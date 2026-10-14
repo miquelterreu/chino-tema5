@@ -18,6 +18,7 @@
   --text-muted: #a1a1a6;
   --blue-pinyin: #64d2ff;
   --green-ok: #30d158;
+  --gold: #ffd60a;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -41,50 +42,20 @@ body {
   top: 0;
   z-index: 100;
 }
-.topbar-title {
-  color: var(--red-main);
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
+.topbar-title { color: var(--red-main); font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
 .back-btn {
-  background: var(--red-soft);
-  color: var(--red-main);
-  border: 1px solid var(--red-main);
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  display: none;
+  background: var(--red-soft); color: var(--red-main); border: 1px solid var(--red-main);
+  padding: 6px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: none;
 }
 
 /* MENU GRID */
-.menu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 1.25rem;
-  max-width: 500px;
-  margin: 0 auto;
-}
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 1.25rem; max-width: 500px; margin: 0 auto; }
 .menu-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 18px;
-  padding: 1.25rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.15s, border-color 0.15s;
+  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px;
+  padding: 1.25rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; transition: transform 0.15s, border-color 0.15s;
 }
-.menu-card:active {
-  transform: scale(0.96);
-  border-color: var(--red-main);
-}
+.menu-card:active { transform: scale(0.96); border-color: var(--red-main); }
 .menu-icon { font-size: 38px; margin-bottom: 8px; color: var(--red-main); }
 .menu-label { font-size: 15px; font-weight: 700; color: var(--red-main); }
 .menu-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
@@ -93,21 +64,25 @@ body {
 .section { display: none; max-width: 500px; margin: 0 auto; padding: 1rem; }
 .section.active { display: block; }
 
-/* FLASHCARDS (SOLO CARÁCTER VISUAL) */
+/* FILTROS CATEGORIAS */
+.cat-filter-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; }
+.cat-chip {
+  padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border-color);
+  background: var(--card-bg); color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+.cat-chip.active { background: var(--red-main); color: #fff; border-color: var(--red-main); }
+
+/* FLASHCARDS */
 .card-outer { perspective: 1000px; height: 280px; margin-bottom: 1rem; cursor: pointer; }
 .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; }
 .card-inner.flipped { transform: rotateY(180deg); }
 .face {
-  position: absolute; width: 100%; height: 100%;
-  backface-visibility: hidden;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 1.5rem; text-align: center;
+  position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+  border-radius: 20px; border: 1px solid var(--border-color); background: var(--card-bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;
 }
 .face.back { transform: rotateY(180deg); }
-.hz-only { font-size: 80px; font-weight: bold; color: var(--red-main); line-height: 1; }
+.hz-only { font-size: 76px; font-weight: bold; color: var(--red-main); line-height: 1; }
 .py-text { font-size: 20px; color: var(--blue-pinyin); font-weight: 600; margin-top: 8px; }
 .es-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
 
@@ -119,76 +94,75 @@ body {
 .action-btn.yes { border-color: var(--green-ok); color: var(--green-ok); background: rgba(48, 209, 88, 0.15); }
 .action-btn.no { border-color: var(--red-main); color: var(--red-main); background: var(--red-soft); }
 
-/* HISTORIAS / TEXTOS */
-.story-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+/* DICCIONARIO INTERACTIVO */
+.dict-item {
+  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;
+  padding: 12px 16px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s;
 }
+.dict-item:active { border-color: var(--red-main); }
+.dict-header { display: flex; align-items: center; justify-content: space-between; }
+.dict-num { font-size: 11px; color: var(--gold); font-weight: bold; margin-bottom: 2px; }
+.dict-zh { font-size: 24px; font-weight: bold; color: var(--red-main); }
+.dict-py { font-size: 13px; color: var(--blue-pinyin); }
+.dict-es { font-size: 14px; color: #fff; text-align: right; font-weight: 500; }
+
+.dict-detail {
+  display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color);
+}
+.dict-detail.open { display: block; }
+.gram-tag { font-size: 11px; color: var(--gold); background: rgba(255,214,10,0.1); padding: 4px 8px; border-radius: 6px; margin-bottom: 6px; display: inline-block; }
+.gram-pos { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.gram-ex-box { background: rgba(0,0,0,0.3); border-left: 3px solid var(--red-main); padding: 8px; border-radius: 6px; margin-top: 6px; }
+
+/* HISTORIAS Y GRAMÁTICA */
+.story-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 1rem; margin-bottom: 1rem; }
 .story-title { font-size: 16px; font-weight: bold; color: var(--red-main); margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
-.story-line {
-  padding: 8px 0;
-  border-bottom: 1px dashed var(--border-color);
-  cursor: pointer;
-}
+.story-line { padding: 8px 0; border-bottom: 1px dashed var(--border-color); cursor: pointer; }
 .story-zh { font-size: 18px; font-weight: 500; color: #fff; }
 .story-py { font-size: 12px; color: var(--blue-pinyin); margin-top: 2px; }
 .story-es { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
-/* CANVAS PRÁCTICA DE ESCRITURA */
-.write-box {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1rem;
-  text-align: center;
-}
+/* ESCRITURA */
+.write-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 1rem; text-align: center; }
 .tianzige {
-  width: 200px; height: 200px;
-  margin: 0 auto 12px auto;
-  border: 2px solid var(--red-main);
-  background-color: #000;
+  width: 200px; height: 200px; margin: 0 auto 12px auto; border: 2px solid var(--red-main); background-color: #000;
   background-image: linear-gradient(to right, rgba(255,59,48,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,59,48,0.2) 1px, transparent 1px);
-  background-size: 50% 50%;
-  position: relative;
+  background-size: 50% 50%; position: relative;
 }
 canvas { width: 100%; height: 100%; cursor: crosshair; }
-
-/* DICCIONARIO LIST */
-.dict-item {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 12px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 8px; cursor: pointer;
-}
-.dict-zh { font-size: 22px; font-weight: bold; color: var(--red-main); }
-.dict-py { font-size: 13px; color: var(--blue-pinyin); }
-.dict-es { font-size: 13px; color: var(--text-muted); text-align: right; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="topbar-title">CHINESEIMPLE</div>
+  <div class="topbar-title">CHINESEIMPLE TEMA 5</div>
   <button class="back-btn" id="back-btn" onclick="showMenu()">← Volver</button>
 </div>
 
-<!-- MENÚ PRINCIPAL ESTIL CHINESEIMPLE -->
+<!-- MENÚ PRINCIPAL ESTILO CHINESEIMPLE -->
 <div class="menu-grid" id="main-menu">
+  <div class="menu-card" onclick="openSec('dict')">
+    <div class="menu-icon">📖</div>
+    <div class="menu-label">Diccionario (34)</div>
+    <div class="menu-sub">Ordenado + Gramática + Ejemplos</div>
+  </div>
+
   <div class="menu-card" onclick="openSec('flash')">
     <div class="menu-icon">🎴</div>
     <div class="menu-label">Flashcards</div>
     <div class="menu-sub">Modo visual silencioso</div>
   </div>
 
+  <div class="menu-card" onclick="openSec('gram')">
+    <div class="menu-icon">📝</div>
+    <div class="menu-label">Gramática Apuntes</div>
+    <div class="menu-sub">Reglas clave del PDF</div>
+  </div>
+
   <div class="menu-card" onclick="openSec('stories')">
     <div class="menu-icon">📚</div>
     <div class="menu-label">Historias</div>
-    <div class="menu-sub">Texto 1 y Texto 2</div>
+    <div class="menu-sub">Texto 1 y Texto 2 completos</div>
   </div>
 
   <div class="menu-card" onclick="openSec('write')">
@@ -197,29 +171,36 @@ canvas { width: 100%; height: 100%; cursor: crosshair; }
     <div class="menu-sub">Practicar trazos a mano</div>
   </div>
 
-  <div class="menu-card" onclick="openSec('dict')">
-    <div class="menu-icon">📖</div>
-    <div class="menu-label">Diccionario</div>
-    <div class="menu-sub">Todas las palabras</div>
-  </div>
-
   <div class="menu-card" onclick="openSec('game-words')">
     <div class="menu-icon">🎮</div>
-    <div class="menu-label">Juego Palabras</div>
-    <div class="menu-sub">Test para el examen</div>
-  </div>
-
-  <div class="menu-card" onclick="openSec('gram')">
-    <div class="menu-icon">📖</div>
-    <div class="menu-label">Gramática</div>
-    <div class="menu-sub">Reglas del Tema 5</div>
+    <div class="menu-label">Juego Examen</div>
+    <div class="menu-sub">Test de las 34 palabras</div>
   </div>
 </div>
 
-<!-- SECCIÓN 1: FLASHCARDS SILENCIOSAS (NÚMERO I VISUALS) -->
+<!-- SECCIÓN 1: DICCIONARIO INTERACTIVO CON TODAS LAS 34 PALABRAS Y APUNTES -->
+<div class="section" id="sec-dict">
+  <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+    Toca cualquier palabra para ver <b>dónde se coloca en la frase</b>, notas de los apuntes y escuchar oraciones de ejemplo:
+  </p>
+  
+  <div class="cat-filter-row">
+    <button class="cat-chip active" onclick="filterCat('ALL', this)">Todas (34)</button>
+    <button class="cat-chip" onclick="filterCat('Verbo', this)">Verbos / VO</button>
+    <button class="cat-chip" onclick="filterCat('Substantiu', this)">Sustantivos</button>
+    <button class="cat-chip" onclick="filterCat('Adjectiu', this)">Adjetivos</button>
+    <button class="cat-chip" onclick="filterCat('Adverbi', this)">Adverbios</button>
+    <button class="cat-chip" onclick="filterCat('Partícula', this)">Partículas</button>
+    <button class="cat-chip" onclick="filterCat('Classificador', this)">Classificadors</button>
+  </div>
+
+  <div id="dict-list"></div>
+</div>
+
+<!-- SECCIÓN 2: FLASHCARDS VISUALES SILENCIOSAS -->
 <div class="section" id="sec-flash">
   <p style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:10px;">
-    Intenta adivinar el significado solo viendo el carácter. Toca para ver Pinyin y escuchar.
+    Adivina el significado solo viendo el carácter. Toca la tarjeta para voltearla, ver el Pinyin y escuchar su pronunciación.
   </p>
   <div class="card-outer" onclick="flipFlash()">
     <div class="card-inner" id="flash-inner">
@@ -233,27 +214,123 @@ canvas { width: 100%; height: 100%; cursor: crosshair; }
     </div>
   </div>
   <div class="btn-row">
-    <button class="action-btn no" onclick="nextFlash(false)">✗ No la sé</button>
+    <button class="action-btn no" onclick="nextFlash(false)">✗ Repasar</button>
     <button class="action-btn yes" onclick="nextFlash(true)">✓ La sé</button>
   </div>
 </div>
 
-<!-- SECCIÓN 2: HISTORIAS (TEXTO 1 Y TEXTO 2 COMPLETS) -->
+<!-- SECCIÓN 3: GRAMÁTICA COMPLETA DE LOS APUNTES -->
+<div class="section" id="sec-gram">
+  <div class="story-card">
+    <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
+    <div class="gram-tag">RÈGLA CLAU 1 DE NIVELL</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      • <b>Verb + 一下:</b> Modifica l'acció o el temps (fer una acció un moment, de manera breu i educada).<br>
+      • <b>Verb + (一)点:</b> Modifica la quantitat de la cosa o beguda (un xic de / un poc de). El numeral (一) es pot ometre.
+    </p>
+    <div class="story-line" onclick="speak('你听一下')">
+      <div class="story-zh">你听一下。</div>
+      <div class="story-py">Nǐ tīng yí xià.</div>
+      <div class="story-es">Escucha un momento.</div>
+    </div>
+    <div class="story-line" onclick="speak('看一下这个人')">
+      <div class="story-zh">看一下这个人。</div>
+      <div class="story-py">Kàn yí xià zhè ge rén.</div>
+      <div class="story-es">Mira un momento a esta persona.</div>
+    </div>
+    <div class="story-line" onclick="speak('你想喝一点茶吗')">
+      <div class="story-zh">你想喝一点茶吗？</div>
+      <div class="story-py">Nǐ xiǎng hē yì diǎn chá ma?</div>
+      <div class="story-es">¿Quieres beber un poco de té?</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">2. Regla d'Ubicació amb 在 (zài)</div>
+    <div class="gram-tag">FÓRMULA D'OR: Persona / Sujeto + 在 + Lloc + Acció</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      En xinès, la preposició 在 i el lloc van <b>SEMPRE ABANS</b> que l'acció principal. L'acció es fa al final de la frase.
+    </p>
+    <div class="story-line" onclick="speak('我在大学学习')">
+      <div class="story-zh">我在大学学习。</div>
+      <div class="story-py">Wǒ zài dàxué xuéxí.</div>
+      <div class="story-es">Estudio en la universidad.</div>
+    </div>
+    <div class="story-line" onclick="speak('你在哪儿学习中文')">
+      <div class="story-zh">你在哪儿学习中文？</div>
+      <div class="story-py">Nǐ zài nǎr xué zhōngwén?</div>
+      <div class="story-es">¿Dónde estudias chino?</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">3. Acció completada amb 了 (le)</div>
+    <div class="gram-tag">FÓRMULA: Verbo + 了 + Objeto | NEGACIÓ: 没有 + Verbo (sense 了)</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Indica que una acció s'ha realitzat o completat. Es posa directament rere del verb. Per negar, s'utilitza <b>没有</b> i s'elimina el 了.
+    </p>
+    <div class="story-line" onclick="speak('我喝了咖啡')">
+      <div class="story-zh">我喝了咖啡。</div>
+      <div class="story-py">Wǒ hē le kāfēi.</div>
+      <div class="story-es">He bebido café.</div>
+    </div>
+    <div class="story-line" onclick="speak('我喝了两杯咖啡')">
+      <div class="story-zh">我喝了两杯咖啡。</div>
+      <div class="story-py">Wǒ hē le liǎng bēi kāfēi.</div>
+      <div class="story-es">He bebido dos tazas de café.</div>
+    </div>
+    <div class="story-line" onclick="speak('我没有去图书馆')">
+      <div class="story-zh">我没有去图书馆。</div>
+      <div class="story-py">Wǒ méiyǒu qù túshūguǎn.</div>
+      <div class="story-es">No he ido a la biblioteca.</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">4. Adverbi 才 (cái)</div>
+    <div class="gram-tag">FÓRMULA: Temps + 才 + Verbo</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Indica que una acció passa més tard del previst ("no fins...", "tan tard com").
+    </p>
+    <div class="story-line" onclick="speak('我今天才去图书馆')">
+      <div class="story-zh">我今天才去图书馆。</div>
+      <div class="story-py">Wǒ jīntiān cái qù túshūguǎn.</div>
+      <div class="story-es">No he ido a la biblioteca hasta hoy.</div>
+    </div>
+    <div class="story-line" onclick="speak('我星期日才喝咖啡')">
+      <div class="story-zh">我星期日才喝咖啡。</div>
+      <div class="story-py">Wǒ xīngqīrì cái hē kāfēi.</div>
+      <div class="story-es">No bebo café hasta el domingo.</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">5. Cortesia i suggeriments amb 吧 (ba)</div>
+    <div class="gram-tag">FÓRMULA: Frase + 吧</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Es posa al final de la frase per suavitzar un ordre o fer una proposta amable ("fem això, d'acord?").
+    </p>
+    <div class="story-line" onclick="speak('我们喝咖啡吧')">
+      <div class="story-zh">我们喝咖啡吧。</div>
+      <div class="story-py">Wǒmen hē kāfēi ba.</div>
+      <div class="story-es">¿Tomamos un café? / Vamos a tomar un café.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 4: HISTORIAS COMPLETAS -->
 <div class="section" id="sec-stories">
-  <!-- TEXTO 1: DIÁLOGO -->
   <div class="story-card">
     <div class="story-title">Texto 1: Visita a casa de Gao Wenzhong (Diálogo)</div>
     <div id="story1-list"></div>
   </div>
-
-  <!-- TEXTO 2: NARRATIVA -->
   <div class="story-card">
     <div class="story-title">Texto 2: Resumen de la velada (Narrativa)</div>
     <div id="story2-list"></div>
   </div>
 </div>
 
-<!-- SECCIÓN 3: ESCRITURA A MANO -->
+<!-- SECCIÓN 5: ESCRITURA -->
 <div class="section" id="sec-write">
   <div class="write-box">
     <div style="font-size:14px; color:var(--text-muted); margin-bottom:6px;">Carácter a dibujar:</div>
@@ -271,12 +348,7 @@ canvas { width: 100%; height: 100%; cursor: crosshair; }
   </div>
 </div>
 
-<!-- SECCIÓN 4: DICCIONARIO -->
-<div class="section" id="sec-dict">
-  <div id="dict-container"></div>
-</div>
-
-<!-- SECCIÓN 5: JUEGO PALABRAS -->
+<!-- SECCIÓN 6: JUEGO -->
 <div class="section" id="sec-game-words">
   <div class="story-card" style="text-align:center;">
     <div style="font-size:42px; font-weight:bold; color:var(--red-main); margin-bottom:12px;" id="g-hz">图书馆</div>
@@ -284,30 +356,45 @@ canvas { width: 100%; height: 100%; cursor: crosshair; }
   </div>
 </div>
 
-<!-- SECCIÓN 6: GRAMÁTICA -->
-<div class="section" id="sec-gram">
-  <div class="story-card">
-    <div class="story-title">1. Uso de 了 (Acción completada)</div>
-    <p style="font-size:13px; color:var(--text-muted); margin-bottom:6px;">Se coloca justo detrás del verbo: Verb + 了 + Objeto.</p>
-    <div class="story-line" onclick="speak('王朋喝了两杯茶')">
-      <div class="story-zh">王朋喝了两杯茶。</div>
-      <div class="story-py">Wáng Péng hē le liǎng bēi chá.</div>
-      <div class="story-es">Wang Peng bebió dos tazas de té.</div>
-    </div>
-  </div>
-  <div class="story-card">
-    <div class="story-title">2. Uso de 才 (Acción tardía)</div>
-    <p style="font-size:13px; color:var(--text-muted); margin-bottom:6px;">Indica que algo ocurrió más tarde de lo esperado ("no hasta...").</p>
-    <div class="story-line" onclick="speak('他们晚上十二点才回家')">
-      <div class="story-zh">他们晚上十二点才回家。</div>
-      <div class="story-py">Tāmen wǎnshang shí'èr diǎn cái huí jiā.</div>
-      <div class="story-es">No volvieron a casa hasta las 12 de la noche.</div>
-    </div>
-  </div>
-</div>
-
 <script>
-/* HISTÒRIES I VOCABULARI EXTRACCIÓ DIRECTA DE LES FOTOS */
+/* DADES COMPLETES DELS APUNTS PDF (LES 34 PALABRES + TOTS ELS DETALLS) */
+const ALL_VOCAB_34 = [
+  {num:1, hz:"呀", py:"ya", cat:"Partícula modal", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
+  {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
+  {num:3, hz:"快", py:"kuài", cat:"Adverbi / Adjectiu", es:"Ràpidament / De pressa", pos:"Es posa ABANS d'un verb per demanar que es faci una acció de pressa.", exZh:"快来！", exEs:"¡Vine de pressa!"},
+  {num:4, hz:"进来", py:"jìn lai", cat:"Verbo compost", es:"Entrar (venint cap a qui parla)", pos:"Si B entra cap a A s'usa 进来. Si s'allunya seria 进去 (jìn qù). S'afegeix 请 (qǐng) davant per cortesia.", exZh:"请进来。", exEs:"Por favor, entra / Adelante!"},
+  {num:5, hz:"来", py:"lái", cat:"Verbo", es:"Venir", pos:"Verb de moviment.", exZh:"你来我家吗？", exEs:"¿Vens a casa meva?"},
+  {num:6, hz:"介绍", py:"jièshào", cat:"Verbo", es:"Presentar a algú breument", pos:"Acostuma a anar seguit de 一下 (jièshào yí xià).", exZh:"我介绍一下。", exEs:"Us presento breument / Os presento un momento..."},
+  {num:7, hz:"一下", py:"yí xià", cat:"Estructura", es:"Un moment / Breument", pos:"FÓRMULA: [ Verb + 一下 ]. Indica acció ràpida o petició més suau.", exZh:"看一下这个人。", exEs:"Mira un momento a esta persona."},
+  {num:8, hz:"高兴", py:"gāoxìng", cat:"Adjectiu", es:"Content / Alegre", pos:"ESTRUCTURA: [ Sujeto + 很 + 高兴 ].", exZh:"很高兴认识你。", exEs:"Encantado/a de conocerte."},
+  {num:9, hz:"漂亮", py:"piàoliang", cat:"Adjectiu", es:"Guapa / Bonica", pos:"S'utilitza per a gènere femení o per descriure coses i llocs.", exZh:"我家很漂亮。", exEs:"La meva casa és bonica."},
+  {num:10, hz:"坐", py:"zuò", cat:"Verbo", es:"Sentarse / Seure", pos:"Amb 请 davant per cortesia: 请坐 (Qǐng zuò).", exZh:"请坐。", exEs:"Siéntese, por favor / Sigueu, per favor."},
+  {num:11, hz:"在", py:"zài", cat:"Preposició", es:"Estar a / en un lloc", pos:"FÓRMULA D'OR: Persona + 在 + Lloc + Acció. En xinès el lloc va SEMPRE ABANS que l'acció.", exZh:"我在大学学习。", exEs:"Estudio en la universidad."},
+  {num:12, hz:"哪儿", py:"nǎr", cat:"Pronom interrogatiu", es:"On? / ¿Dónde?", pos:"Substitueix el lloc en la pregunta.", exZh:"你在哪儿学习中文？", exEs:"¿Dónde estudias chino?"},
+  {num:13, hz:"学校", py:"xuéxiào", cat:"Substantiu", es:"Escola / Centre d'estudis", pos:"Lloc que es col·loca rere de 在.", exZh:"我在学校学中文。", exEs:"Estudio chino en la escuela."},
+  {num:14, hz:"喝", py:"hē", cat:"Verbo", es:"Beure", pos:"Verb d'acció + beguda.", exZh:"请问，你想喝什么？", exEs:"Disculpa, ¿qué quieres beber?"},
+  {num:15, hz:"点(儿)", py:"diǎn(r)", cat:"Classificador", es:"Un poc / Una mica de", pos:"FÓRMULA: [ Verb + 点(儿) + Objeto ]. Per dir 'Sí, un poc': 想一点.", exZh:"喝点(儿)咖啡。", exEs:"Beber un poco de café."},
+  {num:16, hz:"茶", py:"chá", cat:"Substantiu", es:"Té (beguda)", pos:"Substantiu objecte.", exZh:"你喜欢茶还是咖啡？", exEs:"¿Te gusta el té o el café?"},
+  {num:17, hz:"咖啡", py:"kāfēi", cat:"Substantiu", es:"Cafè", pos:"Substantiu objecte.", exZh:"你想喝咖啡吗？", exEs:"¿Quieres beber café?"},
+  {num:18, hz:"吧", py:"ba", cat:"Partícula modal", es:"Sugerència / Proposta amable", pos:"Es posa al FINAL de la frase per suavitzar un ordre o fer una proposta.", exZh:"我们喝咖啡吧。", exEs:"¿Vamos a tomar un café?"},
+  {num:19, hz:"要", py:"yào", cat:"Verbo", es:"Voler / Tenir la intenció de", pos:"ESTRUCTURA: [ 要 + Substantiu ] o [ 要 + Verb ].", exZh:"我们要一杯咖啡。", exEs:"Queremos una taza de café."},
+  {num:20, hz:"瓶", py:"píng", cat:"Classificador", es:"Ampolla / Botella (mesura)", pos:"Número + 瓶 + Beguda. Nota: L'objecte físic ampolla es diu 瓶子 (píngzi).", exZh:"一瓶可乐。", exEs:"Una botella de coca-cola."},
+  {num:21, hz:"可乐", py:"kělè", cat:"Substantiu", es:"Coca-cola", pos:"Substantiu objecte (o 可口可乐 kěkǒukělè).", exZh:"可乐在哪儿？", exEs:"¿Dónde está la coca-cola?"},
+  {num:22, hz:"可以", py:"kěyǐ", cat:"Verbo modal", es:"Poder (permís / possibilitat)", pos:"Se situa ABANS del verb principal.", exZh:"我可以和你跳舞吗？", exEs:"¿Puedo bailar contigo?"},
+  {num:23, hz:"对不起", py:"duìbuqǐ", cat:"Expressió", es:"Lo siento / Perdón", pos:"Es diu al començament de la frase.", exZh:"对不起，我不知道。", exEs:"Lo siento, no lo sé."},
+  {num:24, hz:"给", py:"gěi", cat:"Verbo", es:"Donar / Dar", pos:"ESTRUCTURA: [ 给 + Persona + Objeto ].", exZh:"给我一瓶可乐。", exEs:"Dame una botella de coca-cola."},
+  {num:25, hz:"杯", py:"bēi", cat:"Classificador", es:"Got / Tassa (mesura)", pos:"Número + 杯 + Beguda. Nota: L'objecte físic got o tassa es diu 杯子 (bēizi).", exZh:"两杯咖啡。", exEs:"Dos tazas de café."},
+  {num:26, hz:"水", py:"shuǐ", cat:"Substantiu", es:"Aigua", pos:"Substantiu objecte.", exZh:"请给我一杯水。", exEs:"Por favor dame un vaso de agua."},
+  {num:27, hz:"高小音", py:"Gāo Xiǎoyīn", cat:"Nom propi", es:"Gao Xiaoyin (nom)", pos:"Sujeto de la frase.", exZh:"高小音在学校。", exEs:"Gao Xiaoyin está en la escuela."},
+  {num:28, hz:"玩(儿)", py:"wán(r)", cat:"Verbo", es:"Divertir-se / Jugar / Passar-ho bé", pos:"Com a adjectiu: 好玩 (hǎowán) = Divertit. Ej: 玩儿电脑 / 玩儿球.", exZh:"我们去你家玩儿吧。", exEs:"Anem a casa teva a passar-ho bé?"},
+  {num:29, hz:"了", py:"le", cat:"Partícula modal", es:"Acció realitzada / completada", pos:"POSICIÓ: Just rere del verb (V + 了 + Objeto). Negació amb 没有 (sense 了).", exZh:"我喝了两杯咖啡。", exEs:"He begut dues tasses de cafè."},
+  {num:30, hz:"图书馆", py:"túshūguǎn", cat:"Substantiu", es:"Biblioteca", pos:"Lloc físic que va amb 在 o 去.", exZh:"我没有去图书馆。", exEs:"No he anat a la biblioteca."},
+  {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
+  {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
+  {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
+  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
+];
+
 const TEXT_1 = [
   {zh:"谁呀？", py:"Shéi ya?", es:"¿Quién es?"},
   {zh:"是我，王朋，还有李友。", py:"Shì wǒ, Wáng Péng, hái yǒu Lǐ Yǒu.", es:"Soy yo, Wang Peng, y también Li You."},
@@ -334,21 +421,6 @@ const TEXT_2 = [
   {zh:"王朋和李友晚上十二点才回家。", py:"Wáng Péng hé Lǐ Yǒu wǎnshang shí'èr diǎn cái huí jiā.", es:"Wang Peng y Li You no volvieron a casa hasta las 12 de la noche."}
 ];
 
-const VOCAB = [
-  {hz:"图书馆", py:"túshūguǎn", es:"Biblioteca"},
-  {hz:"聊天(儿)", py:"liáo tiān(r)", es:"Charlar / Hablar"},
-  {hz:"回家", py:"huí jiā", es:"Volver a casa"},
-  {hz:"一起", py:"yìqǐ", es:"Juntos"},
-  {hz:"才", py:"cái", es:"Tan tarde como / No hasta"},
-  {hz:"瓶", py:"píng", es:"Botella (clasificador)"},
-  {hz:"杯", py:"bēi", es:"Vaso / Taza"},
-  {hz:"给", py:"gěi", es:"Dar"},
-  {hz:"可乐", py:"kělè", es:"Coca-Cola"},
-  {hz:"介绍", py:"jièshào", es:"Presentar"},
-  {hz:"高兴", py:"gāoxìng", es:"Alegre / Contento"},
-  {hz:"漂亮", py:"piàoliang", es:"Bonita / Guapa"}
-];
-
 let flashIdx = 0;
 let writeIdx = 0;
 
@@ -364,10 +436,10 @@ function openSec(id) {
   document.getElementById('sec-' + id).classList.add('active');
   document.getElementById('back-btn').style.display = 'block';
 
+  if(id === 'dict') renderDict(ALL_VOCAB_34);
   if(id === 'flash') renderFlash();
   if(id === 'stories') renderStories();
   if(id === 'write') initWrite();
-  if(id === 'dict') renderDict();
   if(id === 'game-words') initGameWords();
 }
 
@@ -380,10 +452,54 @@ function speak(text) {
   window.speechSynthesis.speak(u);
 }
 
-/* FLASHCARDS (SENSE ÀUDIO AUTOMÀTIC A LA CARA DEL DAVANT) */
+/* DICCIONARI COMPLET I INTERACTIU */
+function renderDict(list) {
+  const el = document.getElementById('dict-list');
+  el.innerHTML = '';
+  list.forEach(w => {
+    const item = document.createElement('div');
+    item.className = 'dict-item';
+    item.innerHTML = `
+      <div class="dict-header">
+        <div>
+          <div class="dict-num">#${w.num} · ${w.cat}</div>
+          <div class="dict-zh">${w.hz} <span class="dict-py">${w.py}</span></div>
+        </div>
+        <div class="dict-es">${w.es}</div>
+      </div>
+      <div class="dict-detail" id="detail-${w.num}">
+        <div class="gram-tag">📍 POSICIÓ I REGLA DELS APUNTS:</div>
+        <div class="gram-pos">${w.pos}</div>
+        <div class="gram-ex-box" onclick="event.stopPropagation(); speak('${w.exZh}')">
+          <div style="font-size:14px; font-weight:bold; color:#fff;">${w.exZh} 🔊</div>
+          <div style="font-size:12px; color:var(--blue-pinyin);">${w.exEs}</div>
+        </div>
+      </div>
+    `;
+    item.onclick = () => {
+      const detail = document.getElementById(`detail-${w.num}`);
+      detail.classList.toggle('open');
+      speak(w.hz);
+    };
+    el.appendChild(item);
+  });
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  if(cat === 'ALL') {
+    renderDict(ALL_VOCAB_34);
+  } else {
+    const filtered = ALL_VOCAB_34.filter(w => w.cat.includes(cat));
+    renderDict(filtered);
+  }
+}
+
+/* FLASHCARDS SILENCIOSES */
 function renderFlash() {
   document.getElementById('flash-inner').classList.remove('flipped');
-  const w = VOCAB[flashIdx];
+  const w = ALL_VOCAB_34[flashIdx];
   document.getElementById('f-hz').textContent = w.hz;
   document.getElementById('b-es').textContent = w.es;
   document.getElementById('b-py').textContent = w.py;
@@ -393,16 +509,16 @@ function flipFlash() {
   const inner = document.getElementById('flash-inner');
   inner.classList.toggle('flipped');
   if(inner.classList.contains('flipped')) {
-    speak(VOCAB[flashIdx].hz);
+    speak(ALL_VOCAB_34[flashIdx].hz);
   }
 }
 
 function nextFlash(ok) {
-  flashIdx = (flashIdx + 1) % VOCAB.length;
+  flashIdx = (flashIdx + 1) % ALL_VOCAB_34.length;
   renderFlash();
 }
 
-/* HISTÒRIES */
+/* HISTÒRIES COMPLETES */
 function renderStories() {
   const s1 = document.getElementById('story1-list');
   s1.innerHTML = '';
@@ -425,11 +541,11 @@ function renderStories() {
   });
 }
 
-/* ESCRIPTURA CANVAS */
+/* ESCRIPTURA EN CANVAS */
 let canvas, ctx, painting = false;
 
 function initWrite() {
-  const item = VOCAB[writeIdx];
+  const item = ALL_VOCAB_34[writeIdx];
   document.getElementById('write-target').textContent = item.hz;
   document.getElementById('write-py').textContent = item.py;
 
@@ -466,36 +582,17 @@ function paint(e) {
   ctx.moveTo(clientX - rect.left, clientY - rect.top);
 }
 
-function clearCanvas() {
-  if(ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+function clearCanvas() { if(ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
+function nextWrite() { writeIdx = (writeIdx + 1) % ALL_VOCAB_34.length; initWrite(); }
 
-function nextWrite() {
-  writeIdx = (writeIdx + 1) % VOCAB.length;
-  initWrite();
-}
-
-/* DICCIONARI */
-function renderDict() {
-  const el = document.getElementById('dict-container');
-  el.innerHTML = '';
-  VOCAB.forEach(w => {
-    const item = document.createElement('div');
-    item.className = 'dict-item';
-    item.innerHTML = `<div><div class="dict-zh">${w.hz}</div><div class="dict-py">${w.py}</div></div><div class="dict-es">${w.es}</div>`;
-    item.onclick = () => speak(w.hz);
-    el.appendChild(item);
-  });
-}
-
-/* JOC DE PARAULES */
+/* JOC EXAMEN */
 function initGameWords() {
-  const q = VOCAB[Math.floor(Math.random() * VOCAB.length)];
+  const q = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)];
   document.getElementById('g-hz').textContent = q.hz;
 
   let opts = [q.es];
   while(opts.length < 4) {
-    let rand = VOCAB[Math.floor(Math.random() * VOCAB.length)].es;
+    let rand = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)].es;
     if(!opts.includes(rand)) opts.push(rand);
   }
   opts.sort(() => Math.random() - 0.5);
@@ -509,12 +606,10 @@ function initGameWords() {
     btn.onclick = () => {
       if(o === q.es) {
         speak(q.hz);
-        btn.style.borderColor = '#30d158';
-        btn.style.color = '#30d158';
+        btn.style.borderColor = '#30d158'; btn.style.color = '#30d158';
         setTimeout(initGameWords, 800);
       } else {
-        btn.style.borderColor = '#ff3b30';
-        btn.style.color = '#ff3b30';
+        btn.style.borderColor = '#ff3b30'; btn.style.color = '#ff3b30';
       }
     };
     container.appendChild(btn);
