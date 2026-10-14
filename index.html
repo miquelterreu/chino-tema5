@@ -30,7 +30,7 @@ body {
   user-select: none;
 }
 
-/* TOPBAR RESPONSIVE CON ESPACIO SEGURA PARA MÓVILES (SAFE AREA) */
+/* TOPBAR RESPONSIVE */
 .topbar {
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ body {
   padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; display: none;
 }
 
-/* MENU GRID RESPONSIVE */
+/* MENU GRID */
 .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 1.25rem; max-width: 500px; margin: 0 auto; }
 .menu-card {
   background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px;
@@ -77,7 +77,7 @@ body {
 }
 .cat-chip.active { background: var(--red-main); color: #fff; border-color: var(--red-main); }
 
-/* SEARCH BAR DICCIONARIO GLOBAL */
+/* SEARCH BAR */
 .search-input {
   width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border-color);
   background: var(--card-bg); color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;
@@ -173,14 +173,13 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 1: DICCIONARIOS (TEMA 5 vs GLOBAL) -->
+<!-- SECCIÓN 1: DICCIONARIOS -->
 <div class="section" id="sec-dict">
   <div class="dict-switch-row">
     <button class="switch-btn active" id="btn-tab-t5" onclick="switchDictTab('t5')">Tema 5 (34 Palabras)</button>
     <button class="switch-btn" id="btn-tab-global" onclick="switchDictTab('global')">Todos los Temas (1-5)</button>
   </div>
 
-  <!-- SUBTAB TEMA 5 -->
   <div id="tab-t5-content">
     <div class="cat-filter-row">
       <button class="cat-chip active" onclick="filterCat('ALL', this)">Todas (34)</button>
@@ -194,7 +193,6 @@ body {
     <div id="dict-list-t5"></div>
   </div>
 
-  <!-- SUBTAB GLOBAL -->
   <div id="tab-global-content" style="display:none;">
     <input class="search-input" id="global-search" placeholder="Buscar hanzi, pinyin o español..." oninput="filterGlobalDict()">
     <div id="dict-list-global"></div>
@@ -223,7 +221,7 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 3: GRAMÁTICA COMPLETA DE LOS APUNTES -->
+<!-- SECCIÓN 3: GRAMÁTICA CORREGIDA -->
 <div class="section" id="sec-gram">
   <div class="story-card">
     <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
@@ -267,26 +265,44 @@ body {
     </div>
   </div>
 
+  <!-- EJEMPLO 3 DE "了" TOTALMENTE COMPLETO Y CORREGIDO -->
   <div class="story-card">
-    <div class="story-title">3. Acción completada con 了 (le)</div>
-    <div class="gram-tag">FÓRMULA: Verbo + 了 + Objeto | NEGACIÓN: 没有 + Verbo</div>
+    <div class="story-title">3. Estructuras con 了 (le) (Afirmativa, Negativa y Preguntas)</div>
+    <div class="gram-tag">FÓRMULAS DE EXAMEN</div>
     <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
-      Indica acción realizada. Se coloca tras el verbo. Para negar se usa <b>没有</b> y se elimina el 了.
+      Indica una acción pasada o completada. Su estructura varía según si afirmas, niegas o preguntas:
     </p>
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">1. AFIRMATIVA: Verbo + 了 + Objeto</p>
     <div class="story-line" onclick="speak('我喝了咖啡')">
       <div class="story-zh">我喝了咖啡。</div>
       <div class="story-py">Wǒ hē le kāfēi.</div>
-      <div class="story-es">He bebido café.</div>
+      <div class="story-es">He bebido / Bebí café.</div>
     </div>
     <div class="story-line" onclick="speak('我喝了两杯咖啡')">
       <div class="story-zh">我喝了两杯咖啡。</div>
       <div class="story-py">Wǒ hē le liǎng bēi kāfēi.</div>
       <div class="story-es">He bebido dos tazas de café.</div>
     </div>
+
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">2. NEGATIVA: 没有 + Verbo (¡se elimina el 了!)</p>
     <div class="story-line" onclick="speak('我没有去图书馆')">
       <div class="story-zh">我没有去图书馆。</div>
       <div class="story-py">Wǒ méiyǒu qù túshūguǎn.</div>
       <div class="story-es">No he ido a la biblioteca.</div>
+    </div>
+
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">3. PREGUNTA OPCIÓN A: Verbo + Objeto + 了 + 吗？</p>
+    <div class="story-line" onclick="speak('你喝咖啡了吗')">
+      <div class="story-zh">你喝咖啡了吗？</div>
+      <div class="story-py">Nǐ hē kāfēi le ma?</div>
+      <div class="story-es">¿Has bebido café?</div>
+    </div>
+
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">4. PREGUNTA OPCIÓN B (TÍPICA DE EXAMEN): Verbo + Objeto + 了 + 没有？</p>
+    <div class="story-line" onclick="speak('你喝咖啡了没有')">
+      <div class="story-zh">你喝咖啡了没有？</div>
+      <div class="story-py">Nǐ hē kāfēi le méiyǒu?</div>
+      <div class="story-es">¿Has bebido café o no?</div>
     </div>
   </div>
 
@@ -325,7 +341,6 @@ body {
 </div>
 
 <script>
-/* DATOS TEMA 5 CON DETALLES DE APUNTES */
 const ALL_VOCAB_34 = [
   {num:1, hz:"呀", py:"ya", cat:"Partícula modal", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
   {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
@@ -355,7 +370,7 @@ const ALL_VOCAB_34 = [
   {num:26, hz:"水", py:"shuǐ", cat:"Substantiu", es:"Aigua", pos:"Substantiu objecte.", exZh:"请给我一杯水。", exEs:"Por favor dame un vaso de agua."},
   {num:27, hz:"高小音", py:"Gāo Xiǎoyīn", cat:"Nom propi", es:"Gao Xiaoyin (nom)", pos:"Sujeto de la frase.", exZh:"高小音在学校。", exEs:"Gao Xiaoyin está en la escuela."},
   {num:28, hz:"玩(儿)", py:"wán(r)", cat:"Verbo", es:"Divertir-se / Jugar / Passar-ho bé", pos:"Com a adjectiu: 好玩 (hǎowán) = Divertit. Ej: 玩儿电脑 / 玩儿球.", exZh:"我们去你家玩儿吧。", exEs:"Anem a casa teva a passar-ho bé?"},
-  {num:29, hz:"了", py:"le", cat:"Partícula modal", es:"Acció realitzada / completada", pos:"POSICIÓ: Just rere del verb (V + 了 + Objeto). Negació amb 没有 (sense 了).", exZh:"我喝了两杯咖啡。", esEs:"He begut dues tasses de cafè."},
+  {num:29, hz:"了", py:"le", cat:"Partícula modal", es:"Acció realitzada / completada", pos:"POSICIÓ: Just rere del verb (V + 了 + Objeto). Pregunta: ...了没有？ / ...了吗？", exZh:"我喝了两杯咖啡。", exEs:"He begut dues tasses de cafè."},
   {num:30, hz:"图书馆", py:"túshūguǎn", cat:"Substantiu", es:"Biblioteca", pos:"Lloc físic que va amb 在 o 去.", exZh:"我没有去图书馆。", exEs:"No he anat a la biblioteca."},
   {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
   {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
@@ -363,7 +378,6 @@ const ALL_VOCAB_34 = [
   {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
 ];
 
-/* DICCIONARIO GLOBAL (ACUMULADO DE TODOS LOS TEMAS) */
 const GLOBAL_VOCAB = [
   ...ALL_VOCAB_34,
   {hz:"你", py:"nǐ", es:"tú"}, {hz:"好", py:"hǎo", es:"bueno / bien"}, {hz:"请", py:"qǐng", es:"por favor / invitar"},
@@ -460,7 +474,6 @@ function speak(text) {
   window.speechSynthesis.speak(u);
 }
 
-/* SWITCH DICCIONARIOS */
 function switchDictTab(tab) {
   if(tab === 't5') {
     document.getElementById('btn-tab-t5').classList.add('active');
@@ -477,7 +490,6 @@ function switchDictTab(tab) {
   }
 }
 
-/* DICCIONARIO TEMA 5 */
 function renderDictT5(list) {
   const el = document.getElementById('dict-list-t5');
   el.innerHTML = '';
@@ -521,7 +533,6 @@ function filterCat(cat, btn) {
   }
 }
 
-/* DICCIONARIO GLOBAL */
 function renderGlobalDict(list) {
   const el = document.getElementById('dict-list-global');
   el.innerHTML = '';
@@ -547,7 +558,6 @@ function filterGlobalDict() {
   renderGlobalDict(filtered);
 }
 
-/* FLASHCARDS */
 function renderFlash() {
   document.getElementById('flash-inner').classList.remove('flipped');
   const w = ALL_VOCAB_34[flashIdx];
@@ -569,7 +579,6 @@ function nextFlash(ok) {
   renderFlash();
 }
 
-/* HISTORIAS */
 function renderStories() {
   const s1 = document.getElementById('story1-list');
   s1.innerHTML = '';
@@ -592,7 +601,6 @@ function renderStories() {
   });
 }
 
-/* JUEGO EXAMEN */
 function initGameWords() {
   const q = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)];
   document.getElementById('g-hz').textContent = q.hz;
