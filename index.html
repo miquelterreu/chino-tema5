@@ -9,51 +9,51 @@
 <meta name="theme-color" content="#121212">
 <style>
 :root {
-  --bg-dark: #121212;
-  --card-bg: #1e1e1e;
-  --red-main: #ff3b30;
-  --red-soft: rgba(255, 59, 48, 0.15);
-  --border-color: #2c2c2e;
-  --text-white: #ffffff;
-  --text-muted: #a1a1a6;
-  --blue-pinyin: #64d2ff;
-  --green-ok: #30d158;
-  --gold: #ffd60a;
+  --bg-dark: #121212;
+  --card-bg: #1e1e1e;
+  --red-main: #ff3b30;
+  --red-soft: rgba(255, 59, 48, 0.15);
+  --border-color: #2c2c2e;
+  --text-white: #ffffff;
+  --text-muted: #a1a1a6;
+  --blue-pinyin: #64d2ff;
+  --green-ok: #30d158;
+  --gold: #ffd60a;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+- { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-white);
-  min-height: 100vh;
-  padding-bottom: 3rem;
-  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  min-height: 100vh;
+  padding-bottom: 3rem;
+  user-select: none;
 }
 
 /* TOPBAR RESPONSIVE */
 .topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: calc(env(safe-area-inset-top, 20px) + 12px) 1.25rem 12px 1.25rem;
-  background: var(--bg-dark);
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 20px) + 12px) 1.25rem 12px 1.25rem;
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .topbar-title { color: var(--red-main); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
 .back-btn {
-  background: var(--red-soft); color: var(--red-main); border: 1px solid var(--red-main);
-  padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; display: none;
+  background: var(--red-soft); color: var(--red-main); border: 1px solid var(--red-main);
+  padding: 8px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; display: none;
 }
 
 /* MENU GRID */
 .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 1.25rem; max-width: 500px; margin: 0 auto; }
 .menu-card {
-  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px;
-  padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; cursor: pointer; transition: transform 0.15s, border-color 0.15s;
+  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px;
+  padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; transition: transform 0.15s, border-color 0.15s;
 }
 .menu-card:active { transform: scale(0.95); border-color: var(--red-main); }
 .menu-icon { font-size: 42px; margin-bottom: 8px; color: var(--red-main); }
@@ -72,15 +72,15 @@ body {
 /* FILTROS CATEGORIAS */
 .cat-filter-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; }
 .cat-chip {
-  padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border-color);
-  background: var(--card-bg); color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;
+  padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border-color);
+  background: var(--card-bg); color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;
 }
 .cat-chip.active { background: var(--red-main); color: #fff; border-color: var(--red-main); }
 
 /* SEARCH BAR */
 .search-input {
-  width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border-color);
-  background: var(--card-bg); color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;
+  width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border-color);
+  background: var(--card-bg); color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;
 }
 .search-input:focus { border-color: var(--red-main); }
 
@@ -89,9 +89,9 @@ body {
 .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; }
 .card-inner.flipped { transform: rotateY(180deg); }
 .face {
-  position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
-  border-radius: 20px; border: 1px solid var(--border-color); background: var(--card-bg);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;
+  position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+  border-radius: 20px; border: 1px solid var(--border-color); background: var(--card-bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;
 }
 .face.back { transform: rotateY(180deg); }
 .hz-only { font-size: 76px; font-weight: bold; color: var(--red-main); line-height: 1; }
@@ -100,16 +100,16 @@ body {
 
 .btn-row { display: flex; gap: 10px; margin-top: 1rem; }
 .action-btn {
-  flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color);
-  background: var(--card-bg); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer;
+  flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color);
+  background: var(--card-bg); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer;
 }
 .action-btn.yes { border-color: var(--green-ok); color: var(--green-ok); background: rgba(48, 209, 88, 0.15); }
 .action-btn.no { border-color: var(--red-main); color: var(--red-main); background: var(--red-soft); }
 
 /* DICCIONARIO ITEMS */
 .dict-item {
-  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;
-  padding: 12px 16px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s;
+  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;
+  padding: 12px 16px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s;
 }
 .dict-item:active { border-color: var(--red-main); }
 .dict-header { display: flex; align-items: center; justify-content: space-between; }
@@ -136,500 +136,501 @@ body {
 <body>
 
 <div class="topbar">
-  <div class="topbar-title">CHINESEIMPLE TEMA 5</div>
-  <button class="back-btn" id="back-btn" onclick="showMenu()">← Volver</button>
+  <div class="topbar-title">CHINESEIMPLE TEMA 5</div>
+  <button class="back-btn" id="back-btn" onclick="showMenu()">← Volver</button>
 </div>
 
 <!-- MENÚ PRINCIPAL -->
 <div class="menu-grid" id="main-menu">
-  <div class="menu-card" onclick="openSec('dict')">
-    <div class="menu-icon">📖</div>
-    <div class="menu-label">Diccionario</div>
-    <div class="menu-sub">Tema 5 + Diccionario Global</div>
-  </div>
+  <div class="menu-card" onclick="openSec('dict')">
+    <div class="menu-icon">📖</div>
+    <div class="menu-label">Diccionario</div>
+    <div class="menu-sub">Tema 5 + Diccionario Global</div>
+  </div>
 
-  <div class="menu-card" onclick="openSec('flash')">
-    <div class="menu-icon">🎴</div>
-    <div class="menu-label">Flashcards</div>
-    <div class="menu-sub">Modo visual silencioso</div>
-  </div>
+  <div class="menu-card" onclick="openSec('flash')">
+    <div class="menu-icon">🎴</div>
+    <div class="menu-label">Flashcards</div>
+    <div class="menu-sub">Modo visual silencioso</div>
+  </div>
 
-  <div class="menu-card" onclick="openSec('gram')">
-    <div class="menu-icon">📝</div>
-    <div class="menu-label">Gramática Apuntes</div>
-    <div class="menu-sub">Reglas clave del PDF</div>
-  </div>
+  <div class="menu-card" onclick="openSec('gram')">
+    <div class="menu-icon">📝</div>
+    <div class="menu-label">Gramática Apuntes</div>
+    <div class="menu-sub">Reglas clave del PDF</div>
+  </div>
 
-  <div class="menu-card" onclick="openSec('stories')">
-    <div class="menu-icon">📚</div>
-    <div class="menu-label">Historias</div>
-    <div class="menu-sub">Texto 1 y Texto 2 completos</div>
-  </div>
+  <div class="menu-card" onclick="openSec('stories')">
+    <div class="menu-icon">📚</div>
+    <div class="menu-label">Historias</div>
+    <div class="menu-sub">Texto 1 y Texto 2 completos</div>
+  </div>
 
-  <div class="menu-card" onclick="openSec('game-words')" style="grid-column: span 2;">
-    <div class="menu-icon">🎮</div>
-    <div class="menu-label">Juego Examen</div>
-    <div class="menu-sub">Test de vocabulario para repasar</div>
-  </div>
+  <div class="menu-card" onclick="openSec('game-words')" style="grid-column: span 2;">
+    <div class="menu-icon">🎮</div>
+    <div class="menu-label">Juego Examen</div>
+    <div class="menu-sub">Test de vocabulario para repasar</div>
+  </div>
 </div>
 
 <!-- SECCIÓN 1: DICCIONARIOS -->
 <div class="section" id="sec-dict">
-  <div class="dict-switch-row">
-    <button class="switch-btn active" id="btn-tab-t5" onclick="switchDictTab('t5')">Tema 5 (34 Palabras)</button>
-    <button class="switch-btn" id="btn-tab-global" onclick="switchDictTab('global')">Todos los Temas (1-5)</button>
-  </div>
+  <div class="dict-switch-row">
+    <button class="switch-btn active" id="btn-tab-t5" onclick="switchDictTab('t5')">Tema 5 (34 Palabras)</button>
+    <button class="switch-btn" id="btn-tab-global" onclick="switchDictTab('global')">Todos los Temas (1-5)</button>
+  </div>
 
-  <div id="tab-t5-content">
-    <div class="cat-filter-row">
-      <button class="cat-chip active" onclick="filterCat('ALL', this)">Todas (34)</button>
-      <button class="cat-chip" onclick="filterCat('Verbo', this)">Verbos / VO</button>
-      <button class="cat-chip" onclick="filterCat('Substantiu', this)">Sustantivos</button>
-      <button class="cat-chip" onclick="filterCat('Adjectiu', this)">Adjetivos</button>
-      <button class="cat-chip" onclick="filterCat('Adverbi', this)">Adverbios</button>
-      <button class="cat-chip" onclick="filterCat('Partícula', this)">Partículas</button>
-      <button class="cat-chip" onclick="filterCat('Classificador', this)">Classificadors</button>
-    </div>
-    <div id="dict-list-t5"></div>
-  </div>
+  <div id="tab-t5-content">
+    <div class="cat-filter-row">
+      <button class="cat-chip active" onclick="filterCat('ALL', this)">Todas (34)</button>
+      <button class="cat-chip" onclick="filterCat('Verbo', this)">Verbos / VO</button>
+      <button class="cat-chip" onclick="filterCat('Substantiu', this)">Sustantivos</button>
+      <button class="cat-chip" onclick="filterCat('Adjectiu', this)">Adjetivos</button>
+      <button class="cat-chip" onclick="filterCat('Adverbi', this)">Adverbios</button>
+      <button class="cat-chip" onclick="filterCat('Partícula', this)">Partículas</button>
+      <button class="cat-chip" onclick="filterCat('Classificador', this)">Classificadors</button>
+    </div>
+    <div id="dict-list-t5"></div>
+  </div>
 
-  <div id="tab-global-content" style="display:none;">
-    <input class="search-input" id="global-search" placeholder="Buscar hanzi, pinyin o español..." oninput="filterGlobalDict()">
-    <div id="dict-list-global"></div>
-  </div>
+  <div id="tab-global-content" style="display:none;">
+    <input class="search-input" id="global-search" placeholder="Buscar hanzi, pinyin o español..." oninput="filterGlobalDict()">
+    <div id="dict-list-global"></div>
+  </div>
 </div>
 
 <!-- SECCIÓN 2: FLASHCARDS -->
 <div class="section" id="sec-flash">
-  <p style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:10px;">
-    Adivina el significado solo viendo el carácter. Toca la tarjeta para voltearla, ver el Pinyin y escuchar su pronunciación.
-  </p>
-  <div class="card-outer" onclick="flipFlash()">
-    <div class="card-inner" id="flash-inner">
-      <div class="face front">
-        <div class="hz-only" id="f-hz">图书馆</div>
-      </div>
-      <div class="face back">
-        <div class="es-title" id="b-es">Biblioteca</div>
-        <div class="py-text" id="b-py">túshūguǎn</div>
-      </div>
-    </div>
-  </div>
-  <div class="btn-row">
-    <button class="action-btn no" onclick="nextFlash(false)">✗ Repasar</button>
-    <button class="action-btn yes" onclick="nextFlash(true)">✓ La sé</button>
-  </div>
+  <p style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+    Adivina el significado solo viendo el carácter. Toca la tarjeta para voltearla, ver el Pinyin y escuchar su pronunciación.
+  </p>
+  <div class="card-outer" onclick="flipFlash()">
+    <div class="card-inner" id="flash-inner">
+      <div class="face front">
+        <div class="hz-only" id="f-hz">图书馆</div>
+      </div>
+      <div class="face back">
+        <div class="es-title" id="b-es">Biblioteca</div>
+        <div class="py-text" id="b-py">túshūguǎn</div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="action-btn no" onclick="nextFlash(false)">✗ Repasar</button>
+    <button class="action-btn yes" onclick="nextFlash(true)">✓ La sé</button>
+  </div>
 </div>
 
 <!-- SECCIÓN 3: GRAMÁTICA CORREGIDA -->
 <div class="section" id="sec-gram">
-  <div class="story-card">
-    <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
-    <div class="gram-tag">REGLA CLAVE 1</div>
-    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
-      • <b>Verb + 一下:</b> Modifica la acción/tiempo (hacer algo un momento de forma suave).<br>
-      • <b>Verb + (一)点:</b> Modifica la cantidad de la bebida/comida (un poco de).
-    </p>
-    <div class="story-line" onclick="speak('你听一下')">
-      <div class="story-zh">你听一下。</div>
-      <div class="story-py">Nǐ tīng yí xià.</div>
-      <div class="story-es">Escucha un momento.</div>
-    </div>
-    <div class="story-line" onclick="speak('看一下这个人')">
-      <div class="story-zh">看一下这个人。</div>
-      <div class="story-py">Kàn yí xià zhè ge rén.</div>
-      <div class="story-es">Mira un momento a esta persona.</div>
-    </div>
-    <div class="story-line" onclick="speak('你想喝一点茶吗')">
-      <div class="story-zh">你想喝一点茶吗？</div>
-      <div class="story-py">Nǐ xiǎng hē yì diǎn chá ma?</div>
-      <div class="story-es">¿Quieres beber un poco de té?</div>
-    </div>
-  </div>
+  <div class="story-card">
+    <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
+    <div class="gram-tag">REGLA CLAVE 1</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      • <b>Verb + 一下:</b> Modifica la acción/tiempo (hacer algo un momento de forma suave).<br>
+      • <b>Verb + (一)点:</b> Modifica la cantidad de la bebida/comida (un poco de).
+    </p>
+    <div class="story-line" onclick="speak('你听一下')">
+      <div class="story-zh">你听一下。</div>
+      <div class="story-py">Nǐ tīng yí xià.</div>
+      <div class="story-es">Escucha un momento.</div>
+    </div>
+    <div class="story-line" onclick="speak('看一下这个人')">
+      <div class="story-zh">看一下这个人。</div>
+      <div class="story-py">Kàn yí xià zhè ge rén.</div>
+      <div class="story-es">Mira un momento a esta persona.</div>
+    </div>
+    <div class="story-line" onclick="speak('你想喝一点茶吗')">
+      <div class="story-zh">你想喝一点茶吗？</div>
+      <div class="story-py">Nǐ xiǎng hē yì diǎn chá ma?</div>
+      <div class="story-es">¿Quieres beber un poco de té?</div>
+    </div>
+  </div>
 
-  <div class="story-card">
-    <div class="story-title">2. Regla de Posición con 在 (zài)</div>
-    <div class="gram-tag">FÓRMULA D'OR: Persona + 在 + Lugar + Acción</div>
-    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
-      En chino, la preposición 在 y el lugar van <b>SIEMPRE ANTES</b> que la acción principal.
-    </p>
-    <div class="story-line" onclick="speak('我在大学学习')">
-      <div class="story-zh">我在大学学习。</div>
-      <div class="story-py">Wǒ zài dàxué xuéxí.</div>
-      <div class="story-es">Estudio en la universidad.</div>
-    </div>
-    <div class="story-line" onclick="speak('你在哪儿学习中文')">
-      <div class="story-zh">你在哪儿学习中文？</div>
-      <div class="story-py">Nǐ zài nǎr xué zhōngwén?</div>
-      <div class="story-es">¿Dónde estudias chino?</div>
-    </div>
-  </div>
+  <div class="story-card">
+    <div class="story-title">2. Regla de Posición con 在 (zài)</div>
+    <div class="gram-tag">FÓRMULA D'OR: Persona + 在 + Lugar + Acción</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      En chino, la preposición 在 y el lugar van <b>SIEMPRE ANTES</b> que la acción principal.
+    </p>
+    <div class="story-line" onclick="speak('我在大学学习')">
+      <div class="story-zh">我在大学学习。</div>
+      <div class="story-py">Wǒ zài dàxué xuéxí.</div>
+      <div class="story-es">Estudio en la universidad.</div>
+    </div>
+    <div class="story-line" onclick="speak('你在哪儿学习中文')">
+      <div class="story-zh">你在哪儿学习中文？</div>
+      <div class="story-py">Nǐ zài nǎr xué zhōngwén?</div>
+      <div class="story-es">¿Dónde estudias chino?</div>
+    </div>
+  </div>
 
-  <!-- EJEMPLO 3 DE "了" TOTALMENTE COMPLETO Y CORREGIDO -->
-  <div class="story-card">
-    <div class="story-title">3. Estructuras con 了 (le) (Afirmativa, Negativa y Preguntas)</div>
-    <div class="gram-tag">FÓRMULAS DE EXAMEN</div>
-    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
-      Indica una acción pasada o completada. Su estructura varía según si afirmas, niegas o preguntas:
-    </p>
-    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">1. AFIRMATIVA: Verbo + 了 + Objeto</p>
-    <div class="story-line" onclick="speak('我喝了咖啡')">
-      <div class="story-zh">我喝了咖啡。</div>
-      <div class="story-py">Wǒ hē le kāfēi.</div>
-      <div class="story-es">He bebido / Bebí café.</div>
-    </div>
-    <div class="story-line" onclick="speak('我喝了两杯咖啡')">
-      <div class="story-zh">我喝了两杯咖啡。</div>
-      <div class="story-py">Wǒ hē le liǎng bēi kāfēi.</div>
-      <div class="story-es">He bebido dos tazas de café.</div>
-    </div>
+  <!-- EJEMPLO 3 DE "了" TOTALMENTE COMPLETO Y CORREGIDO -->
+  <div class="story-card">
+    <div class="story-title">3. Estructuras con 了 (le) (Afirmativa, Negativa y Preguntas)</div>
+    <div class="gram-tag">FÓRMULAS DE EXAMEN</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Indica una acción pasada o completada. Su estructura varía según si afirmas, niegas o preguntas:
+    </p>
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">1. AFIRMATIVA: Verbo + 了 + Objeto</p>
+    <div class="story-line" onclick="speak('我喝了咖啡')">
+      <div class="story-zh">我喝了咖啡。</div>
+      <div class="story-py">Wǒ hē le kāfēi.</div>
+      <div class="story-es">He bebido / Bebí café.</div>
+    </div>
+    <div class="story-line" onclick="speak('我喝了两杯咖啡')">
+      <div class="story-zh">我喝了两杯咖啡。</div>
+      <div class="story-py">Wǒ hē le liǎng bēi kāfēi.</div>
+      <div class="story-es">He bebido dos tazas de café.</div>
+    </div>
 
-    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">2. NEGATIVA: 没有 + Verbo (¡se elimina el 了!)</p>
-    <div class="story-line" onclick="speak('我没有去图书馆')">
-      <div class="story-zh">我没有去图书馆。</div>
-      <div class="story-py">Wǒ méiyǒu qù túshūguǎn.</div>
-      <div class="story-es">No he ido a la biblioteca.</div>
-    </div>
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">2. NEGATIVA: 没有 + Verbo (¡se elimina el 了!)</p>
+    <div class="story-line" onclick="speak('我没有去图书馆')">
+      <div class="story-zh">我没有去图书馆。</div>
+      <div class="story-py">Wǒ méiyǒu qù túshūguǎn.</div>
+      <div class="story-es">No he ido a la biblioteca.</div>
+    </div>
 
-    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">3. PREGUNTA OPCIÓN A: Verbo + Objeto + 了 + 吗？</p>
-    <div class="story-line" onclick="speak('你喝咖啡了吗')">
-      <div class="story-zh">你喝咖啡了吗？</div>
-      <div class="story-py">Nǐ hē kāfēi le ma?</div>
-      <div class="story-es">¿Has bebido café?</div>
-    </div>
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">3. PREGUNTA OPCIÓN A: Verbo + Objeto + 了 + 吗？</p>
+    <div class="story-line" onclick="speak('你喝咖啡了吗')">
+      <div class="story-zh">你喝咖啡了吗？</div>
+      <div class="story-py">Nǐ hē kāfēi le ma?</div>
+      <div class="story-es">¿Has bebido café?</div>
+    </div>
 
-    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">4. PREGUNTA OPCIÓN B (TÍPICA DE EXAMEN): Verbo + Objeto + 了 + 没有？</p>
-    <div class="story-line" onclick="speak('你喝咖啡了没有')">
-      <div class="story-zh">你喝咖啡了没有？</div>
-      <div class="story-py">Nǐ hē kāfēi le méiyǒu?</div>
-      <div class="story-es">¿Has bebido café o no?</div>
-    </div>
-  </div>
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">4. PREGUNTA OPCIÓN B (TÍPICA DE EXAMEN): Verbo + Objeto + 了 + 没有？</p>
+    <div class="story-line" onclick="speak('你喝咖啡了没有')">
+      <div class="story-zh">你喝咖啡了没有？</div>
+      <div class="story-py">Nǐ hē kāfēi le méiyǒu?</div>
+      <div class="story-es">¿Has bebido café o no?</div>
+    </div>
+  </div>
 
-  <div class="story-card">
-    <div class="story-title">4. Adverbio 才 (cái)</div>
-    <div class="gram-tag">FÓRMULA: Tiempo + 才 + Verbo</div>
-    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
-      Indica acción tardía ("no hasta...", "tan tarde como").
-    </p>
-    <div class="story-line" onclick="speak('我今天才去图书馆')">
-      <div class="story-zh">我今天才去图书馆。</div>
-      <div class="story-py">Wǒ jīntiān cái qù túshūguǎn.</div>
-      <div class="story-es">No he ido a la biblioteca hasta hoy.</div>
-    </div>
-  </div>
+  <div class="story-card">
+    <div class="story-title">4. Adverbio 才 (cái)</div>
+    <div class="gram-tag">FÓRMULA: Tiempo + 才 + Verbo</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Indica acción tardía ("no hasta...", "tan tarde como").
+    </p>
+    <div class="story-line" onclick="speak('我今天才去图书馆')">
+      <div class="story-zh">我今天才去图书馆。</div>
+      <div class="story-py">Wǒ jīntiān cái qù túshūguǎn.</div>
+      <div class="story-es">No he ido a la biblioteca hasta hoy.</div>
+    </div>
+  </div>
 </div>
 
 <!-- SECCIÓN 4: HISTORIAS COMPLETAS -->
 <div class="section" id="sec-stories">
-  <div class="story-card">
-    <div class="story-title">Texto 1: Visita a casa de Gao Wenzhong (Diálogo)</div>
-    <div id="story1-list"></div>
-  </div>
-  <div class="story-card">
-    <div class="story-title">Texto 2: Resumen de la velada (Narrativa)</div>
-    <div id="story2-list"></div>
-  </div>
+  <div class="story-card">
+    <div class="story-title">Texto 1: Visita a casa de Gao Wenzhong (Diálogo)</div>
+    <div id="story1-list"></div>
+  </div>
+  <div class="story-card">
+    <div class="story-title">Texto 2: Resumen de la velada (Narrativa)</div>
+    <div id="story2-list"></div>
+  </div>
 </div>
 
 <!-- SECCIÓN 5: JUEGO -->
 <div class="section" id="sec-game-words">
-  <div class="story-card" style="text-align:center;">
-    <div style="font-size:42px; font-weight:bold; color:var(--red-main); margin-bottom:12px;" id="g-hz">图书馆</div>
-    <div style="display:flex; flex-direction:column; gap:8px;" id="g-opts"></div>
-  </div>
+  <div class="story-card" style="text-align:center;">
+    <div style="font-size:42px; font-weight:bold; color:var(--red-main); margin-bottom:12px;" id="g-hz">图书馆</div>
+    <div style="display:flex; flex-direction:column; gap:8px;" id="g-opts"></div>
+  </div>
 </div>
 
 <script>
 const ALL_VOCAB_34 = [
-  {num:1, hz:"呀", py:"ya", cat:"Partícula modal", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
-  {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
-  {num:3, hz:"快", py:"kuài", cat:"Adverbi / Adjectiu", es:"Ràpidament / De pressa", pos:"Es posa ABANS d'un verb per demanar que es faci una acció de pressa.", exZh:"快来！", exEs:"¡Vine de pressa!"},
-  {num:4, hz:"进来", py:"jìn lai", cat:"Verbo compost", es:"Entrar (venint cap a qui parla)", pos:"Si B entra cap a A s'usa 进来. Si s'allunya seria 进去 (jìn qù). S'afegeix 请 (qǐng) davant per cortesia.", exZh:"请进来。", exEs:"Por favor, entra / Adelante!"},
-  {num:5, hz:"来", py:"lái", cat:"Verbo", es:"Venir", pos:"Verb de moviment.", exZh:"你来我家吗？", exEs:"¿Vens a casa meva?"},
-  {num:6, hz:"介绍", py:"jièshào", cat:"Verbo", es:"Presentar a algú breument", pos:"Acostuma a anar seguit de 一下 (jièshào yí xià).", exZh:"我介绍一下。", exEs:"Us presento breument / Os presento un momento..."},
-  {num:7, hz:"一下", py:"yí xià", cat:"Estructura", es:"Un moment / Breument", pos:"FÓRMULA: [ Verb + 一下 ]. Indica acció ràpida o petició més suau.", exZh:"看一下这个人。", exEs:"Mira un momento a esta persona."},
-  {num:8, hz:"高兴", py:"gāoxìng", cat:"Adjectiu", es:"Content / Alegre", pos:"ESTRUCTURA: [ Sujeto + 很 + 高兴 ].", exZh:"很高兴认识你。", exEs:"Encantado/a de conocerte."},
-  {num:9, hz:"漂亮", py:"piàoliang", cat:"Adjectiu", es:"Guapa / Bonica", pos:"S'utilitza per a gènere femení o per descriure coses i llocs.", exZh:"我家很漂亮。", exEs:"La meva casa és bonica."},
-  {num:10, hz:"坐", py:"zuò", cat:"Verbo", es:"Sentarse / Seure", pos:"Amb 请 davant per cortesia: 请坐 (Qǐng zuò).", exZh:"请坐。", exEs:"Siéntese, por favor / Sigueu, per favor."},
-  {num:11, hz:"在", py:"zài", cat:"Preposició", es:"Estar a / en un lloc", pos:"FÓRMULA D'OR: Persona + 在 + Lloc + Acció. En xinès el lloc va SEMPRE ABANS que l'acció.", exZh:"我在大学学习。", exEs:"Estudio en la universidad."},
-  {num:12, hz:"哪儿", py:"nǎr", cat:"Pronom interrogatiu", es:"On? / ¿Dónde?", pos:"Substitueix el lloc en la pregunta.", exZh:"你在哪儿学习中文？", exEs:"¿Dónde estudias chino?"},
-  {num:13, hz:"学校", py:"xuéxiào", cat:"Substantiu", es:"Escola / Centre d'estudis", pos:"Lloc que es col·loca rere de 在.", exZh:"我在学校学中文。", exEs:"Estudio chino en la escuela."},
-  {num:14, hz:"喝", py:"hē", cat:"Verbo", es:"Beure", pos:"Verb d'acció + beguda.", exZh:"请问，你想喝什么？", exEs:"Disculpa, ¿qué quieres beber?"},
-  {num:15, hz:"点(儿)", py:"diǎn(r)", cat:"Classificador", es:"Un poc / Una mica de", pos:"FÓRMULA: [ Verb + 点(儿) + Objeto ]. Per dir 'Sí, un poc': 想一点.", exZh:"喝点(儿)咖啡。", exEs:"Beber un poco de café."},
-  {num:16, hz:"茶", py:"chá", cat:"Substantiu", es:"Té (beguda)", pos:"Substantiu objecte.", exZh:"你喜欢茶还是咖啡？", exEs:"¿Te gusta el té o el café?"},
-  {num:17, hz:"咖啡", py:"kāfēi", cat:"Substantiu", es:"Cafè", pos:"Substantiu objecte.", exZh:"你想喝咖啡吗？", exEs:"¿Quieres beber café?"},
-  {num:18, hz:"吧", py:"ba", cat:"Partícula modal", es:"Sugerència / Proposta amable", pos:"Es posa al FINAL de la frase per suavitzar un ordre o fer una proposta.", exZh:"我们喝咖啡吧。", exEs:"¿Vamos a tomar un café?"},
-  {num:19, hz:"要", py:"yào", cat:"Verbo", es:"Voler / Tenir la intenció de", pos:"ESTRUCTURA: [ 要 + Substantiu ] o [ 要 + Verb ].", exZh:"我们要一杯咖啡。", exEs:"Queremos una taza de café."},
-  {num:20, hz:"瓶", py:"píng", cat:"Classificador", es:"Ampolla / Botella (mesura)", pos:"Número + 瓶 + Beguda. Nota: L'objecte físic ampolla es diu 瓶子 (píngzi).", exZh:"一瓶可乐。", exEs:"Una botella de coca-cola."},
-  {num:21, hz:"可乐", py:"kělè", cat:"Substantiu", es:"Coca-cola", pos:"Substantiu objecte (o 可口可乐 kěkǒukělè).", exZh:"可乐在哪儿？", exEs:"¿Dónde está la coca-cola?"},
-  {num:22, hz:"可以", py:"kěyǐ", cat:"Verbo modal", es:"Poder (permís / possibilitat)", pos:"Se situa ABANS del verb principal.", exZh:"我可以和你跳舞吗？", exEs:"¿Puedo bailar contigo?"},
-  {num:23, hz:"对不起", py:"duìbuqǐ", cat:"Expressió", es:"Lo siento / Perdón", pos:"Es diu al començament de la frase.", exZh:"对不起，我不知道。", exEs:"Lo siento, no lo sé."},
-  {num:24, hz:"给", py:"gěi", cat:"Verbo", es:"Donar / Dar", pos:"ESTRUCTURA: [ 给 + Persona + Objeto ].", exZh:"给我一瓶可乐。", exEs:"Dame una botella de coca-cola."},
-  {num:25, hz:"杯", py:"bēi", cat:"Classificador", es:"Got / Tassa (mesura)", pos:"Número + 杯 + Beguda. Nota: L'objecte físic got o tassa es diu 杯子 (bēizi).", exZh:"两杯咖啡。", exEs:"Dos tazas de café."},
-  {num:26, hz:"水", py:"shuǐ", cat:"Substantiu", es:"Aigua", pos:"Substantiu objecte.", exZh:"请给我一杯水。", exEs:"Por favor dame un vaso de agua."},
-  {num:27, hz:"高小音", py:"Gāo Xiǎoyīn", cat:"Nom propi", es:"Gao Xiaoyin (nom)", pos:"Sujeto de la frase.", exZh:"高小音在学校。", exEs:"Gao Xiaoyin está en la escuela."},
-  {num:28, hz:"玩(儿)", py:"wán(r)", cat:"Verbo", es:"Divertir-se / Jugar / Passar-ho bé", pos:"Com a adjectiu: 好玩 (hǎowán) = Divertit. Ej: 玩儿电脑 / 玩儿球.", exZh:"我们去你家玩儿吧。", exEs:"Anem a casa teva a passar-ho bé?"},
-  {num:29, hz:"了", py:"le", cat:"Partícula modal", es:"Acció realitzada / completada", pos:"POSICIÓ: Just rere del verb (V + 了 + Objeto). Pregunta: ...了没有？ / ...了吗？", exZh:"我喝了两杯咖啡。", exEs:"He begut dues tasses de cafè."},
-  {num:30, hz:"图书馆", py:"túshūguǎn", cat:"Substantiu", es:"Biblioteca", pos:"Lloc físic que va amb 在 o 去.", exZh:"我没有去图书馆。", exEs:"No he anat a la biblioteca."},
-  {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
-  {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
-  {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
-  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
+  {num:1, hz:"呀", py:"ya", cat:"Partícula modal", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
+  {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
+  {num:3, hz:"快", py:"kuài", cat:"Adverbi / Adjectiu", es:"Ràpidament / De pressa", pos:"Es posa ABANS d'un verb per demanar que es faci una acció de pressa.", exZh:"快来！", exEs:"¡Vine de pressa!"},
+  {num:4, hz:"进来", py:"jìn lai", cat:"Verbo compost", es:"Entrar (venint cap a qui parla)", pos:"Si B entra cap a A s'usa 进来. Si s'allunya seria 进去 (jìn qù). S'afegeix 请 (qǐng) davant per cortesia.", exZh:"请进来。", exEs:"Por favor, entra / Adelante!"},
+  {num:5, hz:"来", py:"lái", cat:"Verbo", es:"Venir", pos:"Verb de moviment.", exZh:"你来我家吗？", exEs:"¿Vens a casa meva?"},
+  {num:6, hz:"介绍", py:"jièshào", cat:"Verbo", es:"Presentar a algú breument", pos:"Acostuma a anar seguit de 一下 (jièshào yí xià).", exZh:"我介绍一下。", exEs:"Us presento breument / Os presento un momento..."},
+  {num:7, hz:"一下", py:"yí xià", cat:"Estructura", es:"Un moment / Breument", pos:"FÓRMULA: [ Verb + 一下 ]. Indica acció ràpida o petició més suau.", exZh:"看一下这个人。", exEs:"Mira un momento a esta persona."},
+  {num:8, hz:"高兴", py:"gāoxìng", cat:"Adjectiu", es:"Content / Alegre", pos:"ESTRUCTURA: [ Sujeto + 很 + 高兴 ].", exZh:"很高兴认识你。", exEs:"Encantado/a de conocerte."},
+  {num:9, hz:"漂亮", py:"piàoliang", cat:"Adjectiu", es:"Guapa / Bonica", pos:"S'utilitza per a gènere femení o per descriure coses i llocs.", exZh:"我家很漂亮。", exEs:"La meva casa és bonica."},
+  {num:10, hz:"坐", py:"zuò", cat:"Verbo", es:"Sentarse / Seure", pos:"Amb 请 davant per cortesia: 请坐 (Qǐng zuò).", exZh:"请坐。", exEs:"Siéntese, por favor / Sigueu, per favor."},
+  {num:11, hz:"在", py:"zài", cat:"Preposició", es:"Estar a / en un lloc", pos:"FÓRMULA D'OR: Persona + 在 + Lloc + Acció. En xinès el lloc va SEMPRE ABANS que l'acció.", exZh:"我在大学学习。", exEs:"Estudio en la universidad."},
+  {num:12, hz:"哪儿", py:"nǎr", cat:"Pronom interrogatiu", es:"On? / ¿Dónde?", pos:"Substitueix el lloc en la pregunta.", exZh:"你在哪儿学习中文？", exEs:"¿Dónde estudias chino?"},
+  {num:13, hz:"学校", py:"xuéxiào", cat:"Substantiu", es:"Escola / Centre d'estudis", pos:"Lloc que es col·loca rere de 在.", exZh:"我在学校学中文。", exEs:"Estudio chino en la escuela."},
+  {num:14, hz:"喝", py:"hē", cat:"Verbo", es:"Beure", pos:"Verb d'acció + beguda.", exZh:"请问，你想喝什么？", exEs:"Disculpa, ¿qué quieres beber?"},
+  {num:15, hz:"点(儿)", py:"diǎn(r)", cat:"Classificador", es:"Un poc / Una mica de", pos:"FÓRMULA: [ Verb + 点(儿) + Objeto ]. Per dir 'Sí, un poc': 想一点.", exZh:"喝点(儿)咖啡。", exEs:"Beber un poco de café."},
+  {num:16, hz:"茶", py:"chá", cat:"Substantiu", es:"Té (beguda)", pos:"Substantiu objecte.", exZh:"你喜欢茶还是咖啡？", exEs:"¿Te gusta el té o el café?"},
+  {num:17, hz:"咖啡", py:"kāfēi", cat:"Substantiu", es:"Cafè", pos:"Substantiu objecte.", exZh:"你想喝咖啡吗？", exEs:"¿Quieres beber café?"},
+  {num:18, hz:"吧", py:"ba", cat:"Partícula modal", es:"Sugerència / Proposta amable", pos:"Es posa al FINAL de la frase per suavitzar un ordre o fer una proposta.", exZh:"我们喝咖啡吧。", exEs:"¿Vamos a tomar un café?"},
+  {num:19, hz:"要", py:"yào", cat:"Verbo", es:"Voler / Tenir la intenció de", pos:"ESTRUCTURA: [ 要 + Substantiu ] o [ 要 + Verb ].", exZh:"我们要一杯咖啡。", exEs:"Queremos una taza de café."},
+  {num:20, hz:"瓶", py:"píng", cat:"Classificador", es:"Ampolla / Botella (mesura)", pos:"Número + 瓶 + Beguda. Nota: L'objecte físic ampolla es diu 瓶子 (píngzi).", exZh:"一瓶可乐。", exEs:"Una botella de coca-cola."},
+  {num:21, hz:"可乐", py:"kělè", cat:"Substantiu", es:"Coca-cola", pos:"Substantiu objecte (o 可口可乐 kěkǒukělè).", exZh:"可乐在哪儿？", exEs:"¿Dónde está la coca-cola?"},
+  {num:22, hz:"可以", py:"kěyǐ", cat:"Verbo modal", es:"Poder (permís / possibilitat)", pos:"Se situa ABANS del verb principal.", exZh:"我可以和你跳舞吗？", exEs:"¿Puedo bailar contigo?"},
+  {num:23, hz:"对不起", py:"duìbuqǐ", cat:"Expressió", es:"Lo siento / Perdón", pos:"Es diu al començament de la frase.", exZh:"对不起，我不知道。", exEs:"Lo siento, no lo sé."},
+  {num:24, hz:"给", py:"gěi", cat:"Verbo", es:"Donar / Dar", pos:"ESTRUCTURA: [ 给 + Persona + Objeto ].", exZh:"给我一瓶可乐。", exEs:"Dame una botella de coca-cola."},
+  {num:25, hz:"杯", py:"bēi", cat:"Classificador", es:"Got / Tassa (mesura)", pos:"Número + 杯 + Beguda. Nota: L'objecte físic got o tassa es diu 杯子 (bēizi).", exZh:"两杯咖啡。", exEs:"Dos tazas de café."},
+  {num:26, hz:"水", py:"shuǐ", cat:"Substantiu", es:"Aigua", pos:"Substantiu objecte.", exZh:"请给我一杯水。", exEs:"Por favor dame un vaso de agua."},
+  {num:27, hz:"高小音", py:"Gāo Xiǎoyīn", cat:"Nom propi", es:"Gao Xiaoyin (nom)", pos:"Sujeto de la frase.", exZh:"高小音在学校。", exEs:"Gao Xiaoyin está en la escuela."},
+  {num:28, hz:"玩(儿)", py:"wán(r)", cat:"Verbo", es:"Divertir-se / Jugar / Passar-ho bé", pos:"Com a adjectiu: 好玩 (hǎowán) = Divertit. Ej: 玩儿电脑 / 玩儿球.", exZh:"我们去你家玩儿吧。", exEs:"Anem a casa teva a passar-ho bé?"},
+  {num:29, hz:"了", py:"le", cat:"Partícula modal", es:"Acció realitzada / completada", pos:"POSICIÓ: Just rere del verb (V + 了 + Objeto). Pregunta: ...了没有？ / ...了吗？", exZh:"我喝了两杯咖啡。", exEs:"He begut dues tasses de cafè."},
+  {num:30, hz:"图书馆", py:"túshūguǎn", cat:"Substantiu", es:"Biblioteca", pos:"Lloc físic que va amb 在 o 去.", exZh:"我没有去图书馆。", exEs:"No he anat a la biblioteca."},
+  {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
+  {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
+  {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
+  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
 ];
 
 const GLOBAL_VOCAB = [
-  ...ALL_VOCAB_34,
-  {hz:"你", py:"nǐ", es:"tú"}, {hz:"好", py:"hǎo", es:"bueno / bien"}, {hz:"请", py:"qǐng", es:"por favor / invitar"},
-  {hz:"问", py:"wèn", es:"preguntar"}, {hz:"贵", py:"guì", es:"honorable / caro"}, {hz:"姓", py:"xìng", es:"apellidarse"},
-  {hz:"我", py:"wǒ", es:"yo"}, {hz:"呢", py:"ne", es:"¿y…?"}, {hz:"小姐", py:"xiǎojiě", es:"señorita"},
-  {hz:"叫", py:"jiào", es:"llamarse"}, {hz:"什么", py:"shénme", es:"qué"}, {hz:"名字", py:"míngzi", es:"nombre"},
-  {hz:"先生", py:"xiānsheng", es:"señor"}, {hz:"中国", py:"Zhōngguó", es:"China"}, {hz:"北京", py:"Běijīng", es:"Beijing"},
-  {hz:"美国", py:"Měiguó", es:"EE.UU."}, {hz:"纽约", py:"Niǔyuē", es:"Nueva York"}, {hz:"那", py:"nà", es:"eso / aquel"},
-  {hz:"的", py:"de", es:"posesivo"}, {hz:"照片", py:"zhàopiàn", es:"foto"}, {hz:"这", py:"zhè", es:"esto / este"},
-  {hz:"爸爸", py:"bàba", es:"papá"}, {hz:"妈妈", py:"māma", es:"mamá"}, {hz:"个", py:"gè", es:"clasificador"},
-  {hz:"孩子", py:"háizi", es:"niño/a"}, {hz:"谁", py:"shéi", es:"quién"}, {hz:"她", py:"tā", es:"ella"},
-  {hz:"姐姐", py:"jiějie", es:"hermana mayor"}, {hz:"弟弟", py:"dìdi", es:"hermano menor"}, {hz:"他", py:"tā", es:"él"},
-  {hz:"哥哥", py:"gēge", es:"hermano mayor"}, {hz:"儿子", py:"érzi", es:"hijo"}, {hz:"有", py:"yǒu", es:"tener / haber"},
-  {hz:"女儿", py:"nǚ'ér", es:"hija"}, {hz:"没", py:"méi", es:"no (con 有)"}, {hz:"家", py:"jiā", es:"casa / familia"},
-  {hz:"几", py:"jǐ", es:"cuántos"}, {hz:"两", py:"liǎng", es:"dos"}, {hz:"妹妹", py:"mèimei", es:"hermana menor"},
-  {hz:"和", py:"hé", es:"y"}, {hz:"做", py:"zuò", es:"hacer"}, {hz:"工作", py:"gōngzuò", es:"trabajar"},
-  {hz:"律师", py:"lǜshī", es:"abogado/a"}, {hz:"都", py:"dōu", es:"todos"}, {hz:"大学生", py:"dàxuéshēng", es:"universitario"},
-  {hz:"医生", py:"yīshēng", es:"médico/a"}, {hz:"老师", py:"lǎoshī", es:"profesor/a"}, {hz:"是", py:"shì", es:"ser"},
-  {hz:"吗", py:"ma", es:"¿?"}, {hz:"不", py:"bù", es:"no"}, {hz:"学生", py:"xuésheng", es:"estudiante"},
-  {hz:"也", py:"yě", es:"también"}, {hz:"人", py:"rén", es:"persona"}, {hz:"号", py:"hào", es:"día / número"},
-  {hz:"月", py:"yuè", es:"mes"}, {hz:"星期", py:"xīngqī", es:"semana"}, {hz:"星期四", py:"xīngqīsì", es:"jueves"},
-  {hz:"天", py:"tiān", es:"día"}, {hz:"生日", py:"shēngrì", es:"cumpleaños"}, {hz:"今年", py:"jīnnián", es:"este año"},
-  {hz:"大", py:"dà", es:"grande"}, {hz:"岁", py:"suì", es:"años de edad"}, {hz:"吃", py:"chī", es:"comer"},
-  {hz:"饭", py:"fàn", es:"comida"}, {hz:"怎么样", py:"zěnmeyàng", es:"¿qué tal?"}, {hz:"太…了", py:"tài…le", es:"demasiado"},
-  {hz:"谢谢", py:"xièxie", es:"gracias"}, {hz:"喜欢", py:"xǐhuān", es:"gustar"}, {hz:"菜", py:"cài", es:"plato"},
-  {hz:"还是", py:"háishi", es:"o"}, {hz:"可是", py:"kěshì", es:"pero"}, {hz:"我们", py:"wǒmen", es:"nosotros"},
-  {hz:"点", py:"diǎn", es:"hora en punto"}, {hz:"半", py:"bàn", es:"media hora"}, {hz:"晚上", py:"wǎnshang", es:"noche"},
-  {hz:"见", py:"jiàn", es:"ver"}, {hz:"再见", py:"zàijiàn", es:"adiós"}, {hz:"英国", py:"Yīngguó", es:"Reino Unido"},
-  {hz:"现在", py:"xiànzài", es:"ahora"}, {hz:"刻", py:"kè", es:"cuarto de hora"}, {hz:"今天", py:"jīntiān", es:"hoy"},
-  {hz:"很", py:"hěn", es:"muy"}, {hz:"忙", py:"máng", es:"ocupado/a"}, {hz:"明天", py:"míngtiān", es:"mañana"},
-  {hz:"晚饭", py:"wǎnfàn", es:"cena"}, {hz:"为什么", py:"wèishénme", es:"¿por qué?"}, {hz:"因为", py:"yīnwèi", es:"porque"},
-  {hz:"还", py:"hái", es:"además"}, {hz:"同学", py:"tóngxué", es:"compañero"}, {hz:"认识", py:"rènshi", es:"conocer"},
-  {hz:"朋友", py:"péngyou", es:"amigo/a"}, {hz:"周末", py:"zhōumò", es:"fin de semana"}, {hz:"打球", py:"dǎ qiú", es:"jugar a pelota"},
-  {hz:"看", py:"kàn", es:"ver / mirar"}, {hz:"电视", py:"diànshì", es:"televisión"}, {hz:"唱歌", py:"chàng gē", es:"cantar"},
-  {hz:"跳舞", py:"tiào wǔ", es:"bailar"}, {hz:"听", py:"tīng", es:"escuchar"}, {hz:"音乐", py:"yīnyuè", es:"música"},
-  {hz:"书", py:"shū", es:"libro"}, {hz:"对", py:"duì", es:"correcto"}, {hz:"有的", py:"yǒude", es:"algunos"},
-  {hz:"时候", py:"shíhou", es:"momento"}, {hz:"电影", py:"diànyǐng", es:"película"}, {hz:"常常", py:"chángcháng", es:"a menudo"},
-  {hz:"去", py:"qù", es:"ir"}, {hz:"外国", py:"wàiguó", es:"extranjero"}, {hz:"请客", py:"qǐng kè", es:"invitar"},
-  {hz:"昨天", py:"zuótiān", es:"ayer"}, {hz:"所以", py:"suǒyǐ", es:"por eso"}
+  ...ALL_VOCAB_34,
+  {hz:"你", py:"nǐ", es:"tú"}, {hz:"好", py:"hǎo", es:"bueno / bien"}, {hz:"请", py:"qǐng", es:"por favor / invitar"},
+  {hz:"问", py:"wèn", es:"preguntar"}, {hz:"贵", py:"guì", es:"honorable / caro"}, {hz:"姓", py:"xìng", es:"apellidarse"},
+  {hz:"我", py:"wǒ", es:"yo"}, {hz:"呢", py:"ne", es:"¿y…?"}, {hz:"小姐", py:"xiǎojiě", es:"señorita"},
+  {hz:"叫", py:"jiào", es:"llamarse"}, {hz:"什么", py:"shénme", es:"qué"}, {hz:"名字", py:"míngzi", es:"nombre"},
+  {hz:"先生", py:"xiānsheng", es:"señor"}, {hz:"中国", py:"Zhōngguó", es:"China"}, {hz:"北京", py:"Běijīng", es:"Beijing"},
+  {hz:"美国", py:"Měiguó", es:"EE.UU."}, {hz:"纽约", py:"Niǔyuē", es:"Nueva York"}, {hz:"那", py:"nà", es:"eso / aquel"},
+  {hz:"的", py:"de", es:"posesivo"}, {hz:"照片", py:"zhàopiàn", es:"foto"}, {hz:"这", py:"zhè", es:"esto / este"},
+  {hz:"爸爸", py:"bàba", es:"papá"}, {hz:"妈妈", py:"māma", es:"mamá"}, {hz:"个", py:"gè", es:"clasificador"},
+  {hz:"孩子", py:"háizi", es:"niño/a"}, {hz:"谁", py:"shéi", es:"quién"}, {hz:"她", py:"tā", es:"ella"},
+  {hz:"姐姐", py:"jiějie", es:"hermana mayor"}, {hz:"弟弟", py:"dìdi", es:"hermano menor"}, {hz:"他", py:"tā", es:"él"},
+  {hz:"哥哥", py:"gēge", es:"hermano mayor"}, {hz:"儿子", py:"érzi", es:"hijo"}, {hz:"有", py:"yǒu", es:"tener / haber"},
+  {hz:"女儿", py:"nǚ'ér", es:"hija"}, {hz:"没", py:"méi", es:"no (con 有)"}, {hz:"家", py:"jiā", es:"casa / familia"},
+  {hz:"几", py:"jǐ", es:"cuántos"}, {hz:"两", py:"liǎng", es:"dos"}, {hz:"妹妹", py:"mèimei", es:"hermana menor"},
+  {hz:"和", py:"hé", es:"y"}, {hz:"做", py:"zuò", es:"hacer"}, {hz:"工作", py:"gōngzuò", es:"trabajar"},
+  {hz:"律师", py:"lǜshī", es:"abogado/a"}, {hz:"都", py:"dōu", es:"todos"}, {hz:"大学生", py:"dàxuéshēng", es:"universitario"},
+  {hz:"医生", py:"yīshēng", es:"médico/a"}, {hz:"老师", py:"lǎoshī", es:"profesor/a"}, {hz:"是", py:"shì", es:"ser"},
+  {hz:"吗", py:"ma", es:"¿?"}, {hz:"不", py:"bù", es:"no"}, {hz:"学生", py:"xuésheng", es:"estudiante"},
+  {hz:"也", py:"yě", es:"también"}, {hz:"人", py:"rén", es:"persona"}, {hz:"号", py:"hào", es:"día / número"},
+  {hz:"月", py:"yuè", es:"mes"}, {hz:"星期", py:"xīngqī", es:"semana"}, {hz:"星期四", py:"xīngqīsì", es:"jueves"},
+  {hz:"天", py:"tiān", es:"día"}, {hz:"生日", py:"shēngrì", es:"cumpleaños"}, {hz:"今年", py:"jīnnián", es:"este año"},
+  {hz:"大", py:"dà", es:"grande"}, {hz:"岁", py:"suì", es:"años de edad"}, {hz:"吃", py:"chī", es:"comer"},
+  {hz:"饭", py:"fàn", es:"comida"}, {hz:"怎么样", py:"zěnmeyàng", es:"¿qué tal?"}, {hz:"太…了", py:"tài…le", es:"demasiado"},
+  {hz:"谢谢", py:"xièxie", es:"gracias"}, {hz:"喜欢", py:"xǐhuān", es:"gustar"}, {hz:"菜", py:"cài", es:"plato"},
+  {hz:"还是", py:"háishi", es:"o"}, {hz:"可是", py:"kěshì", es:"pero"}, {hz:"我们", py:"wǒmen", es:"nosotros"},
+  {hz:"点", py:"diǎn", es:"hora en punto"}, {hz:"半", py:"bàn", es:"media hora"}, {hz:"晚上", py:"wǎnshang", es:"noche"},
+  {hz:"见", py:"jiàn", es:"ver"}, {hz:"再见", py:"zàijiàn", es:"adiós"}, {hz:"英国", py:"Yīngguó", es:"Reino Unido"},
+  {hz:"现在", py:"xiànzài", es:"ahora"}, {hz:"刻", py:"kè", es:"cuarto de hora"}, {hz:"今天", py:"jīntiān", es:"hoy"},
+  {hz:"很", py:"hěn", es:"muy"}, {hz:"忙", py:"máng", es:"ocupado/a"}, {hz:"明天", py:"míngtiān", es:"mañana"},
+  {hz:"晚饭", py:"wǎnfàn", es:"cena"}, {hz:"为什么", py:"wèishénme", es:"¿por qué?"}, {hz:"因为", py:"yīnwèi", es:"porque"},
+  {hz:"还", py:"hái", es:"además"}, {hz:"同学", py:"tóngxué", es:"compañero"}, {hz:"认识", py:"rènshi", es:"conocer"},
+  {hz:"朋友", py:"péngyou", es:"amigo/a"}, {hz:"周末", py:"zhōumò", es:"fin de semana"}, {hz:"打球", py:"dǎ qiú", es:"jugar a pelota"},
+  {hz:"看", py:"kàn", es:"ver / mirar"}, {hz:"电视", py:"diànshì", es:"televisión"}, {hz:"唱歌", py:"chàng gē", es:"cantar"},
+  {hz:"跳舞", py:"tiào wǔ", es:"bailar"}, {hz:"听", py:"tīng", es:"escuchar"}, {hz:"音乐", py:"yīnyuè", es:"música"},
+  {hz:"书", py:"shū", es:"libro"}, {hz:"对", py:"duì", es:"correcto"}, {hz:"有的", py:"yǒude", es:"algunos"},
+  {hz:"时候", py:"shíhou", es:"momento"}, {hz:"电影", py:"diànyǐng", es:"película"}, {hz:"常常", py:"chángcháng", es:"a menudo"},
+  {hz:"去", py:"qù", es:"ir"}, {hz:"外国", py:"wàiguó", es:"extranjero"}, {hz:"请客", py:"qǐng kè", es:"invitar"},
+  {hz:"昨天", py:"zuótiān", es:"ayer"}, {hz:"所以", py:"suǒyǐ", es:"por eso"}
 ];
 
 const TEXT_1 = [
-  {zh:"谁呀？", py:"Shéi ya?", es:"¿Quién es?"},
-  {zh:"是我，王朋，还有李友。", py:"Shì wǒ, Wáng Péng, hái yǒu Lǐ Yǒu.", es:"Soy yo, Wang Peng, y también Li You."},
-  {zh:"请进，请进，快进来！来，我介绍一下，这是我姐姐，高小音。", py:"Qǐng jìn, qǐng jìn, kuài jìn lai! Lái, wǒ jièshào yí xià, zhè shì wǒ jiějie, Gāo Xiǎoyīn.", es:"Adelante, entren. ¡Vengan, les presento un momento! Esta es mi hermana mayor, Gao Xiaoyin."},
-  {zh:"小音，你好。认识你很高兴。", py:"Xiǎoyīn, nǐ hǎo. Rènshi nǐ hěn gāoxìng.", es:"Hola Xiaoyin. Encantado de conocerte."},
-  {zh:"认识你们我也很高兴。", py:"Rènshi nǐmen wǒ yě hěn gāoxìng.", es:"Encantada de conocerles a ustedes también."},
-  {zh:"你们家很大，也很漂亮。", py:"Nǐmen jiā hěn dà, yě hěn piàoliang.", es:"Su casa es muy grande y muy bonita."},
-  {zh:"是吗？请坐，请坐。", py:"Shì ma? Qǐng zuò, qǐng zuò.", es:"¿Ah sí? Siéntense, por favor."},
-  {zh:"小音，你在哪儿工作？", py:"Xiǎoyīn, nǐ zài nǎr gōngzuò?", es:"Xiaoyin, ¿dónde trabajas?"},
-  {zh:"我在学校工作。你们想喝点儿什么？喝茶还是喝咖啡？", py:"Wǒ zài xuéxiào gōngzuò. Nǐmen xiǎng hē diǎnr shénme? Hē chá háishi hē kāfēi?", es:"Trabajo en la escuela. ¿Qué les gustaría beber? ¿Té o café?"},
-  {zh:"我喝茶吧。", py:"Wǒ hē chá ba.", es:"Yo tomaré té."},
-  {zh:"我要一瓶可乐，可以吗？", py:"Wǒ yào yì píng kělè, kěyǐ ma?", es:"Quiero una botella de Coca-Cola, ¿puedo?"},
-  {zh:"对不起，我们家没有可乐。", py:"Duìbuqǐ, wǒmen jiā méi yǒu kělè.", es:"Lo siento, en nuestra casa no tenemos Coca-Cola."},
-  {zh:"那给我一杯水吧。", py:"Nà gěi wǒ yì bēi shuǐ ba.", es:"Entonces dame un vaso de agua."}
+  {zh:"谁呀？", py:"Shéi ya?", es:"¿Quién es?"},
+  {zh:"是我，王朋，还有李友。", py:"Shì wǒ, Wáng Péng, hái yǒu Lǐ Yǒu.", es:"Soy yo, Wang Peng, y también Li You."},
+  {zh:"请进，请进，快进来！来，我介绍一下，这是我姐姐，高小音。", py:"Qǐng jìn, qǐng jìn, kuài jìn lai! Lái, wǒ jièshào yí xià, zhè shì wǒ jiějie, Gāo Xiǎoyīn.", es:"Adelante, entren. ¡Vengan, les presento un momento! Esta es mi hermana mayor, Gao Xiaoyin."},
+  {zh:"小音，你好。认识你很高兴。", py:"Xiǎoyīn, nǐ hǎo. Rènshi nǐ hěn gāoxìng.", es:"Hola Xiaoyin. Encantado de conocerte."},
+  {zh:"认识你们我也很高兴。", py:"Rènshi nǐmen wǒ yě hěn gāoxìng.", es:"Encantada de conocerles a ustedes también."},
+  {zh:"你们家很大，也很漂亮。", py:"Nǐmen jiā hěn dà, yě hěn piàoliang.", es:"Su casa es muy grande y muy bonita."},
+  {zh:"是吗？请坐，请坐。", py:"Shì ma? Qǐng zuò, qǐng zuò.", es:"¿Ah sí? Siéntense, por favor."},
+  {zh:"小音，你在哪儿工作？", py:"Xiǎoyīn, nǐ zài nǎr gōngzuò?", es:"Xiaoyin, ¿dónde trabajas?"},
+  {zh:"我在学校工作。你们想喝点儿什么？喝茶还是喝咖啡？", py:"Wǒ zài xuéxiào gōngzuò. Nǐmen xiǎng hē diǎnr shénme? Hē chá háishi hē kāfēi?", es:"Trabajo en la escuela. ¿Qué les gustaría beber? ¿Té o café?"},
+  {zh:"我喝茶吧。", py:"Wǒ hē chá ba.", es:"Yo tomaré té."},
+  {zh:"我要一瓶可乐，可以吗？", py:"Wǒ yào yì píng kělè, kěyǐ ma?", es:"Quiero una botella de Coca-Cola, ¿puedo?"},
+  {zh:"对不起，我们家没有可乐。", py:"Duìbuqǐ, wǒmen jiā méi yǒu kělè.", es:"Lo siento, en nuestra casa no tenemos Coca-Cola."},
+  {zh:"那给我一杯水吧。", py:"Nà gěi wǒ yì bēi shuǐ ba.", es:"Entonces dame un vaso de agua."}
 ];
 
 const TEXT_2 = [
-  {zh:"昨天晚上，王朋和李友去高文中家玩儿。", py:"Zuótiān wǎnshang, Wáng Péng hé Lǐ Yǒu qù Gāo Wénzhōng jiā wánr.", es:"Ayer por la noche, Wang Peng y Li You fueron a casa de Gao Wenzhong a pasar el rato."},
-  {zh:"在高文中家，他们认识了高文中的姐姐。", py:"Zài Gāo Wénzhōng jiā, tāmen rènshi le Gāo Wénzhōng de jiějie.", es:"En casa de Gao Wenzhong, conocieron a la hermana mayor de Gao Wenzhong."},
-  {zh:"她叫高小音，在学校的图书馆工作。", py:"Tā jiào Gāo Xiǎoyīn, zài xuéxiào de túshūguǎn gōngzuò.", es:"Se llama Gao Xiaoyin y trabaja en la biblioteca de la escuela."},
-  {zh:"她请王朋喝茶，王朋喝了两杯。", py:"Tā qǐng Wáng Péng hē chá, Wáng Péng hē le liǎng bēi.", es:"Ella invitó a Wang Peng a té, y Wang Peng bebió dos tazas."},
-  {zh:"李友不喝茶，只喝了一杯水。", py:"Lǐ Yǒu bù hē chá, zhǐ hē le yì bēi shuǐ.", es:"Li You no bebe té, solo bebió un vaso de agua."},
-  {zh:"他们一起聊天儿、看电视。", py:"Tāmen yìqǐ liáo tiānr, kàn diànshì.", es:"Ellos charlaron y vieron la televisión juntos."},
-  {zh:"王朋和李友晚上十二点才回家。", py:"Wáng Péng hé Lǐ Yǒu wǎnshang shí'èr diǎn cái huí jiā.", es:"Wang Peng y Li You no volvieron a casa hasta las 12 de la noche."}
+  {zh:"昨天晚上，王朋和李友去高文中家玩儿。", py:"Zuótiān wǎnshang, Wáng Péng hé Lǐ Yǒu qù Gāo Wénzhōng jiā wánr.", es:"Ayer por la noche, Wang Peng y Li You fueron a casa de Gao Wenzhong a pasar el rato."},
+  {zh:"在高文中家，他们认识了高文中的姐姐。", py:"Zài Gāo Wénzhōng jiā, tāmen rènshi le Gāo Wénzhōng de jiějie.", es:"En casa de Gao Wenzhong, conocieron a la hermana mayor de Gao Wenzhong."},
+  {zh:"她叫高小音，在学校的图书馆工作。", py:"Tā jiào Gāo Xiǎoyīn, zài xuéxiào de túshūguǎn gōngzuò.", es:"Se llama Gao Xiaoyin y trabaja en la biblioteca de la escuela."},
+  {zh:"她请王朋喝茶，王朋喝了两杯。", py:"Tā qǐng Wáng Péng hē chá, Wáng Péng hē le liǎng bēi.", es:"Ella invitó a Wang Peng a té, y Wang Peng bebió dos tazas."},
+  {zh:"李友不喝茶，只喝了一杯水。", py:"Lǐ Yǒu bù hē chá, zhǐ hē le yì bēi shuǐ.", es:"Li You no bebe té, solo bebió un vaso de agua."},
+  {zh:"他们一起聊天儿、看电视。", py:"Tāmen yìqǐ liáo tiānr, kàn diànshì.", es:"Ellos charlaron y vieron la televisión juntos."},
+  {zh:"王朋和李友晚上十二点才回家。", py:"Wáng Péng hé Lǐ Yǒu wǎnshang shí'èr diǎn cái huí jiā.", es:"Wang Peng y Li You no volvieron a casa hasta las 12 de la noche."}
 ];
 
 let flashIdx = 0;
 
 function showMenu() {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('main-menu').style.display = 'grid';
-  document.getElementById('back-btn').style.display = 'none';
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('main-menu').style.display = 'grid';
+  document.getElementById('back-btn').style.display = 'none';
 }
 
 function openSec(id) {
-  document.getElementById('main-menu').style.display = 'none';
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('sec-' + id).classList.add('active');
-  document.getElementById('back-btn').style.display = 'block';
+  document.getElementById('main-menu').style.display = 'none';
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.getElementById('back-btn').style.display = 'block';
 
-  if(id === 'dict') renderDictT5(ALL_VOCAB_34);
-  if(id === 'flash') renderFlash();
-  if(id === 'stories') renderStories();
-  if(id === 'game-words') initGameWords();
+  if(id === 'dict') renderDictT5(ALL_VOCAB_34);
+  if(id === 'flash') renderFlash();
+  if(id === 'stories') renderStories();
+  if(id === 'game-words') initGameWords();
 }
 
 function speak(text) {
-  if(!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-CN';
-  u.rate = 0.8;
-  window.speechSynthesis.speak(u);
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN';
+  u.rate = 0.8;
+  window.speechSynthesis.speak(u);
 }
 
 function switchDictTab(tab) {
-  if(tab === 't5') {
-    document.getElementById('btn-tab-t5').classList.add('active');
-    document.getElementById('btn-tab-global').classList.remove('active');
-    document.getElementById('tab-t5-content').style.display = 'block';
-    document.getElementById('tab-global-content').style.display = 'none';
-    renderDictT5(ALL_VOCAB_34);
-  } else {
-    document.getElementById('btn-tab-global').classList.add('active');
-    document.getElementById('btn-tab-t5').classList.remove('active');
-    document.getElementById('tab-global-content').style.display = 'block';
-    document.getElementById('tab-t5-content').style.display = 'none';
-    renderGlobalDict(GLOBAL_VOCAB);
-  }
+  if(tab === 't5') {
+    document.getElementById('btn-tab-t5').classList.add('active');
+    document.getElementById('btn-tab-global').classList.remove('active');
+    document.getElementById('tab-t5-content').style.display = 'block';
+    document.getElementById('tab-global-content').style.display = 'none';
+    renderDictT5(ALL_VOCAB_34);
+  } else {
+    document.getElementById('btn-tab-global').classList.add('active');
+    document.getElementById('btn-tab-t5').classList.remove('active');
+    document.getElementById('tab-global-content').style.display = 'block';
+    document.getElementById('tab-t5-content').style.display = 'none';
+    renderGlobalDict(GLOBAL_VOCAB);
+  }
 }
 
 function renderDictT5(list) {
-  const el = document.getElementById('dict-list-t5');
-  el.innerHTML = '';
-  list.forEach(w => {
-    const item = document.createElement('div');
-    item.className = 'dict-item';
-    item.innerHTML = `
-      <div class="dict-header">
-        <div>
-          <div class="dict-num">#${w.num} · ${w.cat}</div>
-          <div class="dict-zh">${w.hz} <span class="dict-py">${w.py}</span></div>
-        </div>
-        <div class="dict-es">${w.es}</div>
-      </div>
-      <div class="dict-detail" id="detail-${w.num}">
-        <div class="gram-tag">📍 POSICIÓN Y REGLA DELS APUNTS:</div>
-        <div class="gram-pos">${w.pos}</div>
-        <div class="gram-ex-box" onclick="event.stopPropagation(); speak('${w.exZh}')">
-          <div style="font-size:14px; font-weight:bold; color:#fff;">${w.exZh} 🔊</div>
-          <div style="font-size:12px; color:var(--blue-pinyin);">${w.exEs}</div>
-        </div>
-      </div>
-    `;
-    item.onclick = () => {
-      const detail = document.getElementById(`detail-${w.num}`);
-      detail.classList.toggle('open');
-      speak(w.hz);
-    };
-    el.appendChild(item);
-  });
+  const el = document.getElementById('dict-list-t5');
+  el.innerHTML = '';
+  list.forEach(w => {
+    const item = document.createElement('div');
+    item.className = 'dict-item';
+    item.innerHTML = `
+      <div class="dict-header">
+        <div>
+          <div class="dict-num">#${w.num} · ${w.cat}</div>
+          <div class="dict-zh">${w.hz} <span class="dict-py">${w.py}</span></div>
+        </div>
+        <div class="dict-es">${w.es}</div>
+      </div>
+      <div class="dict-detail" id="detail-${w.num}">
+        <div class="gram-tag">📍 POSICIÓN Y REGLA DELS APUNTS:</div>
+        <div class="gram-pos">${w.pos}</div>
+        <div class="gram-ex-box" onclick="event.stopPropagation(); speak('${w.exZh}')">
+          <div style="font-size:14px; font-weight:bold; color:#fff;">${w.exZh} 🔊</div>
+          <div style="font-size:12px; color:var(--blue-pinyin);">${w.exEs}</div>
+        </div>
+      </div>
+    `;
+    item.onclick = () => {
+      const detail = document.getElementById(`detail-${w.num}`);
+      detail.classList.toggle('open');
+      speak(w.hz);
+    };
+    el.appendChild(item);
+  });
 }
 
 function filterCat(cat, btn) {
-  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  if(cat === 'ALL') {
-    renderDictT5(ALL_VOCAB_34);
-  } else {
-    const filtered = ALL_VOCAB_34.filter(w => w.cat.includes(cat));
-    renderDictT5(filtered);
-  }
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  if(cat === 'ALL') {
+    renderDictT5(ALL_VOCAB_34);
+  } else {
+    const filtered = ALL_VOCAB_34.filter(w => w.cat.includes(cat));
+    renderDictT5(filtered);
+  }
 }
 
 function renderGlobalDict(list) {
-  const el = document.getElementById('dict-list-global');
-  el.innerHTML = '';
-  list.forEach(w => {
-    const item = document.createElement('div');
-    item.className = 'dict-item';
-    item.innerHTML = `
-      <div class="dict-header">
-        <div>
-          <div class="dict-zh">${w.hz} <span class="dict-py">${w.py}</span></div>
-        </div>
-        <div class="dict-es">${w.es}</div>
-      </div>
-    `;
-    item.onclick = () => speak(w.hz);
-    el.appendChild(item);
-  });
+  const el = document.getElementById('dict-list-global');
+  el.innerHTML = '';
+  list.forEach(w => {
+    const item = document.createElement('div');
+    item.className = 'dict-item';
+    item.innerHTML = `
+      <div class="dict-header">
+        <div>
+          <div class="dict-zh">${w.hz} <span class="dict-py">${w.py}</span></div>
+        </div>
+        <div class="dict-es">${w.es}</div>
+      </div>
+    `;
+    item.onclick = () => speak(w.hz);
+    el.appendChild(item);
+  });
 }
 
 function filterGlobalDict() {
-  const q = document.getElementById('global-search').value.toLowerCase();
-  const filtered = GLOBAL_VOCAB.filter(w => w.hz.includes(q) || w.py.toLowerCase().includes(q) || w.es.toLowerCase().includes(q));
-  renderGlobalDict(filtered);
+  const q = document.getElementById('global-search').value.toLowerCase();
+  const filtered = GLOBAL_VOCAB.filter(w => w.hz.includes(q) || w.py.toLowerCase().includes(q) || w.es.toLowerCase().includes(q));
+  renderGlobalDict(filtered);
 }
 
 function renderFlash() {
-  document.getElementById('flash-inner').classList.remove('flipped');
-  const w = ALL_VOCAB_34[flashIdx];
-  document.getElementById('f-hz').textContent = w.hz;
-  document.getElementById('b-es').textContent = w.es;
-  document.getElementById('b-py').textContent = w.py;
+  document.getElementById('flash-inner').classList.remove('flipped');
+  const w = ALL_VOCAB_34[flashIdx];
+  document.getElementById('f-hz').textContent = w.hz;
+  document.getElementById('b-es').textContent = w.es;
+  document.getElementById('b-py').textContent = w.py;
 }
 
 function flipFlash() {
-  const inner = document.getElementById('flash-inner');
-  inner.classList.toggle('flipped');
-  if(inner.classList.contains('flipped')) {
-    speak(ALL_VOCAB_34[flashIdx].hz);
-  }
+  const inner = document.getElementById('flash-inner');
+  inner.classList.toggle('flipped');
+  if(inner.classList.contains('flipped')) {
+    speak(ALL_VOCAB_34[flashIdx].hz);
+  }
 }
 
 function nextFlash(ok) {
-  flashIdx = (flashIdx + 1) % ALL_VOCAB_34.length;
-  renderFlash();
+  flashIdx = (flashIdx + 1) % ALL_VOCAB_34.length;
+  renderFlash();
 }
 
 function renderStories() {
-  const s1 = document.getElementById('story1-list');
-  s1.innerHTML = '';
-  TEXT_1.forEach(line => {
-    const el = document.createElement('div');
-    el.className = 'story-line';
-    el.innerHTML = `<div class="story-zh">${line.zh}</div><div class="story-py">${line.py}</div><div class="story-es">${line.es}</div>`;
-    el.onclick = () => speak(line.zh);
-    s1.appendChild(el);
-  });
+  const s1 = document.getElementById('story1-list');
+  s1.innerHTML = '';
+  TEXT_1.forEach(line => {
+    const el = document.createElement('div');
+    el.className = 'story-line';
+    el.innerHTML = `<div class="story-zh">${line.zh}</div><div class="story-py">${line.py}</div><div class="story-es">${line.es}</div>`;
+    el.onclick = () => speak(line.zh);
+    s1.appendChild(el);
+  });
 
-  const s2 = document.getElementById('story2-list');
-  s2.innerHTML = '';
-  TEXT_2.forEach(line => {
-    const el = document.createElement('div');
-    el.className = 'story-line';
-    el.innerHTML = `<div class="story-zh">${line.zh}</div><div class="story-py">${line.py}</div><div class="story-es">${line.es}</div>`;
-    el.onclick = () => speak(line.zh);
-    s2.appendChild(el);
-  });
+  const s2 = document.getElementById('story2-list');
+  s2.innerHTML = '';
+  TEXT_2.forEach(line => {
+    const el = document.createElement('div');
+    el.className = 'story-line';
+    el.innerHTML = `<div class="story-zh">${line.zh}</div><div class="story-py">${line.py}</div><div class="story-es">${line.es}</div>`;
+    el.onclick = () => speak(line.zh);
+    s2.appendChild(el);
+  });
 }
 
 function initGameWords() {
-  const q = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)];
-  document.getElementById('g-hz').textContent = q.hz;
+  const q = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)];
+  document.getElementById('g-hz').textContent = q.hz;
 
-  let opts = [q.es];
-  while(opts.length < 4) {
-    let rand = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)].es;
-    if(!opts.includes(rand)) opts.push(rand);
-  }
-  opts.sort(() => Math.random() - 0.5);
+  let opts = [q.es];
+  while(opts.length < 4) {
+    let rand = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)].es;
+    if(!opts.includes(rand)) opts.push(rand);
+  }
+  opts.sort(() => Math.random() - 0.5);
 
-  const container = document.getElementById('g-opts');
-  container.innerHTML = '';
-  opts.forEach(o => {
-    const btn = document.createElement('button');
-    btn.className = 'action-btn';
-    btn.textContent = o;
-    btn.onclick = () => {
-      if(o === q.es) {
-        speak(q.hz);
-        btn.style.borderColor = '#30d158'; btn.style.color = '#30d158';
-        setTimeout(initGameWords, 800);
-      } else {
-        btn.style.borderColor = '#ff3b30'; btn.style.color = '#ff3b30';
-      }
-    };
-    container.appendChild(btn);
-  });
+  const container = document.getElementById('g-opts');
+  container.innerHTML = '';
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'action-btn';
+    btn.textContent = o;
+    btn.onclick = () => {
+      if(o === q.es) {
+        speak(q.hz);
+        btn.style.borderColor = '#30d158'; btn.style.color = '#30d158';
+        setTimeout(initGameWords, 800);
+      } else {
+        btn.style.borderColor = '#ff3b30'; btn.style.color = '#ff3b30';
+      }
+    };
+    container.appendChild(btn);
+  });
 }
 </script>
 </body>
 </html>
+ corrige porque mis compañeoros dicen que ellos no puden escuchar el audio en su mobil i solo lo esycho yo 
