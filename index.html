@@ -64,10 +64,14 @@ body {
 .section { display: none; max-width: 500px; margin: 0 auto; padding: 1rem; }
 .section.active { display: block; }
 
-/* SWITCH DE DICCIONARIO */
-.dict-switch-row { display: flex; gap: 8px; margin-bottom: 1rem; background: var(--card-bg); padding: 4px; border-radius: 12px; border: 1px solid var(--border-color); }
-.switch-btn { flex: 1; padding: 10px; border: none; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; cursor: pointer; }
-.switch-btn.active { background: var(--red-main); color: #fff; }
+/* SWITCH DE DICCIONARIO Y VELOCIDAD */
+.dict-switch-row, .speed-switch-row {
+  display: flex; gap: 8px; margin-bottom: 1rem; background: var(--card-bg); padding: 4px; border-radius: 12px; border: 1px solid var(--border-color);
+}
+.switch-btn, .speed-btn {
+  flex: 1; padding: 10px; border: none; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.switch-btn.active, .speed-btn.active { background: var(--red-main); color: #fff; }
 
 /* FILTROS CATEGORIAS */
 .cat-filter-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; }
@@ -319,8 +323,15 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 4: HISTORIAS COMPLETAS -->
+<!-- SECCIÓN 4: HISTORIAS COMPLETAS CON SELECTOR DE VELOCIDAD -->
 <div class="section" id="sec-stories">
+  <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Velocidad del audio:</div>
+  <div class="speed-switch-row">
+    <button class="speed-btn" id="sp-slow" onclick="setAudioSpeed(0.5, 'sp-slow')">🐢 Lento (0.5x)</button>
+    <button class="speed-btn active" id="sp-norm" onclick="setAudioSpeed(0.8, 'sp-norm')">▶ Normal (0.8x)</button>
+    <button class="speed-btn" id="sp-fast" onclick="setAudioSpeed(1.0, 'sp-fast')">⚡ Rápido (1.0x)</button>
+  </div>
+
   <div class="story-card">
     <div class="story-title">Texto 1: Visita a casa de Gao Wenzhong (Diálogo)</div>
     <div id="story1-list"></div>
@@ -374,7 +385,7 @@ const ALL_VOCAB_34 = [
   {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
   {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
   {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
-  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
+  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", esEs:"Vull tornar a casa."}
 ];
 
 const GLOBAL_VOCAB = [
@@ -446,8 +457,8 @@ const TEXT_2 = [
 
 let flashIdx = 0;
 let cachedVoices = [];
+let currentRate = 0.8; // Velocidad por defecto
 
-// CARGAR VOCES COMPATIBLES CON MÓVILES (iOS / Android)
 function loadVoices() {
   if ('speechSynthesis' in window) {
     cachedVoices = window.speechSynthesis.getVoices();
@@ -458,7 +469,6 @@ if ('speechSynthesis' in window) {
   loadVoices();
 }
 
-// DESBLOQUEAR AUDIO AL HACER PRIMER TAP
 document.addEventListener('touchstart', function initAudioOnTap() {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.resume();
@@ -469,6 +479,12 @@ document.addEventListener('touchstart', function initAudioOnTap() {
   document.removeEventListener('touchstart', initAudioOnTap);
 }, { once: true });
 
+function setAudioSpeed(speed, btnId) {
+  currentRate = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(btnId).classList.add('active');
+}
+
 function speak(text) {
   if (!('speechSynthesis' in window)) return;
   
@@ -477,13 +493,12 @@ function speak(text) {
 
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
-  u.rate = 0.8;
+  u.rate = currentRate; // Aplica la velocidad seleccionada
 
   if (cachedVoices.length === 0) {
     cachedVoices = window.speechSynthesis.getVoices();
   }
 
-  // BUSCAR LA MEJOR VOZ EN CHINO INSTALADA EN EL DISPOSITIVO
   const zhVoice = cachedVoices.find(v => v.lang === 'zh-CN' || v.lang === 'zh_CN' || v.lang.startsWith('zh'));
   if (zhVoice) {
     u.voice = zhVoice;
