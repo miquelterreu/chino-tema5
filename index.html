@@ -88,7 +88,7 @@ body {
 }
 .search-input:focus { border-color: var(--red-main); }
 
-/* FLASHCARDS */
+/* FLASHCARDS & PRÁCTICA */
 .card-outer { perspective: 1000px; height: 280px; margin-bottom: 1rem; cursor: pointer; }
 .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; }
 .card-inner.flipped { transform: rotateY(180deg); }
@@ -106,6 +106,7 @@ body {
 .action-btn {
   flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color);
   background: var(--card-bg); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer;
+  margin-top: 8px;
 }
 .action-btn.yes { border-color: var(--green-ok); color: var(--green-ok); background: rgba(48, 209, 88, 0.15); }
 .action-btn.no { border-color: var(--red-main); color: var(--red-main); background: var(--red-soft); }
@@ -135,6 +136,23 @@ body {
 .story-zh { font-size: 18px; font-weight: 500; color: #fff; }
 .story-py { font-size: 12px; color: var(--blue-pinyin); margin-top: 2px; }
 .story-es { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* MODULO PRACTICA EXAMEN */
+.practice-menu-card {
+  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px;
+  padding: 1rem; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+}
+.practice-menu-card:active { border-color: var(--red-main); }
+.practice-title { font-size: 15px; font-weight: 700; color: #fff; }
+.practice-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.practice-icon { font-size: 28px; margin-left: 10px; }
+.audio-play-big {
+  background: var(--red-soft); border: 1px solid var(--red-main); color: var(--red-main);
+  padding: 16px; border-radius: 16px; font-size: 18px; font-weight: bold; text-align: center;
+  cursor: pointer; margin-bottom: 16px;
+}
+.audio-play-big:active { transform: scale(0.98); }
+.img-emoji-box { font-size: 64px; text-align: center; margin: 12px 0; }
 </style>
 </head>
 <body>
@@ -170,14 +188,14 @@ body {
     <div class="menu-sub">Texto 1 y Texto 2 completos</div>
   </div>
 
-  <div class="menu-card" onclick="openSec('game-words')" style="grid-column: span 2;">
-    <div class="menu-icon">🎮</div>
-    <div class="menu-label">Juego Examen</div>
-    <div class="menu-sub">Test de vocabulario para repasar</div>
+  <div class="menu-card" onclick="openSec('exam-hub')" style="grid-column: span 2; background: rgba(255, 59, 48, 0.08); border-color: var(--red-main);">
+    <div class="menu-icon">🎯</div>
+    <div class="menu-label" style="font-size:17px;">Preparar Examen</div>
+    <div class="menu-sub">Módulos de práctica de los 6 modelos</div>
   </div>
 </div>
 
-<!-- SECCIÓN 1: DICCIONARIOS -->
+<!-- SECCIÓN DICCIONARIOS -->
 <div class="section" id="sec-dict">
   <div class="dict-switch-row">
     <button class="switch-btn active" id="btn-tab-t5" onclick="switchDictTab('t5')">Tema 5 (34 Palabras)</button>
@@ -203,7 +221,7 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 2: FLASHCARDS -->
+<!-- SECCIÓN FLASHCARDS -->
 <div class="section" id="sec-flash">
   <p style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:10px;">
     Adivina el significado solo viendo el carácter. Toca la tarjeta para voltearla, ver el Pinyin y escuchar su pronunciación.
@@ -225,7 +243,7 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 3: GRAMÁTICA CORREGIDA -->
+<!-- SECCIÓN GRAMÁTICA -->
 <div class="section" id="sec-gram">
   <div class="story-card">
     <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
@@ -323,7 +341,7 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 4: HISTORIAS COMPLETAS CON SELECTOR DE VELOCIDAD -->
+<!-- SECCIÓN HISTORIAS -->
 <div class="section" id="sec-stories">
   <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Velocidad del audio:</div>
   <div class="speed-switch-row">
@@ -342,11 +360,66 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 5: JUEGO -->
-<div class="section" id="sec-game-words">
-  <div class="story-card" style="text-align:center;">
-    <div style="font-size:42px; font-weight:bold; color:var(--red-main); margin-bottom:12px;" id="g-hz">图书馆</div>
-    <div style="display:flex; flex-direction:column; gap:8px;" id="g-opts"></div>
+<!-- SECCIÓN HUB DE PREPARAR EXAMEN -->
+<div class="section" id="sec-exam-hub">
+  <div style="font-size:14px; color:var(--text-muted); margin-bottom:12px; text-align:center;">
+    Selecciona el tipo de ejercicio que quieres practicar hoy:
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(1)">
+    <div>
+      <div class="practice-title">1. Rellenar Hueco (A, B, C, D)</div>
+      <div class="practice-desc">Lee la frase y escoge la palabra que falta</div>
+    </div>
+    <div class="practice-icon">✍️</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(2)">
+    <div>
+      <div class="practice-title">2. Gramática Correcta</div>
+      <div class="practice-desc">Identifica cuál de las frases tiene el orden correcto</div>
+    </div>
+    <div class="practice-icon">📐</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(3)">
+    <div>
+      <div class="practice-title">3. Comprensión de Texto (A, B, C, D)</div>
+      <div class="practice-desc">Lee la pregunta y selecciona la respuesta correcta</div>
+    </div>
+    <div class="practice-icon">📄</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(4)">
+    <div>
+      <div class="practice-title">4. Listening: Verdadero o Falso</div>
+      <div class="practice-desc">Escucha el audio y di si coincide con la imagen</div>
+    </div>
+    <div class="practice-icon">👂</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(5)">
+    <div>
+      <div class="practice-title">5. Listening: Relacionar Imagen</div>
+      <div class="practice-desc">Escucha la frase e identifica a qué imagen corresponde</div>
+    </div>
+    <div class="practice-icon">🖼️</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(6)">
+    <div>
+      <div class="practice-title">6. Listening: Opción Múltiple (A, B, C, D)</div>
+      <div class="practice-desc">Escucha la frase oral y escoge la respuesta correcta</div>
+    </div>
+    <div class="practice-icon">🎧</div>
+  </div>
+</div>
+
+<!-- SECCIÓN INTERACTIVA DE PRÁCTICA -->
+<div class="section" id="sec-practice-runner">
+  <div class="story-card">
+    <div class="story-title" id="p-runner-title">Práctica</div>
+    <div id="p-runner-body"></div>
   </div>
 </div>
 
@@ -362,7 +435,7 @@ const ALL_VOCAB_34 = [
   {num:8, hz:"高兴", py:"gāoxìng", cat:"Adjectiu", es:"Content / Alegre", pos:"ESTRUCTURA: [ Sujeto + 很 + 高兴 ].", exZh:"很高兴认识你。", exEs:"Encantado/a de conocerte."},
   {num:9, hz:"漂亮", py:"piàoliang", cat:"Adjectiu", es:"Guapa / Bonica", pos:"S'utilitza per a gènere femení o per descriure coses i llocs.", exZh:"我家很漂亮。", exEs:"La meva casa és bonica."},
   {num:10, hz:"坐", py:"zuò", cat:"Verbo", es:"Sentarse / Seure", pos:"Amb 请 davant per cortesia: 请坐 (Qǐng zuò).", exZh:"请坐。", exEs:"Siéntese, por favor / Sigueu, per favor."},
-  {num:11, hz:"在", py:"zài", cat:"Preposició", es:"Estar a / en un lloc", pos:"FÓRMULA D'OR: Persona + 在 + Lloc + Acció. En xinès el lloc va SEMPRE ABANS que l'acció.", exZh:"我在大学学习。", exEs:"Estudio en la universidad."},
+  {num:11, hz:"在", py:"zài", cat:"Preposició", es:"Estar a / en un lloc", pos:"FÓRMULA D'OR: Persona + 在 + Lugar + Acción. En xinès el lloc va SEMPRE ABANS que l'acció.", exZh:"我在大学学习。", exEs:"Estudio en la universidad."},
   {num:12, hz:"哪儿", py:"nǎr", cat:"Pronom interrogatiu", es:"On? / ¿Dónde?", pos:"Substitueix el lloc en la pregunta.", exZh:"你在哪儿学习中文？", exEs:"¿Dónde estudias chino?"},
   {num:13, hz:"学校", py:"xuéxiào", cat:"Substantiu", es:"Escola / Centre d'estudis", pos:"Lloc que es col·loca rere de 在.", exZh:"我在学校学中文。", exEs:"Estudio chino en la escuela."},
   {num:14, hz:"喝", py:"hē", cat:"Verbo", es:"Beure", pos:"Verb d'acció + beguda.", exZh:"请问，你想喝什么？", exEs:"Disculpa, ¿qué quieres beber?"},
@@ -385,7 +458,7 @@ const ALL_VOCAB_34 = [
   {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
   {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
   {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
-  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", esEs:"Vull tornar a casa."}
+  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
 ];
 
 const GLOBAL_VOCAB = [
@@ -455,9 +528,42 @@ const TEXT_2 = [
   {zh:"王朋和李友晚上十二点才回家。", py:"Wáng Péng hé Lǐ Yǒu wǎnshang shí'èr diǎn cái huí jiā.", es:"Wang Peng y Li You no volvieron a casa hasta las 12 de la noche."}
 ];
 
+// BANCO DE EJERCICIOS DE PRÁCTICA
+const PRACTICE_DATA = {
+  1: [ // Rellenar Huecos
+    { q: "我介绍___，这是我姐姐。", opts: ["A. 一点", "B. 一下", "C. 了", "D. 在"], correct: 1 },
+    { q: "你想喝___什么？", opts: ["A. 一下", "B. 点儿", "C. 才", "D. 吧"], correct: 1 },
+    { q: "王朋喝___两杯茶。", opts: ["A. 在", "B. 吧", "C. 了", "D. 呀"], correct: 2 },
+    { q: "他们晚上十二点___回家。", opts: ["A. 才", "B. 吗", "C. 给", "D. 进"], correct: 0 }
+  ],
+  2: [ // Gramática Correcta
+    { q: "Escoge la frase gramaticalmente correcta con 在:", opts: ["A. 我学习在图书馆中文。", "B. 我在图书馆学习中文。", "C. 我学习中文在图书馆。", "D. 在图书馆我中文学习。"], correct: 1 },
+    { q: "Escoge la frase correcta en pasado (了):", opts: ["A. 我没有去了图书馆。", "B. 我不去图书馆了。", "C. 我没有去图书馆。", "D. 我不没有去图书馆。"], correct: 2 },
+    { q: "Escoge la frase correcta para pedir algo suavemente:", opts: ["A. 你看一点这个人。", "B. 你看一下这个人。", "C. 你看在这个人。", "D. 你看才这个人。"], correct: 1 }
+  ],
+  3: [ // Comprensión
+    { q: "高小音在哪儿工作？", opts: ["A. 在家", "B. 在学校的图书馆", "C. 在医院", "D. 不工作"], correct: 1 },
+    { q: "李友喝了什么？", opts: ["A. 茶", "B. 咖啡", "C. 可乐", "D. 一杯水"], correct: 3 },
+    { q: "王朋和李友几点回家？", opts: ["A. 十点", "B. 十一点", "C. 十二点", "D. 一点"], correct: 2 }
+  ],
+  4: [ // Listening V/F
+    { audio: "高小音在学校工作。", emoji: "🏫", desc: "Imagen: Escuela / Biblioteca", correct: "V" },
+    { audio: "李友喝了一瓶可乐。", emoji: "🥤", desc: "Imagen: Vaso de Agua", correct: "F" },
+    { audio: "王朋喝了两杯茶。", emoji: "🍵🍵", desc: "Imagen: Dos tazas de té", correct: "V" }
+  ],
+  5: [ // Listening Relacionar Imagen
+    { audio: "你在哪儿工作？", opts: ["🏢 A. Trabajo/Oficina", "🏡 B. Casa", "☕ C. Cafetería", "⚽ D. Deporte"], correct: 0 },
+    { audio: "我们一起看电视。", opts: ["📖 A. Leer libro", "📺 B. Ver televisión", "💃 C. Bailar", "🚗 D. Conducir"], correct: 1 }
+  ],
+  6: [ // Listening Test A, B, C, D
+    { audio: "你想喝点儿什么？", opts: ["A. 我喝茶吧。", "B. 我很好。", "C. 我在学校。", "D. 再见！"], correct: 0 },
+    { audio: "认识你很高兴！", opts: ["A. 对不起。", "B. 认识你我也很高兴！", "C. 我不喝咖啡。", "D. 太好了！"], correct: 1 }
+  ]
+};
+
 let flashIdx = 0;
 let cachedVoices = [];
-let currentRate = 0.8; // Velocidad por defecto
+let currentRate = 0.8;
 
 function loadVoices() {
   if ('speechSynthesis' in window) {
@@ -487,22 +593,19 @@ function setAudioSpeed(speed, btnId) {
 
 function speak(text) {
   if (!('speechSynthesis' in window)) return;
-  
   window.speechSynthesis.cancel();
   window.speechSynthesis.resume();
 
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
-  u.rate = currentRate; // Aplica la velocidad seleccionada
+  u.rate = currentRate;
 
   if (cachedVoices.length === 0) {
     cachedVoices = window.speechSynthesis.getVoices();
   }
 
   const zhVoice = cachedVoices.find(v => v.lang === 'zh-CN' || v.lang === 'zh_CN' || v.lang.startsWith('zh'));
-  if (zhVoice) {
-    u.voice = zhVoice;
-  }
+  if (zhVoice) u.voice = zhVoice;
 
   window.speechSynthesis.speak(u);
 }
@@ -522,7 +625,93 @@ function openSec(id) {
   if(id === 'dict') renderDictT5(ALL_VOCAB_34);
   if(id === 'flash') renderFlash();
   if(id === 'stories') renderStories();
-  if(id === 'game-words') initGameWords();
+}
+
+/* SISTEMA DE PRÁCTICA POR MÓDULOS */
+let currentPracticeType = 1;
+let currentPracticeIdx = 0;
+
+function openPractice(type) {
+  currentPracticeType = type;
+  currentPracticeIdx = 0;
+  openSec('practice-runner');
+  loadPracticeQuestion();
+}
+
+function loadPracticeQuestion() {
+  const data = PRACTICE_DATA[currentPracticeType];
+  const body = document.getElementById('p-runner-body');
+  const title = document.getElementById('p-runner-title');
+  body.innerHTML = '';
+
+  if (currentPracticeIdx >= data.length) {
+    title.textContent = "¡Práctica Completada!";
+    body.innerHTML = `
+      <p style="text-align:center; padding:1rem; color:var(--green-ok); font-size:18px; font-weight:bold;">
+        ¡Buen trabajo! Has completado todos los ejercicios de este bloque.
+      </p>
+      <button class="action-btn yes" onclick="openSec('exam-hub')">Volver al Menú de Examen</button>
+    `;
+    return;
+  }
+
+  const item = data[currentPracticeIdx];
+
+  if (currentPracticeType === 1 || currentPracticeType === 2 || currentPracticeType === 3) {
+    title.textContent = `Práctica ${currentPracticeType} (${currentPracticeIdx + 1}/${data.length})`;
+    body.innerHTML = `<div style="font-size:20px; font-weight:bold; color:var(--red-main); margin-bottom:16px;">${item.q}</div>`;
+    item.opts.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'action-btn';
+      btn.textContent = opt;
+      btn.onclick = () => checkPracticeAnswer(btn, idx === item.correct);
+      body.appendChild(btn);
+    });
+  } 
+  else if (currentPracticeType === 4) {
+    title.textContent = `Listening V/F (${currentPracticeIdx + 1}/${data.length})`;
+    body.innerHTML = `
+      <div class="audio-play-big" onclick="speak('${item.audio}')">🔊 Escuchar Frase</div>
+      <div class="img-emoji-box">${item.emoji}</div>
+      <div style="text-align:center; color:var(--text-muted); margin-bottom:16px;">${item.desc}</div>
+      <div class="btn-row">
+        <button class="action-btn yes" onclick="checkPracticeAnswer(this, '${item.correct}' === 'V')">✓ Verdadero</button>
+        <button class="action-btn no" onclick="checkPracticeAnswer(this, '${item.correct}' === 'F')">✗ Falso</button>
+      </div>
+    `;
+    speak(item.audio);
+  }
+  else if (currentPracticeType === 5 || currentPracticeType === 6) {
+    title.textContent = `Listening Práctica (${currentPracticeIdx + 1}/${data.length})`;
+    body.innerHTML = `
+      <div class="audio-play-big" onclick="speak('${item.audio}')">🔊 Escuchar Frase</div>
+      <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px; text-align:center;">Selecciona la respuesta o imagen correcta:</div>
+    `;
+    item.opts.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'action-btn';
+      btn.textContent = opt;
+      btn.onclick = () => checkPracticeAnswer(btn, idx === item.correct);
+      body.appendChild(btn);
+    });
+    speak(item.audio);
+  }
+}
+
+function checkPracticeAnswer(btn, isOk) {
+  if (isOk) {
+    btn.style.borderColor = '#30d158';
+    btn.style.backgroundColor = 'rgba(48, 209, 88, 0.2)';
+    btn.style.color = '#30d158';
+    setTimeout(() => {
+      currentPracticeIdx++;
+      loadPracticeQuestion();
+    }, 700);
+  } else {
+    btn.style.borderColor = '#ff3b30';
+    btn.style.backgroundColor = 'var(--red-soft)';
+    btn.style.color = '#ff3b30';
+  }
 }
 
 function switchDictTab(tab) {
@@ -649,36 +838,6 @@ function renderStories() {
     el.innerHTML = `<div class="story-zh">${line.zh}</div><div class="story-py">${line.py}</div><div class="story-es">${line.es}</div>`;
     el.onclick = () => speak(line.zh);
     s2.appendChild(el);
-  });
-}
-
-function initGameWords() {
-  const q = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)];
-  document.getElementById('g-hz').textContent = q.hz;
-
-  let opts = [q.es];
-  while(opts.length < 4) {
-    let rand = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)].es;
-    if(!opts.includes(rand)) opts.push(rand);
-  }
-  opts.sort(() => Math.random() - 0.5);
-
-  const container = document.getElementById('g-opts');
-  container.innerHTML = '';
-  opts.forEach(o => {
-    const btn = document.createElement('button');
-    btn.className = 'action-btn';
-    btn.textContent = o;
-    btn.onclick = () => {
-      if(o === q.es) {
-        speak(q.hz);
-        btn.style.borderColor = '#30d158'; btn.style.color = '#30d158';
-        setTimeout(initGameWords, 800);
-      } else {
-        btn.style.borderColor = '#ff3b30'; btn.style.color = '#ff3b30';
-      }
-    };
-    container.appendChild(btn);
   });
 }
 </script>
