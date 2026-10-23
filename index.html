@@ -135,6 +135,18 @@ body {
 .story-zh { font-size: 18px; font-weight: 500; color: #fff; }
 .story-py { font-size: 12px; color: var(--blue-pinyin); margin-top: 2px; }
 .story-es { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* ESTILOS DEL MÓDULO EXAMEN */
+.exam-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.exam-badge { background: var(--red-soft); color: var(--red-main); border: 1px solid var(--red-main); padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: bold; }
+.exam-question { font-size: 16px; font-weight: bold; margin-bottom: 12px; color: #fff; }
+.audio-btn-large { background: var(--red-soft); border: 1px solid var(--red-main); color: var(--red-main); padding: 12px; border-radius: 12px; font-size: 16px; font-weight: bold; width: 100%; margin-bottom: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.opt-btn { width: 100%; text-align: left; padding: 12px 16px; margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--card-bg); color: #fff; font-size: 15px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+.opt-btn:active { border-color: var(--red-main); }
+.opt-btn.correct { border-color: var(--green-ok) !important; background: rgba(48, 209, 88, 0.2) !important; color: var(--green-ok) !important; }
+.opt-btn.wrong { border-color: var(--red-main) !important; background: var(--red-soft) !important; color: var(--red-main) !important; }
+.exam-input { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--card-bg); color: #fff; font-size: 16px; margin-bottom: 12px; outline: none; }
+.exam-input:focus { border-color: var(--red-main); }
 </style>
 </head>
 <body>
@@ -170,10 +182,10 @@ body {
     <div class="menu-sub">Texto 1 y Texto 2 completos</div>
   </div>
 
-  <div class="menu-card" onclick="openSec('game-words')" style="grid-column: span 2;">
-    <div class="menu-icon">🎮</div>
-    <div class="menu-label">Juego Examen</div>
-    <div class="menu-sub">Test de vocabulario para repasar</div>
+  <div class="menu-card" onclick="openSec('exam')" style="grid-column: span 2; border-color: var(--gold);">
+    <div class="menu-icon">📝</div>
+    <div class="menu-label" style="color: var(--gold);">Simulacro Examen Real</div>
+    <div class="menu-sub">Dictado, Listening, Gramática, V/F</div>
   </div>
 </div>
 
@@ -225,7 +237,7 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 3: GRAMÁTICA CORREGIDA -->
+<!-- SECCIÓN 3: GRAMÁTICA -->
 <div class="section" id="sec-gram">
   <div class="story-card">
     <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
@@ -323,7 +335,7 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 4: HISTORIAS COMPLETAS CON SELECTOR DE VELOCIDAD -->
+<!-- SECCIÓN 4: HISTORIAS -->
 <div class="section" id="sec-stories">
   <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Velocidad del audio:</div>
   <div class="speed-switch-row">
@@ -342,11 +354,36 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN 5: JUEGO -->
-<div class="section" id="sec-game-words">
-  <div class="story-card" style="text-align:center;">
-    <div style="font-size:42px; font-weight:bold; color:var(--red-main); margin-bottom:12px;" id="g-hz">图书馆</div>
-    <div style="display:flex; flex-direction:column; gap:8px;" id="g-opts"></div>
+<!-- SECCIÓN 5: SIMULACRO DE EXAMEN REAL -->
+<div class="section" id="sec-exam">
+  <div class="story-card">
+    <div class="exam-header">
+      <span class="exam-badge" id="exam-part-title">Parte 1 de 7</span>
+      <span style="font-size:13px; color:var(--gold); font-weight:bold;" id="exam-score">Puntos: 0</span>
+    </div>
+
+    <div class="exam-question" id="exam-q-text">Pregunta...</div>
+    
+    <!-- AUDIO BOTÓN PARA LISTENING Y DICTADO -->
+    <button class="audio-btn-large" id="exam-audio-btn" style="display:none;" onclick="playExamAudio()">
+      🔊 Escuchar Audio
+    </button>
+
+    <!-- IMAGEN PARA EJERCICIOS VISUALES -->
+    <div id="exam-img-box" style="display:none; text-align:center; margin-bottom:12px;">
+      <div id="exam-emoji-img" style="font-size:64px; background:rgba(255,255,255,0.05); padding:1rem; border-radius:16px;">☕</div>
+    </div>
+
+    <!-- CAMPO DE TEXTO PARA DICTADO -->
+    <div id="exam-input-box" style="display:none;">
+      <input type="text" class="exam-input" id="exam-user-input" placeholder="Escribe aquí los caracteres (Hanzi)...">
+      <button class="action-btn yes" style="width:100%; margin-top:0;" onclick="checkDictationAnswer()">Comprobar Dictado</button>
+    </div>
+
+    <!-- OPCIONES A, B, C, D -->
+    <div id="exam-opts-container"></div>
+
+    <div id="exam-feedback" style="margin-top:12px; font-size:14px; font-weight:bold; text-align:center;"></div>
   </div>
 </div>
 
@@ -385,7 +422,7 @@ const ALL_VOCAB_34 = [
   {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
   {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo-Objeto", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
   {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
-  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", esEs:"Vull tornar a casa."}
+  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo-Objeto", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
 ];
 
 const GLOBAL_VOCAB = [
@@ -455,9 +492,36 @@ const TEXT_2 = [
   {zh:"王朋和李友晚上十二点才回家。", py:"Wáng Péng hé Lǐ Yǒu wǎnshang shí'èr diǎn cái huí jiā.", es:"Wang Peng y Li You no volvieron a casa hasta las 12 de la noche."}
 ];
 
+// BANCO DE PREGUNTAS DEL SIMULACRO DE EXAMEN BASADO EN LOS 7 PUNTOS DE LA IMAGEN
+const EXAM_QUESTIONS = [
+  // 1. Dictat
+  { type: "dictation", badge: "1. Dictado", title: "Escucha el audio y escribe los caracteres (Hanzi) correspondientes:", audio: "图书馆", answer: "图书馆", pinyinHint: "tú shū guǎn (Biblioteca)" },
+  
+  // 2. Rellenar hueco
+  { type: "mc", badge: "2. Rellenar Hueco", title: "Escoge la palabra que falta en la frase:\n'我在学校___中文。'", opts: ["A. 在", "B. 学习", "C. 了", "D. 吧"], correct: 1, explanation: "Fórmula: Persona + 在 + Lugar + Verb (学习 = estudiar)." },
+  
+  // 3. Gramática
+  { type: "mc", badge: "3. Gramática", title: "Escoge la frase gramaticalmente CORRECTA:", opts: ["A. 我喝咖啡了没有？", "B. 我没喝咖啡了。", "C. 我在学习图书馆中文。", "D. 我点喝茶。"], correct: 0, explanation: "La pregunta de confirmación en pasado se hace con 'Verbo + Objeto + 了 + 没有？'." },
+
+  // 4. Leer y responder
+  { type: "mc", badge: "4. Comprensión Lectora", title: "Lee el texto y responde:\n'李友不喝茶，只喝了一杯水。'\n¿Qué bebió Li You?", opts: ["A. Dos tazas de té", "B. Una botella de Coca-Cola", "C. Un vaso de agua", "D. No bebió nada"], correct: 2, explanation: "'只喝了一杯水' = Solo bebió un vaso de agua." },
+
+  // 5. Listening V/F con imagen
+  { type: "vf", badge: "5. Listening Verdadero/Falso", title: "Escucha la frase e indica si corresponde a la imagen:", audio: "我喝了一瓶可乐", img: "🥤", opts: ["Verdadero (✓)", "Falso (✗)"], correct: 0, explanation: "El audio dice 'He bebido una botella de Coca-Cola', lo cual coincide con la imagen." },
+
+  // 6. Listening y relacionar con imagen
+  { type: "mc", badge: "6. Listening & Imagen", title: "Escucha el audio y elige qué imagen corresponde:", audio: "看电视", opts: ["A. 📚 (Leer)", "B. 📺 (Ver la televisión)", "C. 💃 (Bailar)", "D. 🍵 (Beber té)"], correct: 1, explanation: "'看电视' (kàn diànshì) significa ver la televisión." },
+
+  // 7. Listening pregunta a, b, c, d
+  { type: "mc", badge: "7. Listening Pregunta", title: "Escucha el audio y responde a la pregunta:\n¿A qué hora volvieron a casa?", audio: "王朋和李友晚上十二点才回家", opts: ["A. A las 10:00", "B. A las 11:30", "C. A las 12:00 de la noche", "D. No volvieron a casa"], correct: 2, explanation: "El audio dice '十二点才回家' (no volvieron a casa hasta las 12:00)." }
+];
+
+let examIdx = 0;
+let examScore = 0;
+let currentExamAudio = "";
 let flashIdx = 0;
 let cachedVoices = [];
-let currentRate = 0.8; // Velocidad por defecto
+let currentRate = 0.8;
 
 function loadVoices() {
   if ('speechSynthesis' in window) {
@@ -493,7 +557,7 @@ function speak(text) {
 
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
-  u.rate = currentRate; // Aplica la velocidad seleccionada
+  u.rate = currentRate;
 
   if (cachedVoices.length === 0) {
     cachedVoices = window.speechSynthesis.getVoices();
@@ -522,7 +586,7 @@ function openSec(id) {
   if(id === 'dict') renderDictT5(ALL_VOCAB_34);
   if(id === 'flash') renderFlash();
   if(id === 'stories') renderStories();
-  if(id === 'game-words') initGameWords();
+  if(id === 'exam') startExam();
 }
 
 function switchDictTab(tab) {
@@ -652,34 +716,114 @@ function renderStories() {
   });
 }
 
-function initGameWords() {
-  const q = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)];
-  document.getElementById('g-hz').textContent = q.hz;
+/* LÓGICA DEL EXAMEN SIMULACRO */
+function startExam() {
+  examIdx = 0;
+  examScore = 0;
+  renderExamQuestion();
+}
 
-  let opts = [q.es];
-  while(opts.length < 4) {
-    let rand = ALL_VOCAB_34[Math.floor(Math.random() * ALL_VOCAB_34.length)].es;
-    if(!opts.includes(rand)) opts.push(rand);
+function renderExamQuestion() {
+  document.getElementById('exam-feedback').textContent = '';
+  document.getElementById('exam-score').textContent = `Puntos: ${examScore}`;
+  
+  if (examIdx >= EXAM_QUESTIONS.length) {
+    document.getElementById('exam-part-title').textContent = "¡EXAMEN FINALIZADO!";
+    document.getElementById('exam-q-text').textContent = `¡Has completado las 7 partes del examen! Nota final: ${examScore} / ${EXAM_QUESTIONS.length}`;
+    document.getElementById('exam-audio-btn').style.display = 'none';
+    document.getElementById('exam-img-box').style.display = 'none';
+    document.getElementById('exam-input-box').style.display = 'none';
+    document.getElementById('exam-opts-container').innerHTML = `
+      <button class="action-btn yes" style="width:100%;" onclick="startExam()">🔄 Repetir Examen</button>
+    `;
+    return;
   }
-  opts.sort(() => Math.random() - 0.5);
 
-  const container = document.getElementById('g-opts');
-  container.innerHTML = '';
-  opts.forEach(o => {
-    const btn = document.createElement('button');
-    btn.className = 'action-btn';
-    btn.textContent = o;
-    btn.onclick = () => {
-      if(o === q.es) {
-        speak(q.hz);
-        btn.style.borderColor = '#30d158'; btn.style.color = '#30d158';
-        setTimeout(initGameWords, 800);
-      } else {
-        btn.style.borderColor = '#ff3b30'; btn.style.color = '#ff3b30';
-      }
-    };
-    container.appendChild(btn);
-  });
+  const q = EXAM_QUESTIONS[examIdx];
+  document.getElementById('exam-part-title').textContent = q.badge;
+  document.getElementById('exam-q-text').textContent = q.title;
+
+  // Manejo de Audio
+  if (q.audio) {
+    currentExamAudio = q.audio;
+    document.getElementById('exam-audio-btn').style.display = 'flex';
+  } else {
+    document.getElementById('exam-audio-btn').style.display = 'none';
+  }
+
+  // Manejo de Imagen
+  if (q.img) {
+    document.getElementById('exam-img-box').style.display = 'block';
+    document.getElementById('exam-emoji-img').textContent = q.img;
+  } else {
+    document.getElementById('exam-img-box').style.display = 'none';
+  }
+
+  // Manejo de Input (Dictado)
+  if (q.type === 'dictation') {
+    document.getElementById('exam-input-box').style.display = 'block';
+    document.getElementById('exam-user-input').value = '';
+    document.getElementById('exam-opts-container').innerHTML = '';
+  } else {
+    document.getElementById('exam-input-box').style.display = 'none';
+    const optsBox = document.getElementById('exam-opts-container');
+    optsBox.innerHTML = '';
+    q.opts.forEach((optText, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = optText;
+      btn.onclick = () => selectExamOption(index, btn);
+      optsBox.appendChild(btn);
+    });
+  }
+}
+
+function playExamAudio() {
+  if (currentExamAudio) {
+    speak(currentExamAudio);
+  }
+}
+
+function selectExamOption(selectedIdx, btnEl) {
+  const q = EXAM_QUESTIONS[examIdx];
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+
+  if (selectedIdx === q.correct) {
+    btnEl.classList.add('correct');
+    examScore++;
+    document.getElementById('exam-feedback').style.color = 'var(--green-ok)';
+    document.getElementById('exam-feedback').textContent = `✓ Correcto! ${q.explanation}`;
+  } else {
+    btnEl.classList.add('wrong');
+    allBtns[q.correct].classList.add('correct');
+    document.getElementById('exam-feedback').style.color = 'var(--red-main)';
+    document.getElementById('exam-feedback').textContent = `✗ Incorrecto. ${q.explanation}`;
+  }
+
+  setTimeout(() => {
+    examIdx++;
+    renderExamQuestion();
+  }, 2200);
+}
+
+function checkDictationAnswer() {
+  const q = EXAM_QUESTIONS[examIdx];
+  const userVal = document.getElementById('exam-user-input').value.trim();
+
+  if (userVal === q.answer) {
+    examScore++;
+    document.getElementById('exam-feedback').style.color = 'var(--green-ok)';
+    document.getElementById('exam-feedback').textContent = `✓ PERFECTO! Escrito correctamente: ${q.answer}`;
+  } else {
+    document.getElementById('exam-feedback').style.color = 'var(--red-main)';
+    document.getElementById('exam-feedback').textContent = `✗ Casi. La respuesta era: ${q.answer} (${q.pinyinHint})`;
+  }
+
+  setTimeout(() => {
+    examIdx++;
+    renderExamQuestion();
+  }, 2500);
 }
 </script>
 </body>
