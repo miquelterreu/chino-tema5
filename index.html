@@ -170,4 +170,321 @@ body {
 </div>
 
 <!-- MENÚ PRINCIPAL -->
-<div class="menu-grid" id="main-menu
+<div class="menu-grid" id="main-menu">
+  <div class="menu-card" onclick="openSec('dict')">
+    <div class="menu-icon">📖</div>
+    <div class="menu-label">Diccionario</div>
+    <div class="menu-sub">Tema 5 + Diccionario Global</div>
+  </div>
+
+  <div class="menu-card" onclick="openSec('flash')">
+    <div class="menu-icon">🎴</div>
+    <div class="menu-label">Flashcards</div>
+    <div class="menu-sub">Modo aleatorio inteligente</div>
+  </div>
+
+  <div class="menu-card" onclick="openSec('gram')">
+    <div class="menu-icon">📝</div>
+    <div class="menu-label">Gramática Apuntes</div>
+    <div class="menu-sub">Reglas clave del PDF</div>
+  </div>
+
+  <div class="menu-card" onclick="openSec('stories')">
+    <div class="menu-icon">📚</div>
+    <div class="menu-label">Historias</div>
+    <div class="menu-sub">Texto 1 y Texto 2 completos</div>
+  </div>
+
+  <div class="menu-card" onclick="openSec('exam-hub')" style="grid-column: span 2; background: rgba(255, 59, 48, 0.08); border-color: var(--red-main);">
+    <div class="menu-icon">🎯</div>
+    <div class="menu-label" style="font-size:17px;">Preparar Examen</div>
+    <div class="menu-sub">Practica +10 ejercicios aleatorios</div>
+  </div>
+</div>
+
+<!-- SECCIÓN DICCIONARIOS -->
+<div class="section" id="sec-dict">
+  <div class="dict-switch-row">
+    <button class="switch-btn active" id="btn-tab-t5" onclick="switchDictTab('t5')">Tema 5 (34 Palabras)</button>
+    <button class="switch-btn" id="btn-tab-global" onclick="switchDictTab('global')">Todos los Temas (1-5)</button>
+  </div>
+
+  <!-- FILTROS DE CATEGORÍA -->
+  <div class="cat-filter-row" id="cat-filter-container">
+    <button class="cat-chip active" onclick="filterCat('ALL', this)">Todas</button>
+    <button class="cat-chip" onclick="filterCat('Verbo', this)">Verbos / VO</button>
+    <button class="cat-chip" onclick="filterCat('Substantiu', this)">Sustantivos</button>
+    <button class="cat-chip" onclick="filterCat('Adjectiu', this)">Adjetivos</button>
+    <button class="cat-chip" onclick="filterCat('Adverbi', this)">Adverbios</button>
+    <button class="cat-chip" onclick="filterCat('Partícula', this)">Partículas</button>
+    <button class="cat-chip" onclick="filterCat('Classificador', this)">Classificadors</button>
+  </div>
+
+  <input class="search-input" id="global-search" placeholder="Buscar hanzi, pinyin o español..." oninput="filterDictSearch()">
+  <div id="dict-list-container"></div>
+</div>
+
+<!-- SECCIÓN FLASHCARDS -->
+<div class="section" id="sec-flash">
+  <div class="flash-switch-row">
+    <button class="flash-btn active" id="f-tab-t5" onclick="switchFlashMode('t5')">Tema 5</button>
+    <button class="flash-btn" id="f-tab-global" onclick="switchFlashMode('global')">Todos los Temas (1-5)</button>
+  </div>
+
+  <p style="text-align:center; font-size:11px; color:var(--text-muted); margin-bottom:10px;">
+    Algoritmo de repetición: Si pulsas <b>✓ La sé</b>, no volverá a salir hasta pasadas 4 rondas.
+  </p>
+  <div class="card-outer" onclick="flipFlash()">
+    <div class="card-inner" id="flash-inner">
+      <div class="face front">
+        <div class="hz-only" id="f-hz">图书馆</div>
+      </div>
+      <div class="face back">
+        <div class="es-title" id="b-es">Biblioteca</div>
+        <div class="py-text" id="b-py">túshūguǎn</div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="action-btn no" onclick="nextFlash(false)">✗ Repasar</button>
+    <button class="action-btn yes" onclick="nextFlash(true)">✓ La sé</button>
+  </div>
+</div>
+
+<!-- SECCIÓN GRAMÁTICA -->
+<div class="section" id="sec-gram">
+  <div class="story-card">
+    <div class="story-title">1. Verb + 一下 vs Verb + (一)点</div>
+    <div class="gram-tag">REGLA CLAVE 1</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      • <b>Verb + 一下:</b> Modifica la acción/tiempo (hacer algo un momento de forma suave).<br>
+      • <b>Verb + (一)点:</b> Modifica la cantidad de la bebida/comida (un poco de).
+    </p>
+    <div class="story-line" onclick="speak('你听一下')">
+      <div class="story-zh">你听一下。</div>
+      <div class="story-py">Nǐ tīng yí xià.</div>
+      <div class="story-es">Escucha un momento.</div>
+    </div>
+    <div class="story-line" onclick="speak('看一下这个人')">
+      <div class="story-zh">看一下这个人。</div>
+      <div class="story-py">Kàn yí xià zhè ge rén.</div>
+      <div class="story-es">Mira un momento a esta persona.</div>
+    </div>
+    <div class="story-line" onclick="speak('你想喝一点茶吗')">
+      <div class="story-zh">你想喝一点茶吗？</div>
+      <div class="story-py">Nǐ xiǎng hē yì diǎn chá ma?</div>
+      <div class="story-es">¿Quieres beber un poco de té?</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">2. Regla de Posición con 在 (zài)</div>
+    <div class="gram-tag">FÓRMULA D'OR: Persona + 在 + Lugar + Acción</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      En chino, la preposición 在 y el lugar van <b>SIEMPRE ANTES</b> que la acción principal.
+    </p>
+    <div class="story-line" onclick="speak('我在大学学习')">
+      <div class="story-zh">我在大学学习。</div>
+      <div class="story-py">Wǒ zài dàxué xuéxí.</div>
+      <div class="story-es">Estudio en la universidad.</div>
+    </div>
+    <div class="story-line" onclick="speak('你在哪儿学习中文')">
+      <div class="story-zh">你在哪儿学习中文？</div>
+      <div class="story-py">Nǐ zài nǎr xué zhōngwén?</div>
+      <div class="story-es">¿Dónde estudias chino?</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">3. Estructuras con 了 (le) (Afirmativa, Negativa y Preguntas)</div>
+    <div class="gram-tag">FÓRMULAS DE EXAMEN</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Indica una acción pasada o completada. Su estructura varía según si afirmas, niegas o preguntas:
+    </p>
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">1. AFIRMATIVA: Verbo + 了 + Objeto</p>
+    <div class="story-line" onclick="speak('我喝了咖啡')">
+      <div class="story-zh">我喝了咖啡。</div>
+      <div class="story-py">Wǒ hē le kāfēi.</div>
+      <div class="story-es">He bebido / Bebí café.</div>
+    </div>
+    <div class="story-line" onclick="speak('我喝了两杯咖啡')">
+      <div class="story-zh">我喝了两杯咖啡。</div>
+      <div class="story-py">Wǒ hē le liǎng bēi kāfēi.</div>
+      <div class="story-es">He bebido dos tazas de café.</div>
+    </div>
+
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">2. NEGATIVA: 没有 + Verbo (¡se elimina el 了!)</p>
+    <div class="story-line" onclick="speak('我没有去图书馆')">
+      <div class="story-zh">我没有去图书馆。</div>
+      <div class="story-py">Wǒ méiyǒu qù túshūguǎn.</div>
+      <div class="story-es">No he ido a la biblioteca.</div>
+    </div>
+
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">3. PREGUNTA OPCIÓN A: Verbo + Objeto + 了 + 吗？</p>
+    <div class="story-line" onclick="speak('你喝咖啡了吗')">
+      <div class="story-zh">你喝咖啡了吗？</div>
+      <div class="story-py">Nǐ hē kāfēi le ma?</div>
+      <div class="story-es">¿Has bebido café?</div>
+    </div>
+
+    <p style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">4. PREGUNTA OPCIÓN B (TÍPICA DE EXAMEN): Verbo + Objeto + 了 + 没有？</p>
+    <div class="story-line" onclick="speak('你喝咖啡了没有')">
+      <div class="story-zh">你喝咖啡了没有？</div>
+      <div class="story-py">Nǐ hē kāfēi le méiyǒu?</div>
+      <div class="story-es">¿Has bebido café o no?</div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">4. Adverbio 才 (cái)</div>
+    <div class="gram-tag">FÓRMULA: Tiempo + 才 + Verbo</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+      Indica acción tardía ("no hasta...", "tan tarde como").
+    </p>
+    <div class="story-line" onclick="speak('我今天才去图书馆')">
+      <div class="story-zh">我今天才去图书馆。</div>
+      <div class="story-py">Wǒ jīntiān cái qù túshūguǎn.</div>
+      <div class="story-es">No he ido a la biblioteca hasta hoy.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN HISTORIAS -->
+<div class="section" id="sec-stories">
+  <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Velocidad del audio:</div>
+  <div class="speed-switch-row">
+    <button class="speed-btn" id="sp-slow" onclick="setAudioSpeed(0.5, 'sp-slow')">🐢 Lento (0.5x)</button>
+    <button class="speed-btn active" id="sp-norm" onclick="setAudioSpeed(0.8, 'sp-norm')">▶ Normal (0.8x)</button>
+    <button class="speed-btn" id="sp-fast" onclick="setAudioSpeed(1.0, 'sp-fast')">⚡ Rápido (1.0x)</button>
+  </div>
+
+  <div class="story-card">
+    <div class="story-title">Texto 1: Visita a casa de Gao Wenzhong (Diálogo)</div>
+    <div id="story1-list"></div>
+  </div>
+  <div class="story-card">
+    <div class="story-title">Texto 2: Resumen de la velada (Narrativa)</div>
+    <div id="story2-list"></div>
+  </div>
+</div>
+
+<!-- SECCIÓN HUB PREPARAR EXAMEN -->
+<div class="section" id="sec-exam-hub">
+  <div style="font-size:14px; color:var(--text-muted); margin-bottom:12px; text-align:center;">
+    Selecciona un módulo (Mínimo 10 ejercicios aleatorios cada vez):
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(1)">
+    <div>
+      <div class="practice-title">1. Rellenar Hueco (A, B, C, D)</div>
+      <div class="practice-desc">Vocabulario y gramática en contexto</div>
+    </div>
+    <div class="practice-icon">✍️</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(2)">
+    <div>
+      <div class="practice-title">2. Gramática Correcta</div>
+      <div class="practice-desc">Identifica el orden y la estructura exacta</div>
+    </div>
+    <div class="practice-icon">📐</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(3)">
+    <div>
+      <div class="practice-title">3. Comprensión Lectora</div>
+      <div class="practice-desc">Lee la pregunta y responde correctamente</div>
+    </div>
+    <div class="practice-icon">📄</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(4)">
+    <div>
+      <div class="practice-title">4. Listening: Verdadero o Falso</div>
+      <div class="practice-desc">Escucha la frase y evalúa si coincide</div>
+    </div>
+    <div class="practice-icon">👂</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(5)">
+    <div>
+      <div class="practice-title">5. Listening: Relacionar Imagen</div>
+      <div class="practice-desc">Audio a situación/imagen correcta</div>
+    </div>
+    <div class="practice-icon">🖼️</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(6)">
+    <div>
+      <div class="practice-title">6. Listening: Respuesta Correcta</div>
+      <div class="practice-desc">Escucha la pregunta oral y elige la respuesta</div>
+    </div>
+    <div class="practice-icon">🎧</div>
+  </div>
+</div>
+
+<!-- SECCIÓN PRÁCTICA RUNNER -->
+<div class="section" id="sec-practice-runner">
+  <div class="story-card">
+    <div class="story-title" id="p-runner-title">Práctica</div>
+    <div id="p-runner-body"></div>
+  </div>
+</div>
+
+<script>
+/* DATOS TEMA 5 COMPLETO */
+const ALL_VOCAB_34 = [
+  {num:1, hz:"呀", py:"ya", cat:"Partícula", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
+  {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
+  {num:3, hz:"快", py:"kuài", cat:"Adverbi", es:"Ràpidament / De pressa", pos:"Es posa ABANS d'un verb per demanar que es faci una acció de pressa.", exZh:"快来！", exEs:"¡Vine de pressa!"},
+  {num:4, hz:"进来", py:"jìn lai", cat:"Verbo", es:"Entrar (venint cap a qui parla)", pos:"Si B entra cap a A s'usa 进来. Si s'allunya seria 进去 (jìn qù). S'afegeix 请 (qǐng) davant per cortesia.", exZh:"请进来。", exEs:"Por favor, entra / Adelante!"},
+  {num:5, hz:"来", py:"lái", cat:"Verbo", es:"Venir", pos:"Verb de moviment.", exZh:"你来我家吗？", exEs:"¿Vens a casa meva?"},
+  {num:6, hz:"介绍", py:"jièshào", cat:"Verbo", es:"Presentar a algú breument", pos:"Acostuma a anar seguit de 一下 (jièshào yí xià).", exZh:"我介绍一下。", exEs:"Us presento breument / Os presento un momento..."},
+  {num:7, hz:"一下", py:"yí xià", cat:"Estructura", es:"Un moment / Breument", pos:"FÓRMULA: [ Verb + 一下 ]. Indica acció ràpida o petició més suau.", exZh:"看一下这个人。", exEs:"Mira un momento a esta persona."},
+  {num:8, hz:"高兴", py:"gāoxìng", cat:"Adjectiu", es:"Content / Alegre", pos:"ESTRUCTURA: [ Sujeto + 很 + 高兴 ].", exZh:"很高兴认识你。", exEs:"Encantado/a de conocerte."},
+  {num:9, hz:"漂亮", py:"piàoliang", cat:"Adjectiu", es:"Guapa / Bonica", pos:"S'utilitza per a gènere femení o per descriure coses i llocs.", exZh:"我家很漂亮。", exEs:"La meva casa és bonica."},
+  {num:10, hz:"坐", py:"zuò", cat:"Verbo", es:"Sentarse / Seure", pos:"Amb 请 davant per cortesia: 请坐 (Qǐng zuò).", exZh:"请坐。", exEs:"Siéntese, por favor / Sigueu, per favor."},
+  {num:11, hz:"在", py:"zài", cat:"Preposició", es:"Estar a / en un lloc", pos:"FÓRMULA D'OR: Persona + 在 + Lugar + Acción. En xinès el lloc va SEMPRE ABANS que l'acció.", exZh:"我在大学学习。", exEs:"Estudio en la universidad."},
+  {num:12, hz:"哪儿", py:"nǎr", cat:"Pronom", es:"On? / ¿Dónde?", pos:"Substitueix el lloc en la pregunta.", exZh:"你在哪儿学习中文？", exEs:"¿Dónde estudias chino?"},
+  {num:13, hz:"学校", py:"xuéxiào", cat:"Substantiu", es:"Escola / Centre d'estudis", pos:"Lloc que es col·loca rere de 在.", exZh:"我在学校学中文。", exEs:"Estudio chino en la escuela."},
+  {num:14, hz:"喝", py:"hē", cat:"Verbo", es:"Beure", pos:"Verb d'acció + beguda.", exZh:"请问，你想喝什么？", exEs:"Disculpa, ¿qué quieres beber?"},
+  {num:15, hz:"点(儿)", py:"diǎn(r)", cat:"Classificador", es:"Un poc / Una mica de", pos:"FÓRMULA: [ Verb + 点(儿) + Objeto ]. Per dir 'Sí, un poc': 想一点.", exZh:"喝点(儿)咖啡。", exEs:"Beber un poco de café."},
+  {num:16, hz:"茶", py:"chá", cat:"Substantiu", es:"Té (beguda)", pos:"Substantiu objecte.", exZh:"你喜欢茶还是咖啡？", exEs:"¿Te gusta el té o el café?"},
+  {num:17, hz:"咖啡", py:"kāfēi", cat:"Substantiu", es:"Cafè", pos:"Substantiu objecte.", exZh:"你想喝咖啡吗？", exEs:"¿Quieres beber café?"},
+  {num:18, hz:"吧", py:"ba", cat:"Partícula", es:"Sugerència / Proposta amable", pos:"Es posa al FINAL de la frase per suavitzar un ordre o fer una proposta.", exZh:"我们喝咖啡吧。", exEs:"¿Vamos a tomar un café?"},
+  {num:19, hz:"要", py:"yào", cat:"Verbo", es:"Voler / Tenir la intenció de", pos:"ESTRUCTURA: [ 要 + Substantiu ] o [ 要 + Verb ].", exZh:"我们要一杯咖啡。", exEs:"Queremos una taza de café."},
+  {num:20, hz:"瓶", py:"píng", cat:"Classificador", es:"Ampolla / Botella (mesura)", pos:"Número + 瓶 + Beguda. Nota: L'objecte físic ampolla es diu 瓶子 (píngzi).", exZh:"一瓶可乐。", exEs:"Una botella de coca-cola."},
+  {num:21, hz:"可乐", py:"kělè", cat:"Substantiu", es:"Coca-cola", pos:"Substantiu objecte (o 可口可乐 kěkǒukělè).", exZh:"可乐在哪儿？", exEs:"¿Dónde está la coca-cola?"},
+  {num:22, hz:"可以", py:"kěyǐ", cat:"Verbo", es:"Poder (permís / possibilitat)", pos:"Se situa ABANS del verb principal.", exZh:"我可以和你跳舞吗？", exEs:"¿Puedo bailar contigo?"},
+  {num:23, hz:"对不起", py:"duìbuqǐ", cat:"Expressió", es:"Lo siento / Perdón", pos:"Es diu al començament de la frase.", exZh:"对不起，我不知道。", exEs:"Lo siento, no lo sé."},
+  {num:24, hz:"给", py:"gěi", cat:"Verbo", es:"Donar / Dar", pos:"ESTRUCTURA: [ 给 + Persona + Objeto ].", exZh:"给我一瓶可乐。", exEs:"Dame una botella de coca-cola."},
+  {num:25, hz:"杯", py:"bēi", cat:"Classificador", es:"Got / Tassa (mesura)", pos:"Número + 杯 + Beguda. Nota: L'objecte físic got o tassa es diu 杯子 (bēizi).", exZh:"两杯咖啡。", exEs:"Dos tazas de café."},
+  {num:26, hz:"水", py:"shuǐ", cat:"Substantiu", es:"Aigua", pos:"Substantiu objecte.", exZh:"请给我一杯水。", exEs:"Por favor dame un vaso de agua."},
+  {num:27, hz:"高小音", py:"Gāo Xiǎoyīn", cat:"Nom propi", es:"Gao Xiaoyin (nom)", pos:"Sujeto de la frase.", exZh:"高小音在学校。", exEs:"Gao Xiaoyin está en la escuela."},
+  {num:28, hz:"玩(儿)", py:"wán(r)", cat:"Verbo", es:"Divertir-se / Jugar / Passar-ho bé", pos:"Com a adjectiu: 好玩 (hǎowán) = Divertit. Ej: 玩儿电脑 / 玩儿球.", exZh:"我们去你家玩儿吧。", exEs:"Anem a casa teva a passar-ho bé?"},
+  {num:29, hz:"了", py:"le", cat:"Partícula", es:"Acció realitzada / completada", pos:"POSICIÓ: Just rere del verb (V + 了 + Objeto). Pregunta: ...了没有？ / ...了吗？", exZh:"我喝了两杯咖啡。", exEs:"He begut dues tasses de cafè."},
+  {num:30, hz:"图书馆", py:"túshūguǎn", cat:"Substantiu", es:"Biblioteca", pos:"Lloc físic que va amb 在 o 去.", exZh:"我没有去图书馆。", exEs:"No he anat a la biblioteca."},
+  {num:31, hz:"一起", py:"yìqǐ", cat:"Adverbi", es:"Junts / Plegats", pos:"Se situa ABANS del verb. Ej: 我们在一起吧 (Estiguem junts!).", exZh:"我们一起在图书馆看书。", exEs:"Llegim llibres junts a la biblioteca."},
+  {num:32, hz:"聊天(儿)", py:"liáo tiān(r)", cat:"Verbo", es:"Xerrar / Parlar", pos:"Components: 聊 (liáo - verb) = xerrar | 天 (tiān - substantiu) = cel/dia.", exZh:"我们在聊天儿。", exEs:"Estem xerrant."},
+  {num:33, hz:"才", py:"cái", cat:"Adverbi", es:"Més tard del previst / 'no fins...'", pos:"FÓRMULA: Temps + 才 + Verbo. Indica acció que passa tard.", exZh:"我今天才去图书馆。", exEs:"No he anat a la biblioteca fins avui."},
+  {num:34, hz:"回家", py:"huí jiā", cat:"Verbo", es:"Tornar a casa (pròpia)", pos:"Components: 回 (huí - verb) = tornar | 家 (jiā) = casa/família.", exZh:"我想回家。", exEs:"Vull tornar a casa."}
+];
+
+const GLOBAL_VOCAB = [
+  ...ALL_VOCAB_34,
+  {hz:"你", py:"nǐ", cat:"Pronom", es:"tú"}, {hz:"好", py:"hǎo", cat:"Adjectiu", es:"bueno / bien"}, {hz:"请", py:"qǐng", cat:"Verbo", es:"por favor / invitar"},
+  {hz:"问", py:"wèn", cat:"Verbo", es:"preguntar"}, {hz:"贵", py:"guì", cat:"Adjectiu", es:"honorable / caro"}, {hz:"姓", py:"xìng", cat:"Verbo", es:"apellidarse"},
+  {hz:"我", py:"wǒ", cat:"Pronom", es:"yo"}, {hz:"呢", py:"ne", cat:"Partícula", es:"¿y…?"}, {hz:"小姐", py:"xiǎojiě", cat:"Substantiu", es:"señorita"},
+  {hz:"叫", py:"jiào", cat:"Verbo", es:"llamarse"}, {hz:"什么", py:"shénme", cat:"Pronom", es:"qué"}, {hz:"名字", py:"míngzi", cat:"Substantiu", es:"nombre"},
+  {hz:"先生", py:"xiānsheng", cat:"Substantiu", es:"señor"}, {hz:"中国", py:"Zhōngguó", cat:"Substantiu", es:"China"}, {hz:"北京", py:"Běijīng", cat:"Substantiu", es:"Beijing"},
+  {hz:"美国", py:"Měiguó", cat:"Substantiu", es:"EE.UU."}, {hz:"纽约", py:"Niǔyuē", cat:"Substantiu", es:"Nueva York"}, {hz:"那", py:"nà", cat:"Pronom", es:"eso / aquel"},
+  {hz:"的", py:"de", cat:"Partícula", es:"posesivo / modificador"}, {hz:"照片", py:"zhàopiàn", cat:"Substantiu", es:"foto"}, {hz:"这", py:"zhè", cat:"Pronom", es:"esto / este"},
+  {hz:"爸爸", py:"bàba", cat:"Substantiu", es:"papá"}, {hz:"妈妈", py:"māma", cat:"Substantiu", es:"mamá"}, {hz:"个", py:"gè", cat:"Classificador", es:"clasificador general"},
+  {hz:"孩子", py:"háizi", cat:"Substantiu", es:"niño/a"}, {hz:"谁", py:"shéi", cat:"Pronom", es:"quién"}, {hz:"她", py:"tā", cat:"Pronom", es:"ella"},
+  {hz:"姐姐", py:"jiějie", cat:"Substantiu", es:"hermana mayor"}, {hz:"弟弟", py:"dìdi", cat:"Substantiu", es:"hermano menor"}, {hz:"他", py:"tā", cat:"Pronom", es:"él"},
+  {hz:"哥哥", py:"gēge", cat:"Substantiu", es:"hermano mayor"}, {hz:"儿子", py:"érzi", cat:"Substantiu", es:"hijo"}, {hz:"有", py:"yǒu", cat:"Verbo", es:"tener / haber"},
+  {hz:"女儿", py:"nǚ'ér", cat:"Substantiu", es:"hija"}, {hz:"没", py:"méi", cat:"Adverbi", es:"no (con 有)"}, {hz:"家", py:"jiā", cat:"Substantiu", es:"casa / familia"},
+  {hz:"几", py:"jǐ", cat:"Pronom", es:"cuántos"}, {hz:"两", py:"liǎng", cat:"Número", es:"dos"}, {hz:"妹妹", py:"mèimei", cat:"Substantiu", es:"hermana menor"},
+  {hz:"和", py:"hé", cat:"Conjunció", es:"y"}, {hz:"做", py:"zuò", cat:"Verbo", es:"hacer"}, {hz:"工作", py:"gōngzuò", cat:"Verbo", es:"trabajar / trabajo"},
+  {hz:"律师", py:"lǜshī", cat:"Substantiu", es:"abogado/a"}, {hz:"都", py:"dōu", cat:"Adverbi", es:"todos"}, {hz:"大学生", py:"dàxuéshēng", cat:"Substantiu", es:"universitario"},
+  {hz:"医生", py:"yīshēng", cat:"Substantiu", es:"médico/a"}, {hz:"老师", py:"lǎoshī", cat:"Substantiu", es:"
