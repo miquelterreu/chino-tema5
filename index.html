@@ -158,11 +158,20 @@ body {
 .practice-icon { font-size: 28px; margin-left: 10px; }
 .audio-play-big {
   background: var(--red-soft); border: 1px solid var(--red-main); color: var(--red-main);
-  padding: 16px; border-radius: 16px; font-size: 18px; font-weight: bold; text-align: center;
+  padding: 18px; border-radius: 16px; font-size: 18px; font-weight: bold; text-align: center;
   cursor: pointer; margin-bottom: 16px;
 }
 .audio-play-big:active { transform: scale(0.98); }
 .img-emoji-box { font-size: 64px; text-align: center; margin: 12px 0; }
+
+/* DICTADO CARD */
+.dictado-box {
+  background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px;
+  padding: 2rem 1rem; text-align: center; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem;
+}
+.dictado-counter { font-size: 12px; color: var(--gold); font-weight: bold; margin-bottom: 12px; }
+.dictado-result { display: none; margin-top: 10px; }
+.dictado-result.show { display: block; }
 </style>
 </head>
 <body>
@@ -186,6 +195,12 @@ body {
     <div class="menu-sub">Modo aleatorio inteligente</div>
   </div>
 
+  <div class="menu-card" onclick="openSec('dictado')">
+    <div class="menu-icon">✍️</div>
+    <div class="menu-label">Dictado</div>
+    <div class="menu-sub">Escribe en papel (10 aleatorios)</div>
+  </div>
+
   <div class="menu-card" onclick="openSec('gram')">
     <div class="menu-icon">📝</div>
     <div class="menu-label">Gramática Apuntes</div>
@@ -198,10 +213,10 @@ body {
     <div class="menu-sub">Texto 1 y Texto 2 completos</div>
   </div>
 
-  <div class="menu-card" onclick="openSec('exam-hub')" style="grid-column: span 2; background: rgba(255, 59, 48, 0.08); border-color: var(--red-main);">
+  <div class="menu-card" onclick="openSec('exam-hub')" style="background: rgba(255, 59, 48, 0.08); border-color: var(--red-main);">
     <div class="menu-icon">🎯</div>
-    <div class="menu-label" style="font-size:17px;">Preparar Examen</div>
-    <div class="menu-sub">Practica +10 ejercicios aleatorios</div>
+    <div class="menu-label" style="font-size:15px;">Preparar Examen</div>
+    <div class="menu-sub">Practica +10 ejercicios</div>
   </div>
 </div>
 
@@ -212,7 +227,6 @@ body {
     <button class="switch-btn" id="btn-tab-global" onclick="switchDictTab('global')">Todos los Temas (1-5)</button>
   </div>
 
-  <!-- FILTROS DE CATEGORÍA -->
   <div class="cat-filter-row" id="cat-filter-container">
     <button class="cat-chip active" onclick="filterCat('ALL', this)">Todas</button>
     <button class="cat-chip" onclick="filterCat('Verbo', this)">Verbos / VO</button>
@@ -252,6 +266,34 @@ body {
     <button class="action-btn no" onclick="nextFlash(false)">✗ Repasar</button>
     <button class="action-btn yes" onclick="nextFlash(true)">✓ La sé</button>
   </div>
+</div>
+
+<!-- NUEVA SECCIÓN: DICTADO TOTALMENTE ALEATORIO DE 10 EN 10 -->
+<div class="section" id="sec-dictado">
+  <div style="font-size:13px; color:var(--text-muted); text-align:center; margin-bottom:12px;">
+    🎧 Escucha el audio, escribe el carácter en tu papel y luego pulsa para comprobar si has acertado.
+  </div>
+
+  <div class="dictado-box">
+    <div class="dictado-counter" id="dictado-count">Palabra 1 de 10</div>
+    
+    <div class="audio-play-big" style="width:100%; margin-bottom:12px;" onclick="playDictadoAudio()">
+      🔊 Escuchar Audio
+    </div>
+
+    <div class="dictado-result" id="dictado-res">
+      <div class="hz-only" id="dictado-hz" style="margin-bottom:8px;">字</div>
+      <div class="py-text" id="dictado-py" style="margin-bottom:4px;">zì</div>
+      <div class="es-title" id="dictado-es" style="font-size:18px;">Significado</div>
+    </div>
+  </div>
+
+  <button class="action-btn" id="btn-reveal" onclick="revealDictado()" style="border-color:var(--gold); color:var(--gold); margin-bottom:8px;">
+    👁️ Revelar Carácter
+  </button>
+  <button class="action-btn yes" id="btn-next-dictado" onclick="nextDictadoItem()" style="display:none; width:100%;">
+    ➡️ Siguiente Palabra
+  </button>
 </div>
 
 <!-- SECCIÓN GRAMÁTICA -->
@@ -435,7 +477,7 @@ body {
 </div>
 
 <script>
-/* DATOS TEMA 5 COMPLETO */
+/* DATOS TEMA 5 COMPLETO (34 PALABRAS) */
 const ALL_VOCAB_34 = [
   {num:1, hz:"呀", py:"ya", cat:"Partícula", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
   {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
@@ -562,7 +604,7 @@ const PRACTICE_BANKS = {
     { q: "Escoge la opción correcta de cantidad de bebida:", opts: ["A. 我想喝一下茶。", "B. 我想喝一点儿茶。", "C. 我想喝了茶。", "D. 我想喝在茶。"], correct: 1 },
     { q: "Escoge la pregunta correcta con 了:", opts: ["A. 你喝咖啡了吗？", "B. 你喝了咖啡吗了？", "C. 你没喝咖啡了吗？", "D. 你喝咖啡吗了？"], correct: 0 },
     { q: "Escoge la pregunta opcional típica con 了:", opts: ["A. 你喝咖啡了没有？", "B. 你喝了咖啡没有了？", "C. 你喝咖啡没有了？", "D. 你没有喝咖啡了？"], correct: 0 },
-    { q: "Escoge la frase con el adverbio 才:", opts: ["A. 我今天才去图书馆。", "B. 我才今天去图书馆。", "C. 我去图书馆才今天。", "D. 今天我去才图书馆。"], correct: 0 },
+    { q: "Escoge la frase con el adverbio 才:", opts: ["A. 我今天才去图书馆。", "B. 我才今天去图书馆。", "C. 我去图书馆才今天。", "D. 今天 festival 我去才图书馆。"], correct: 0 },
     { q: "Escoge la respuesta de cortesía:", opts: ["A. 很高兴认识你！ - 认识你我也很高兴！", "B. 很高兴认识你！ - 对不起。", "C. 很高兴认识你！ - 我喝茶。", "D. 很高兴认识你！ - 太好了。"], correct: 0 },
     { q: "Escoge la forma de pedir permiso:", opts: ["A. 我可以进吗？", "B. 我可以进来吗？", "C. 我在进来吗？", "D. 我给进来吗？"], correct: 1 },
     { q: "Escoge el orden con clasificador:", opts: ["A. 一茶杯", "B. 一杯茶", "C. 茶一杯", "D. 杯一茶"], correct: 1 },
@@ -627,14 +669,18 @@ const PRACTICE_BANKS = {
   ]
 };
 
-/* ESTADO GLOBAL Y MEMORIA DE FLASHCARDS */
-let activeDictTab = 't5'; // 't5', 'global'
+/* ESTADO GLOBAL */
+let activeDictTab = 't5'; 
 let activeDictCat = 'ALL';
 let activeFlashTab = 't5';
 
 let flashDeck = [];
 let flashIndex = 0;
-let knownCooldownMap = {}; // Guarda IDs de tarjetas conocidas y sus rondas restantes
+let knownCooldownMap = {};
+
+/* ESTADO PARA EL NUEVO MÓDULO DE DICTADO */
+let dictadoList = [];
+let dictadoIdx = 0;
 
 let cachedVoices = [];
 let currentRate = 0.8;
@@ -700,7 +746,64 @@ function openSec(id) {
 
   if(id === 'dict') renderDict();
   if(id === 'flash') initFlashDeck();
+  if(id === 'dictado') startNewDictadoSession();
   if(id === 'stories') renderStories();
+}
+
+/* LÓGICA DEL NUEVO MÓDULO DE DICTADO */
+function startNewDictadoSession() {
+  // Mezclar los 34 caracteres del tema 5 completamente al azar y coger 10
+  dictadoList = [...ALL_VOCAB_34].sort(() => Math.random() - 0.5).slice(0, 10);
+  dictadoIdx = 0;
+  loadDictadoItem();
+}
+
+function loadDictadoItem() {
+  if (dictadoIdx >= dictadoList.length) {
+    document.getElementById('dictado-count').textContent = "¡Tanda de 10 completada!";
+    document.getElementById('dictado-res').classList.remove('show');
+    document.getElementById('btn-reveal').style.display = 'none';
+    
+    const container = document.querySelector('.dictado-box');
+    container.innerHTML = `
+      <div style="font-size:18px; font-weight:bold; color:var(--green-ok); margin-bottom:12px;">🎉 ¡Tanda de 10 dictados terminada!</div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">¿Quieres practicar otros 10 aleatorios?</p>
+      <button class="action-btn yes" onclick="startNewDictadoSession()" style="width:100%;">🔄 Otra tanda de 10 aleatorios</button>
+    `;
+    document.getElementById('btn-next-dictado').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('dictado-count').textContent = `Palabra ${dictadoIdx + 1} de 10`;
+  document.getElementById('dictado-res').classList.remove('show');
+  
+  const currentItem = dictadoList[dictadoIdx];
+  document.getElementById('dictado-hz').textContent = currentItem.hz;
+  document.getElementById('dictado-py').textContent = currentItem.py;
+  document.getElementById('dictado-es').textContent = currentItem.es;
+
+  document.getElementById('btn-reveal').style.display = 'block';
+  document.getElementById('btn-next-dictado').style.display = 'none';
+
+  // Sonar automáticamente la voz
+  playDictadoAudio();
+}
+
+function playDictadoAudio() {
+  if (dictadoList[dictadoIdx]) {
+    speak(dictadoList[dictadoIdx].hz);
+  }
+}
+
+function revealDictado() {
+  document.getElementById('dictado-res').classList.add('show');
+  document.getElementById('btn-reveal').style.display = 'none';
+  document.getElementById('btn-next-dictado').style.display = 'block';
+}
+
+function nextDictadoItem() {
+  dictadoIdx++;
+  loadDictadoItem();
 }
 
 /* DICCIONARIOS Y FILTROS */
@@ -788,16 +891,13 @@ function initFlashDeck() {
   if (activeFlashTab === 't5') source = [...ALL_VOCAB_34];
   else if (activeFlashTab === 'global') source = [...GLOBAL_VOCAB];
 
-  // Reducir rondas de enfriamiento de la memoria
   for (let key in knownCooldownMap) {
     if (knownCooldownMap[key] > 0) knownCooldownMap[key]--;
   }
 
-  // Filtrar tarjetas en enfriamiento
   let available = source.filter(w => !knownCooldownMap[w.hz] || knownCooldownMap[w.hz] <= 0);
-  if (available.length === 0) available = source; // Reseteo si se han sabido todas
+  if (available.length === 0) available = source;
 
-  // Mezclar aleatoriamente (Shuffle)
   flashDeck = available.sort(() => Math.random() - 0.5);
   flashIndex = 0;
   renderFlashCard();
@@ -823,7 +923,6 @@ function flipFlash() {
 function nextFlash(known) {
   const currentCard = flashDeck[flashIndex];
   if (known) {
-    // Poner en enfriamiento por 4 rondas
     knownCooldownMap[currentCard.hz] = 4;
   }
   
@@ -840,7 +939,6 @@ function openPractice(type) {
   currentPracticeType = type;
   currentPracticeIdx = 0;
   
-  // Clonar y mezclar banco de preguntas para que sean siempre diferentes
   let rawBank = PRACTICE_BANKS[type] || [];
   currentPracticeDataset = [...rawBank].sort(() => Math.random() - 0.5);
 
