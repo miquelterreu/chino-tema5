@@ -33,7 +33,7 @@ body {
   user-select: none;
 }
 
-/* TOPBAR RESPONSIVE CON NAVEGACIÓN A INICIO */
+/* TOPBAR RESPONSIVE */
 .topbar {
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@ body {
 .section { display: none; max-width: 500px; margin: 0 auto; padding: 1rem; }
 .section.active { display: block; }
 
-/* SWITCH DE DICCIONARIO Y FLASHCARDS */
+/* SWITCHES */
 .dict-switch-row, .speed-switch-row, .flash-switch-row {
   display: flex; gap: 8px; margin-bottom: 1rem; background: var(--card-bg); padding: 4px; border-radius: 12px; border: 1px solid var(--border-color);
 }
@@ -116,7 +116,7 @@ body {
 .action-btn {
   flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color);
   background: var(--card-bg); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer;
-  margin-top: 8px;
+  margin-top: 8px; text-align: center;
 }
 .action-btn.yes { border-color: var(--green-ok); color: var(--green-ok); background: rgba(48, 209, 88, 0.15); }
 .action-btn.no { border-color: var(--red-main); color: var(--red-main); background: var(--red-soft); }
@@ -172,6 +172,11 @@ body {
 .dictado-counter { font-size: 12px; color: var(--gold); font-weight: bold; margin-bottom: 12px; }
 .dictado-result { display: none; margin-top: 10px; }
 .dictado-result.show { display: block; }
+
+.word-bank {
+  display: flex; flex-wrap: wrap; gap: 8px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--border-color);
+}
+.word-chip { background: var(--red-soft); color: var(--red-main); border: 1px solid var(--red-main); padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -197,8 +202,8 @@ body {
 
   <div class="menu-card" onclick="openSec('dictado')">
     <div class="menu-icon">✍️</div>
-    <div class="menu-label">Dictado</div>
-    <div class="menu-sub">Escribe en papel (10 aleatorios)</div>
+    <div class="menu-label">1. Dictado</div>
+    <div class="menu-sub">Carácter + Traducción (10 aleatorios)</div>
   </div>
 
   <div class="menu-card" onclick="openSec('gram')">
@@ -216,7 +221,7 @@ body {
   <div class="menu-card" onclick="openSec('exam-hub')" style="background: rgba(255, 59, 48, 0.08); border-color: var(--red-main);">
     <div class="menu-icon">🎯</div>
     <div class="menu-label" style="font-size:15px;">Preparar Examen</div>
-    <div class="menu-sub">Practica +10 ejercicios</div>
+    <div class="menu-sub">Modelos 2 al 7 del Examen</div>
   </div>
 </div>
 
@@ -268,10 +273,10 @@ body {
   </div>
 </div>
 
-<!-- NUEVA SECCIÓN: DICTADO TOTALMENTE ALEATORIO DE 10 EN 10 -->
+<!-- SECCIÓN: 1. DICTADO (CARÁCTER + TRADUCCIÓN) -->
 <div class="section" id="sec-dictado">
   <div style="font-size:13px; color:var(--text-muted); text-align:center; margin-bottom:12px;">
-    🎧 Escucha el audio, escribe el carácter en tu papel y luego pulsa para comprobar si has acertado.
+    🎧 Escucha el audio, escribe el carácter y traducción en tu papel y luego pulsa para comprobar.
   </div>
 
   <div class="dictado-box">
@@ -283,13 +288,13 @@ body {
 
     <div class="dictado-result" id="dictado-res">
       <div class="hz-only" id="dictado-hz" style="margin-bottom:8px;">字</div>
-      <div class="py-text" id="dictado-py" style="margin-bottom:4px;">zì</div>
-      <div class="es-title" id="dictado-es" style="font-size:18px;">Significado</div>
+      <div class="es-title" id="dictado-es" style="font-size:20px; color:var(--green-ok);">Traducción</div>
+      <div class="py-text" id="dictado-py" style="font-size:14px; margin-top:4px;">Pinyin</div>
     </div>
   </div>
 
   <button class="action-btn" id="btn-reveal" onclick="revealDictado()" style="border-color:var(--gold); color:var(--gold); margin-bottom:8px;">
-    👁️ Revelar Carácter
+    👁️ Revelar Carácter y Traducción
   </button>
   <button class="action-btn yes" id="btn-next-dictado" onclick="nextDictadoItem()" style="display:none; width:100%;">
     ➡️ Siguiente Palabra
@@ -413,56 +418,56 @@ body {
   </div>
 </div>
 
-<!-- SECCIÓN HUB PREPARAR EXAMEN -->
+<!-- SECCIÓN HUB PREPARAR EXAMEN (MODELOS 2 AL 7) -->
 <div class="section" id="sec-exam-hub">
   <div style="font-size:14px; color:var(--text-muted); margin-bottom:12px; text-align:center;">
-    Selecciona un módulo (Mínimo 10 ejercicios aleatorios cada vez):
-  </div>
-
-  <div class="practice-menu-card" onclick="openPractice(1)">
-    <div>
-      <div class="practice-title">1. Rellenar Hueco (A, B, C, D)</div>
-      <div class="practice-desc">Vocabulario y gramática en contexto</div>
-    </div>
-    <div class="practice-icon">✍️</div>
+    Modelos exactos según la estructura de tu examen:
   </div>
 
   <div class="practice-menu-card" onclick="openPractice(2)">
     <div>
-      <div class="practice-title">2. Gramática Correcta</div>
-      <div class="practice-desc">Identifica el orden y la estructura exacta</div>
+      <div class="practice-title">2. Leer frases con huecos</div>
+      <div class="practice-desc">Elegir palabras de la lista para rellenar hueco</div>
     </div>
-    <div class="practice-icon">📐</div>
+    <div class="practice-icon">✍️</div>
   </div>
 
   <div class="practice-menu-card" onclick="openPractice(3)">
     <div>
-      <div class="practice-title">3. Comprensión Lectora</div>
-      <div class="practice-desc">Lee la pregunta y responde correctamente</div>
+      <div class="practice-title">3. Elegir entre A, B, C (Gramática)</div>
+      <div class="practice-desc">3 incorrectas y 1 correcta</div>
     </div>
-    <div class="practice-icon">📄</div>
+    <div class="practice-icon">📐</div>
   </div>
 
   <div class="practice-menu-card" onclick="openPractice(4)">
     <div>
-      <div class="practice-title">4. Listening: Verdadero o Falso</div>
-      <div class="practice-desc">Escucha la frase y evalúa si coincide</div>
+      <div class="practice-title">4. Leer frase + 1 pregunta (A, B, C)</div>
+      <div class="practice-desc">Comprensión lectora con opciones A, B, C</div>
     </div>
-    <div class="practice-icon">👂</div>
+    <div class="practice-icon">📄</div>
   </div>
 
   <div class="practice-menu-card" onclick="openPractice(5)">
     <div>
-      <div class="practice-title">5. Listening: Relacionar Imagen</div>
-      <div class="practice-desc">Audio a situación/imagen correcta</div>
+      <div class="practice-title">5. Listening: O / X (2 veces)</div>
+      <div class="practice-desc">Escuchar 2 veces y responder O (correcto) o X (incorrecto)</div>
     </div>
-    <div class="practice-icon">🖼️</div>
+    <div class="practice-icon">👂</div>
   </div>
 
   <div class="practice-menu-card" onclick="openPractice(6)">
     <div>
-      <div class="practice-title">6. Listening: Respuesta Correcta</div>
-      <div class="practice-desc">Escucha la pregunta oral y elige la respuesta</div>
+      <div class="practice-title">6. Listening: Asignar número a imagen</div>
+      <div class="practice-desc">Relacionar cada frase escuchada con su imagen</div>
+    </div>
+    <div class="practice-icon">🖼️</div>
+  </div>
+
+  <div class="practice-menu-card" onclick="openPractice(7)">
+    <div>
+      <div class="practice-title">7. Listening: 1 frase + 1 preg (A, B, C, D)</div>
+      <div class="practice-desc">Escuchar frase/pregunta y elegir entre A, B, C, D</div>
     </div>
     <div class="practice-icon">🎧</div>
   </div>
@@ -471,13 +476,13 @@ body {
 <!-- SECCIÓN PRÁCTICA RUNNER -->
 <div class="section" id="sec-practice-runner">
   <div class="story-card">
-    <div class="story-title" id="p-runner-title">Práctica</div>
+    <div class="story-title" id="p-runner-title">Práctica Examen</div>
     <div id="p-runner-body"></div>
   </div>
 </div>
 
 <script>
-/* DATOS TEMA 5 COMPLETO (34 PALABRAS) */
+/* DATOS TEMA 5 COMPLETO */
 const ALL_VOCAB_34 = [
   {num:1, hz:"呀", py:"ya", cat:"Partícula", es:"Exclamació / Suavitzar el to", pos:"Es posa al FINAL de la frase per suavitzar el to o expressar sorpresa.", exZh:"太好了呀！", exEs:"Quina meravella! / ¡Qué bien!"},
   {num:2, hz:"进", py:"jìn", cat:"Verbo", es:"Entrar", pos:"Verb principal d'acció.", exZh:"进门", exEs:"Entrar per la porta."},
@@ -581,91 +586,36 @@ const TEXT_2 = [
   {zh:"王朋和李友晚上十二点才回家。", py:"Wáng Péng hé Lǐ Yǒu wǎnshang shí'èr diǎn cái huí jiā.", es:"Wang Peng y Li You no volvieron a casa hasta las 12 de la noche."}
 ];
 
-// BANCO AMPLIADO DE EJERCICIOS PARA EXAMEN
+// BANCOS AJUSTADOS A TU HOJA DE EXAMEN
 const PRACTICE_BANKS = {
-  1: [
-    { q: "我介绍___，这是我姐姐。", opts: ["A. 一点", "B. 一下", "C. 了", "D. 在"], correct: 1 },
-    { q: "你想喝___什么？", opts: ["A. 一下", "B. 点儿", "C. 才", "D. 吧"], correct: 1 },
-    { q: "王朋喝___两杯茶。", opts: ["A. 在", "B. 吧", "C. 了", "D. 呀"], correct: 2 },
-    { q: "他们晚上十二点___回家。", opts: ["A. 才", "B. 吗", "C. 给", "D. 进"], correct: 0 },
-    { q: "请___！快进来！", opts: ["A. 进", "B. 坐", "C. 喝", "D. 玩"], correct: 0 },
-    { q: "很高兴___你。", opts: ["A. 介绍", "B. 认识", "C. 工作", "D. 聊天"], correct: 1 },
-    { q: "你___哪儿学习中文？", opts: ["A. 去", "B. 在", "C. 要", "D. 给"], correct: 1 },
-    { q: "请___我一杯水。", opts: ["A. 给", "B. 喝", "C. 进", "D. 坐"], correct: 0 },
-    { q: "我们去你家___吧。", opts: ["A. 玩儿", "B. 瓶", "C. 漂亮", "D. 贵"], correct: 0 },
-    { q: "你们家很大，也很___。", opts: ["A. 忙", "B. 漂亮", "C. 贵", "D. 大"], correct: 1 },
-    { q: "我___有去图书馆。", opts: ["A. 不", "B. 没", "C. 才", "D. 很"], correct: 1 },
-    { q: "我们___看电视吧。", opts: ["A. 一起", "B. 一下", "C. 一点", "D. 一杯"], correct: 0 }
+  2: [ // 2. Leer frases con huecos (con lista banco)
+    { q: "我介绍___，这是我姐姐。", bank: ["一下", "点儿", "了", "才"], opts: ["一下", "点儿", "了", "才"], correct: 0 },
+    { q: "你想喝___什么？", bank: ["一下", "点儿", "了", "在"], opts: ["一下", "点儿", "了", "在"], correct: 1 },
+    { q: "王朋喝___两杯茶。", bank: ["在", "吧", "了", "呀"], opts: ["在", "吧", "了", "呀"], correct: 2 },
+    { q: "他们晚上十二点___回家。", bank: ["才", "吗", "给", "进"], opts: ["才", "吗", "给", "进"], correct: 0 }
   ],
-  2: [
-    { q: "Escoge la frase correcta con 在:", opts: ["A. 我学习在图书馆中文。", "B. 我在图书馆学习中文。", "C. 我学习中文在图书馆。", "D. 在图书馆我中文学习。"], correct: 1 },
-    { q: "Escoge la frase correcta en pasado (了):", opts: ["A. 我没有去了图书馆。", "B. 我不去图书馆了。", "C. 我没有去图书馆。", "D. 我不没有去图书馆。"], correct: 2 },
-    { q: "Escoge la frase correcta para suavizar la acción:", opts: ["A. 你看一点这个人。", "B. 你看一下这个人。", "C. 你看在这个人。", "D. 你看才这个人。"], correct: 1 },
-    { q: "Escoge la opción correcta de cantidad de bebida:", opts: ["A. 我想喝一下茶。", "B. 我想喝一点儿茶。", "C. 我想喝了茶。", "D. 我想喝在茶。"], correct: 1 },
-    { q: "Escoge la pregunta correcta con 了:", opts: ["A. 你喝咖啡了吗？", "B. 你喝了咖啡吗了？", "C. 你没喝咖啡了吗？", "D. 你喝咖啡吗了？"], correct: 0 },
-    { q: "Escoge la pregunta opcional típica con 了:", opts: ["A. 你喝咖啡了没有？", "B. 你喝了咖啡没有了？", "C. 你喝咖啡没有了？", "D. 你没有喝咖啡了？"], correct: 0 },
-    { q: "Escoge la frase con el adverbio 才:", opts: ["A. 我今天才去图书馆。", "B. 我才今天去图书馆。", "C. 我去图书馆才今天。", "D. 今天 festival 我去才图书馆。"], correct: 0 },
-    { q: "Escoge la respuesta de cortesía:", opts: ["A. 很高兴认识你！ - 认识你我也很高兴！", "B. 很高兴认识你！ - 对不起。", "C. 很高兴认识你！ - 我喝茶。", "D. 很高兴认识你！ - 太好了。"], correct: 0 },
-    { q: "Escoge la forma de pedir permiso:", opts: ["A. 我可以进吗？", "B. 我可以进来吗？", "C. 我在进来吗？", "D. 我给进来吗？"], correct: 1 },
-    { q: "Escoge el orden con clasificador:", opts: ["A. 一茶杯", "B. 一杯茶", "C. 茶一杯", "D. 杯一茶"], correct: 1 },
-    { q: "Escoge la negación correcta de past complete:", opts: ["A. 我没喝了", "B. 我没有喝", "C. 我不喝了", "D. 我没喝了茶"], correct: 1 },
-    { q: "Escoge la frase bien formada:", opts: ["A. 高小音在学校工作。", "B. 高小音工作在学校。", "C. 在学校高小音工作不。", "D. 工作高小音在学校。"], correct: 0 }
+  3: [ // 3. Elegir entre A, B, C (3 incorrectas, 1 correcta)
+    { q: "Estructura con 在 (lugar + acción):", opts: ["A. 我学习在图书馆中文。", "B. 我在图书馆学习中文。", "C. 我学习中文在图书馆。"], correct: 1 },
+    { q: "Estructura con 了 (pasado negativo):", opts: ["A. 我没有去了图书馆。", "B. 我不去图书馆了。", "C. 我没有去图书馆。"], correct: 2 },
+    { q: "Acción suave/breve (一下):", opts: ["A. 你看一点这个人。", "B. 你看一下这个人。", "C. 你看才这个人。"], correct: 1 }
   ],
-  3: [
-    { q: "高小音在哪儿工作？", opts: ["A. 在家", "B. 在学校的图书馆", "C. 在医院", "D. 不工作"], correct: 1 },
-    { q: "李友喝了什么？", opts: ["A. 茶", "B. 咖啡", "C. 可乐", "D. 一杯水"], correct: 3 },
-    { q: "王朋和李友几点回家？", opts: ["A. 十点", "B. 十一点", "C. 十二点", "D. 一点"], correct: 2 },
-    { q: "王朋喝了几杯茶？", opts: ["A. 一杯", "B. 两杯", "C. 三杯", "D. 没喝"], correct: 1 },
-    { q: "高文中家有可乐吗？", opts: ["A. 有", "B. 没有", "C. 有很多", "D. 不知道"], correct: 1 },
-    { q: "谁在学校工作？", opts: ["A. 王朋", "B. 李友", "C. 高小音", "D. 高文中"], correct: 2 },
-    { q: "王朋和李友在十点回家了吗？", opts: ["A. 回家了", "B. 没有，十二点才回家", "C. 十点回家了", "D. 不回家"], correct: 1 },
-    { q: "高文中家怎么样？", opts: ["A. 很小", "B. 很大很漂亮", "C. 很贵", "D. 不漂亮"], correct: 1 },
-    { q: "李友为什么不喝可乐？", opts: ["A. 不喜欢", "B. 高文中家没有可乐", "C. 想喝茶", "D. 太贵了"], correct: 1 },
-    { q: "他们晚上做了什么？", opts: ["A. 聊天、看电视", "B. 打球", "C. 唱歌跳舞", "D. 睡觉"], correct: 0 },
-    { q: "谁介绍了高小音？", opts: ["A. 王朋", "B. 李友", "C. 高文中", "D. 没人"], correct: 2 },
-    { q: "李友想喝什么？", opts: ["A. 可乐", "B. 茶", "C. 咖啡", "D. 都不想"], correct: 0 }
+  4: [ // 4. Leer frase + 1 pregunta (A, B, C)
+    { q: "Frase: 高小音在学校的图书馆工作。<br><br><b>Pregunta: 高小音在哪儿工作？</b>", opts: ["A. 在家", "B. 在学校的图书馆", "C. 在医院"], correct: 1 },
+    { q: "Frase: 李友不喝茶，只喝了一杯水。<br><br><b>Pregunta: 李友喝 spent 什么？</b>", opts: ["A. 茶", "B. 咖啡", "C. 一杯水"], correct: 2 },
+    { q: "Frase: 王朋和李友晚上十二点才回家。<br><br><b>Pregunta: 他们几点回家？</b>", opts: ["A. 十点", "B. 十一点", "C. 十二点"], correct: 2 }
   ],
-  4: [
-    { audio: "高小音在学校工作。", emoji: "🏫", desc: "Imagen: Escuela / Biblioteca", correct: "V" },
-    { audio: "李友喝了一瓶可乐。", emoji: "🥤", desc: "Imagen: Vaso de Agua", correct: "F" },
-    { audio: "王朋喝了两杯茶。", emoji: "🍵🍵", desc: "Imagen: Dos tazas de té", correct: "V" },
-    { audio: "他们晚上十二点才回家。", emoji: "🕛", desc: "Imagen: Reloj marcando las 12:00", correct: "V" },
-    { audio: "高文中家没有可乐。", emoji: "❌🥤", desc: "Imagen: No hay coca-cola", correct: "V" },
-    { audio: "王朋和李友去高文中家看书。", emoji: "⚽", desc: "Imagen: Jugando a fútbol", correct: "F" },
-    { audio: "认识你很高兴！", emoji: "🤝", desc: "Imagen: Personas dándose la mano", correct: "V" },
-    { audio: "请喝茶！", emoji: "☕", desc: "Imagen: Taza de café", correct: "F" },
-    { audio: "我在图书馆看书。", emoji: "📚", desc: "Imagen: Biblioteca con libros", correct: "V" },
-    { audio: "我们一起聊天儿。", emoji: "🗣️💬", desc: "Imagen: Dos personas charlando", correct: "V" },
-    { audio: "我喝了一杯水。", emoji: "🥛", desc: "Imagen: Vaso de agua", correct: "V" },
-    { audio: "你们家很大很漂亮。", emoji: "🏰", desc: "Imagen: Casa grande y bonita", correct: "V" }
+  5: [ // 5. Listening (O / X) - Reproducir 2 veces
+    { audio: "高小音在学校工作。", emoji: "🏫", desc: "Imagen: Escuela / Biblioteca", correct: "O" },
+    { audio: "李友喝了一瓶可乐。", emoji: "🥤", desc: "Imagen: Vaso de Agua", correct: "X" },
+    { audio: "王朋喝了两杯茶。", emoji: "🍵🍵", desc: "Imagen: Dos tazas de té", correct: "O" }
   ],
-  5: [
-    { audio: "你在哪儿工作？", opts: ["🏢 A. Trabajo/Oficina", "🏡 B. Casa", "☕ C. Cafetería", "⚽ D. Deporte"], correct: 0 },
-    { audio: "我们一起看电视。", opts: ["📖 A. Leer libro", "📺 B. Ver televisión", "💃 C. Bailar", "🚗 D. Conducir"], correct: 1 },
-    { audio: "请进，快进来！", opts: ["🚪 A. Entrar por la puerta", "🚶 B. Irse fuera", "💤 C. Dormir", "🍽️ D. Comer"], correct: 0 },
-    { audio: "给我一杯水吧。", opts: ["🥛 A. Vaso de agua", "🍺 B. Cerveza", "🍵 C. Taza de té", "🥤 D. Botella de refresco"], correct: 0 },
-    { audio: "我们在图书馆学习。", opts: ["📚 A. Biblioteca", "🏖️ B. Playa", "🛒 C. Supermercado", "🏨 D. Hotel"], correct: 0 },
-    { audio: "我想喝咖啡。", opts: ["☕ A. Café", "🥛 B. Leche", "🍷 C. Vino", "🧃 D. Zumo"], correct: 0 },
-    { audio: "请坐，请坐！", opts: ["🪑 A. Sentarse en la silla", "🏃 B. Correr", "🎤 C. Cantar", "🏊 D. Nadar"], correct: 0 },
-    { audio: "一瓶可乐", opts: ["🥤 A. Botella de Coca-Cola", "🍵 B. Taza de Té", "🍞 C. Pan", "🍏 D. Manzana"], correct: 0 },
-    { audio: "认识你很高兴", opts: ["🤝 A. Saludar con alegría", "😡 B. Enfadado", "😭 C. Llorar", "😴 D. Dormir"], correct: 0 },
-    { audio: "晚上十二点才回家", opts: ["🌌 A. Noche / 12:00", "☀️ B. Sol de Mañana", "🌇 C. Atardecer", "⏰ D. Despertador"], correct: 0 },
-    { audio: "我介绍一下", opts: ["👥 A. Presentar a un amigo", "🚗 B. Conducir coche", "🍳 C. Cocinar", "✈️ D. Avión"], correct: 0 },
-    { audio: "我们一起聊天儿", opts: ["💬 A. Charlar en grupo", "🏃 B. Hacer deporte", "🎨 C. Pintar", "🎧 D. Escuchar música solo"], correct: 0 }
+  6: [ // 6. Listening (Asignar número)
+    { audio: "你在哪儿工作？", opts: ["Imagen 1: Oficina/Trabajo", "Imagen 2: Casa", "Imagen 3: Deporte"], correct: 0 },
+    { audio: "我们一起看电视。", opts: ["Imagen 1: Leer libro", "Imagen 2: Ver televisión", "Imagen 3: Bailar"], correct: 1 }
   ],
-  6: [
+  7: [ // 7. Listening (1 frase + 1 preg - A, B, C, D)
     { audio: "你想喝点儿什么？", opts: ["A. 我喝茶吧。", "B. 我很好。", "C. 我在学校。", "D. 再见！"], correct: 0 },
-    { audio: "认识你很高兴！", opts: ["A. 对不起。", "B. 认识你我也很高兴！", "C. 我不喝咖啡。", "D. 太好了！"], correct: 1 },
-    { audio: "你在哪儿工作？", opts: ["A. 我在学校工作。", "B. 我喝了一杯水。", "C. 我是美国人。", "D. 我很忙。"], correct: 0 },
-    { audio: "你们家有可乐吗？", opts: ["A. 对不起，我们家没有可乐。", "B. 我想回家。", "C. 很高兴！", "D. 在图书馆。"], correct: 0 },
-    { audio: "你可以和我一起去吗？", opts: ["A. 可以！", "B. 不高兴。", "C. 我是学生。", "D. 谢谢！"], correct: 0 },
-    { audio: "你喝了几杯咖啡？", opts: ["A. 我喝了", "B. 我喝了两杯。", "C. 在学校。", "D. 我不认识他。"], correct: 1 },
-    { audio: "你想吃点儿什么？", opts: ["A. 我想吃中国菜。", "B. 我想喝水。", "C. 我去图书馆。", "D. 我很好。"], correct: 0 },
-    { audio: "你昨天去哪儿了？", opts: ["A. 我去高文中家了。", "B. 我喜欢看电视。", "C. 我不认识他。", "D. 明天见！"], correct: 0 },
-    { audio: "今天晚上你忙不忙？", opts: ["A. 我今天很忙。", "B. 我喝茶。", "C. 我叫王朋。", "D. 很高兴！"], correct: 0 },
-    { audio: "王朋，那是你的照片吗？", opts: ["A. 是，这是我的照片。", "B. 我很忙。", "C. 我不喝可乐。", "D. 再见！"], correct: 0 },
-    { audio: "你几点回家？", opts: ["A. 我十二点回家。", "B. 我在学校。", "C. 我很漂亮。", "D. 我喜欢你。"], correct: 0 },
-    { audio: "请问，你贵姓？", opts: ["A. 我姓王。", "B. 我是学生。", "C. 我很好。", "D. 谢谢！"], correct: 0 }
+    { audio: "认识你很高兴！", opts: ["A. 对不起。", "B. 认识你我也很高兴！", "C. 我不喝咖啡。", "D. 太好了！"], correct: 1 }
   ]
 };
 
@@ -678,7 +628,6 @@ let flashDeck = [];
 let flashIndex = 0;
 let knownCooldownMap = {};
 
-/* ESTADO PARA EL NUEVO MÓDULO DE DICTADO */
 let dictadoList = [];
 let dictadoIdx = 0;
 
@@ -711,23 +660,29 @@ function setAudioSpeed(speed, btnId) {
   document.getElementById(btnId).classList.add('active');
 }
 
-function speak(text) {
+function speak(text, times = 1) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   window.speechSynthesis.resume();
 
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-CN';
-  u.rate = currentRate;
+  let count = 0;
+  function play() {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-CN';
+    u.rate = currentRate;
+    if (cachedVoices.length === 0) cachedVoices = window.speechSynthesis.getVoices();
+    const zhVoice = cachedVoices.find(v => v.lang === 'zh-CN' || v.lang === 'zh_CN' || v.lang.startsWith('zh'));
+    if (zhVoice) u.voice = zhVoice;
 
-  if (cachedVoices.length === 0) {
-    cachedVoices = window.speechSynthesis.getVoices();
+    u.onend = () => {
+      count++;
+      if (count < times) {
+        setTimeout(play, 600);
+      }
+    };
+    window.speechSynthesis.speak(u);
   }
-
-  const zhVoice = cachedVoices.find(v => v.lang === 'zh-CN' || v.lang === 'zh_CN' || v.lang.startsWith('zh'));
-  if (zhVoice) u.voice = zhVoice;
-
-  window.speechSynthesis.speak(u);
+  play();
 }
 
 function showMenu() {
@@ -750,9 +705,8 @@ function openSec(id) {
   if(id === 'stories') renderStories();
 }
 
-/* LÓGICA DEL NUEVO MÓDULO DE DICTADO */
+/* 1. DICTADO (CARÁCTER + TRADUCCIÓN) */
 function startNewDictadoSession() {
-  // Mezclar los 34 caracteres del tema 5 completamente al azar y coger 10
   dictadoList = [...ALL_VOCAB_34].sort(() => Math.random() - 0.5).slice(0, 10);
   dictadoIdx = 0;
   loadDictadoItem();
@@ -767,7 +721,6 @@ function loadDictadoItem() {
     const container = document.querySelector('.dictado-box');
     container.innerHTML = `
       <div style="font-size:18px; font-weight:bold; color:var(--green-ok); margin-bottom:12px;">🎉 ¡Tanda de 10 dictados terminada!</div>
-      <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">¿Quieres practicar otros 10 aleatorios?</p>
       <button class="action-btn yes" onclick="startNewDictadoSession()" style="width:100%;">🔄 Otra tanda de 10 aleatorios</button>
     `;
     document.getElementById('btn-next-dictado').style.display = 'none';
@@ -779,13 +732,12 @@ function loadDictadoItem() {
   
   const currentItem = dictadoList[dictadoIdx];
   document.getElementById('dictado-hz').textContent = currentItem.hz;
-  document.getElementById('dictado-py').textContent = currentItem.py;
   document.getElementById('dictado-es').textContent = currentItem.es;
+  document.getElementById('dictado-py').textContent = currentItem.py;
 
   document.getElementById('btn-reveal').style.display = 'block';
   document.getElementById('btn-next-dictado').style.display = 'none';
 
-  // Sonar automáticamente la voz
   playDictadoAudio();
 }
 
@@ -806,7 +758,7 @@ function nextDictadoItem() {
   loadDictadoItem();
 }
 
-/* DICCIONARIOS Y FILTROS */
+/* DICCIONARIO */
 function switchDictTab(tab) {
   activeDictTab = tab;
   document.getElementById('btn-tab-t5').classList.toggle('active', tab === 't5');
@@ -827,10 +779,7 @@ function filterDictSearch() {
 
 function renderDict() {
   const query = document.getElementById('global-search').value.toLowerCase().trim();
-  let baseList = [];
-
-  if (activeDictTab === 't5') baseList = ALL_VOCAB_34;
-  else if (activeDictTab === 'global') baseList = GLOBAL_VOCAB;
+  let baseList = (activeDictTab === 't5') ? ALL_VOCAB_34 : GLOBAL_VOCAB;
 
   if (activeDictCat !== 'ALL') {
     baseList = baseList.filter(w => w.cat && w.cat.includes(activeDictCat));
@@ -843,11 +792,6 @@ function renderDict() {
   const container = document.getElementById('dict-list-container');
   container.innerHTML = '';
 
-  if (baseList.length === 0) {
-    container.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:2rem;">No se encontraron palabras.</div>`;
-    return;
-  }
-
   baseList.forEach((w, idx) => {
     const item = document.createElement('div');
     item.className = 'dict-item';
@@ -859,26 +803,13 @@ function renderDict() {
         </div>
         <div class="dict-es">${w.es}</div>
       </div>
-      ${w.pos ? `
-      <div class="dict-detail" id="detail-${idx}">
-        <div class="gram-tag">📍 REGLA Y USO:</div>
-        <div class="gram-pos">${w.pos}</div>
-        <div class="gram-ex-box" onclick="event.stopPropagation(); speak('${w.exZh}')">
-          <div style="font-size:14px; font-weight:bold; color:#fff;">${w.exZh} 🔊</div>
-          <div style="font-size:12px; color:var(--blue-pinyin);">${w.exEs}</div>
-        </div>
-      </div>` : ''}
     `;
-    item.onclick = () => {
-      const detail = document.getElementById(`detail-${idx}`);
-      if (detail) detail.classList.toggle('open');
-      speak(w.hz);
-    };
+    item.onclick = () => speak(w.hz);
     container.appendChild(item);
   });
 }
 
-/* FLASHCARDS INTELIGENTES CON ALGORITMO Y MEMORIA */
+/* FLASHCARDS */
 function switchFlashMode(mode) {
   activeFlashTab = mode;
   document.getElementById('f-tab-t5').classList.toggle('active', mode === 't5');
@@ -887,18 +818,8 @@ function switchFlashMode(mode) {
 }
 
 function initFlashDeck() {
-  let source = [];
-  if (activeFlashTab === 't5') source = [...ALL_VOCAB_34];
-  else if (activeFlashTab === 'global') source = [...GLOBAL_VOCAB];
-
-  for (let key in knownCooldownMap) {
-    if (knownCooldownMap[key] > 0) knownCooldownMap[key]--;
-  }
-
-  let available = source.filter(w => !knownCooldownMap[w.hz] || knownCooldownMap[w.hz] <= 0);
-  if (available.length === 0) available = source;
-
-  flashDeck = available.sort(() => Math.random() - 0.5);
+  let source = (activeFlashTab === 't5') ? [...ALL_VOCAB_34] : [...GLOBAL_VOCAB];
+  flashDeck = source.sort(() => Math.random() - 0.5);
   flashIndex = 0;
   renderFlashCard();
 }
@@ -920,28 +841,21 @@ function flipFlash() {
   }
 }
 
-function nextFlash(known) {
-  const currentCard = flashDeck[flashIndex];
-  if (known) {
-    knownCooldownMap[currentCard.hz] = 4;
-  }
-  
+function nextFlash() {
   flashIndex = (flashIndex + 1) % flashDeck.length;
   renderFlashCard();
 }
 
-/* PRÁCTICA DE EXAMEN DINÁMICA (CADA VEZ ALEATORIA) */
-let currentPracticeType = 1;
+/* PRÁCTICA RUNNER */
+let currentPracticeType = 2;
 let currentPracticeIdx = 0;
 let currentPracticeDataset = [];
 
 function openPractice(type) {
   currentPracticeType = type;
   currentPracticeIdx = 0;
-  
   let rawBank = PRACTICE_BANKS[type] || [];
   currentPracticeDataset = [...rawBank].sort(() => Math.random() - 0.5);
-
   openSec('practice-runner');
   loadPracticeQuestion();
 }
@@ -955,9 +869,9 @@ function loadPracticeQuestion() {
     title.textContent = "¡Módulo Completado!";
     body.innerHTML = `
       <p style="text-align:center; padding:1.5rem 1rem; color:var(--green-ok); font-size:18px; font-weight:bold;">
-        🎉 ¡Excelente trabajo! Has completado los ${currentPracticeDataset.length} ejercicios de este bloque.
+        🎉 ¡Has completado todos los ejercicios!
       </p>
-      <button class="action-btn yes" onclick="openPractice(${currentPracticeType})">🔄 Repetir con preguntas aleatorias</button>
+      <button class="action-btn yes" onclick="openPractice(${currentPracticeType})">🔄 Repetir modelo</button>
       <button class="action-btn" onclick="openSec('exam-hub')">Volver al Menú Examen</button>
     `;
     return;
@@ -965,9 +879,13 @@ function loadPracticeQuestion() {
 
   const item = currentPracticeDataset[currentPracticeIdx];
 
-  if (currentPracticeType === 1 || currentPracticeType === 2 || currentPracticeType === 3) {
-    title.textContent = `Ejercicio ${currentPracticeIdx + 1} / ${currentPracticeDataset.length}`;
-    body.innerHTML = `<div style="font-size:19px; font-weight:bold; color:var(--red-main); margin-bottom:16px;">${item.q}</div>`;
+  if (currentPracticeType === 2) { // 2. Frases con huecos y banco de palabras
+    title.textContent = `Modelo 2 (${currentPracticeIdx + 1} / ${currentPracticeDataset.length})`;
+    let bankHtml = '<div class="word-bank"><b>Lista de palabras:</b> ';
+    item.bank.forEach(w => bankHtml += `<span class="word-chip">${w}</span>`);
+    bankHtml += '</div>';
+
+    body.innerHTML = bankHtml + `<div style="font-size:19px; font-weight:bold; color:var(--red-main); margin-bottom:16px;">${item.q}</div>`;
     item.opts.forEach((opt, idx) => {
       const btn = document.createElement('button');
       btn.className = 'action-btn';
@@ -976,24 +894,35 @@ function loadPracticeQuestion() {
       body.appendChild(btn);
     });
   } 
-  else if (currentPracticeType === 4) {
-    title.textContent = `Listening V/F (${currentPracticeIdx + 1} / ${currentPracticeDataset.length})`;
+  else if (currentPracticeType === 3 || currentPracticeType === 4 || currentPracticeType === 7) {
+    title.textContent = `Modelo ${currentPracticeType} (${currentPracticeIdx + 1} / ${currentPracticeDataset.length})`;
+    body.innerHTML = `<div style="font-size:18px; font-weight:bold; color:#fff; margin-bottom:16px;">${item.q}</div>`;
+    item.opts.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'action-btn';
+      btn.textContent = opt;
+      btn.onclick = () => checkPracticeAnswer(btn, idx === item.correct);
+      body.appendChild(btn);
+    });
+  }
+  else if (currentPracticeType === 5) { // 5. Listening O / X (2 veces)
+    title.textContent = `Modelo 5: Listening O / X (${currentPracticeIdx + 1} / ${currentPracticeDataset.length})`;
     body.innerHTML = `
-      <div class="audio-play-big" onclick="speak('${item.audio}')">🔊 Escuchar Audio</div>
+      <div class="audio-play-big" onclick="speak('${item.audio}', 2)">🔊 Escuchar Audio (2 veces)</div>
       <div class="img-emoji-box">${item.emoji}</div>
       <div style="text-align:center; color:var(--text-muted); margin-bottom:16px;">${item.desc}</div>
       <div class="btn-row">
-        <button class="action-btn yes" onclick="checkPracticeAnswer(this, '${item.correct}' === 'V')">✓ Verdadero</button>
-        <button class="action-btn no" onclick="checkPracticeAnswer(this, '${item.correct}' === 'F')">✗ Falso</button>
+        <button class="action-btn yes" style="font-size:20px;" onclick="checkPracticeAnswer(this, '${item.correct}' === 'O')">⭕ Correcto (O)</button>
+        <button class="action-btn no" style="font-size:20px;" onclick="checkPracticeAnswer(this, '${item.correct}' === 'X')">❌ Incorrecto (X)</button>
       </div>
     `;
-    speak(item.audio);
+    speak(item.audio, 2);
   }
-  else if (currentPracticeType === 5 || currentPracticeType === 6) {
-    title.textContent = `Listening Test (${currentPracticeIdx + 1} / ${currentPracticeDataset.length})`;
+  else if (currentPracticeType === 6) { // 6. Listening Asignar Número
+    title.textContent = `Modelo 6 (${currentPracticeIdx + 1} / ${currentPracticeDataset.length})`;
     body.innerHTML = `
-      <div class="audio-play-big" onclick="speak('${item.audio}')">🔊 Escuchar Pregunta / Frase</div>
-      <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px; text-align:center;">Elige la opción correcta:</div>
+      <div class="audio-play-big" onclick="speak('${item.audio}', 2)">🔊 Escuchar Frase</div>
+      <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px; text-align:center;">Asigna el número correspondiente a la imagen:</div>
     `;
     item.opts.forEach((opt, idx) => {
       const btn = document.createElement('button');
@@ -1002,7 +931,7 @@ function loadPracticeQuestion() {
       btn.onclick = () => checkPracticeAnswer(btn, idx === item.correct);
       body.appendChild(btn);
     });
-    speak(item.audio);
+    speak(item.audio, 2);
   }
 }
 
