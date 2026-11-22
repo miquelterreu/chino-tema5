@@ -860,5 +860,115 @@ document.addEventListener('DOMContentLoaded',()=>{
   selectTheme(currentTheme);navigateById('home');renderDictionary();renderStories();renderGrammar();updateDashboard();
 });
 </script>
+
+<script id="aprueba-chino-audio-mobile-v1">
+(() => {
+  "use strict";
+
+  const synth = window.speechSynthesis;
+  let active;
+  let notice;
+
+  function clearNotice() {
+    if (notice) notice.remove();
+    notice = null;
+  }
+
+  function showNotice(message, retry) {
+    clearNotice();
+    notice = document.createElement("aside");
+    notice.style.cssText = "position:fixed;z-index:10000;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));width:min(380px,calc(100% - 24px));padding:14px;border:1px solid #666;border-radius:12px;background:#18181c;color:#fff;font:16px/1.45 system-ui;box-shadow:0 4px 16px #0008";
+    const status = document.createElement("div");
+    status.setAttribute("role", "status");
+    notice.append(status);
+    if (retry) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "Reintentar audio";
+      button.onclick = retry;
+      button.style.cssText = "margin:8px 8px 0 0;min-height:44px;padding:6px 10px;font:inherit";
+      notice.append(button);
+    }
+    const close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "Cerrar";
+    close.onclick = clearNotice;
+    close.style.cssText = "margin-top:8px;min-height:44px;padding:6px 10px;font:inherit";
+    notice.append(close);
+    document.body.append(notice);
+    status.textContent = message;
+  }
+
+  function stop() {
+    if (active) clearTimeout(active.watchdog);
+    active = null;
+    if (synth.speaking || synth.pending || synth.paused) synth.cancel();
+  }
+
+  function play(text, times = 1, useSystemVoice = false) {
+    if (typeof text !== "string" || !text.trim()) return;
+    if (!synth || typeof window.SpeechSynthesisUtterance !== "function") {
+      showNotice("Abre la web publicada en Safari o Chrome para usar el audio.");
+      return;
+    }
+
+    stop();
+    clearNotice();
+    const voices = synth.getVoices();
+    const lang = voice => voice.lang.toLowerCase().replace(/_/g, "-");
+    const mandarin = voices.find(v => lang(v) === "zh-cn")
+      || voices.find(v => /^(?:cmn(?:-|$)|zh-hans(?:-|$))/.test(lang(v)))
+      || voices.find(v => lang(v) === "zh-tw")
+      || voices.find(v => lang(v) === "zh");
+    const voice = useSystemVoice ? null : mandarin;
+
+    const session = { queue: [], watchdog: null };
+    active = session;
+
+    function fail() {
+      if (active !== session) return;
+      stop();
+      showNotice(
+        "El navegador no ha podido iniciar la voz. Comprueba el volumen y que el dispositivo tenga una voz de mandarín disponible.",
+        () => play(text, times, Boolean(voice))
+      );
+    }
+
+    const repetitions = Math.max(1, Math.min(10, Math.floor(Number(times)) || 1));
+    for (let i = 0; i < repetitions; i++) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      if (voice) utterance.voice = voice;
+      utterance.lang = voice?.lang || "zh-CN";
+      utterance.rate = 0.82;
+      utterance.onstart = () => {
+        if (active === session) clearTimeout(session.watchdog);
+      };
+      utterance.onend = () => {
+        if (active !== session) return;
+        clearTimeout(session.watchdog);
+        session.queue.shift();
+        if (session.queue.length) session.watchdog = setTimeout(fail, 5000);
+        else active = null;
+      };
+      utterance.onerror = fail;
+      session.queue.push(utterance);
+    }
+
+    // Queue both plays in the original tap so iOS can authorize the audio.
+    session.watchdog = setTimeout(fail, 5000);
+    try {
+      if (synth.paused) synth.resume();
+      for (const utterance of [...session.queue]) {
+        if (active !== session) break;
+        synth.speak(utterance);
+      }
+    } catch {
+      fail();
+    }
+  }
+
+  window.speak = play;
+})();
+</script>
 </body>
 </html>
